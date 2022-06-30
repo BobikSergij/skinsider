@@ -1,0 +1,11 @@
+<!--
+/**
+ * IdeaInYou_skinsider
+ *
+ * @copyright   Copyright (c) 2022 IdeaInYou Company (www.ideainyou.com)
+ * /
+ /-->
+<theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
+    <title>IdeaInYou/skinsider</title>
+    <parent>Magento/luma</parent>
+</theme>

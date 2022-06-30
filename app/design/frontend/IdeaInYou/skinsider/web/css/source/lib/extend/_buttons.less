@@ -1,0 +1,110 @@
+//
+//  Common
+//  _____________________________________________
+@media-common: true;
+@_icon-ctrl: "\ea53";
+
+& when (@media-common = true) {
+    button,
+    a {
+        &.action.secondary,
+        &.action.primary,
+        &.action.tertiary,
+        &.action.gray {
+                .lib-font-size(14);
+                padding: 11px 40px;
+                text-decoration: none;
+                font-weight: 600;
+                font-style: normal;
+                line-height: 25.2px;
+                border-radius: 4px;
+                box-shadow: none;
+                font-family: @montserrat-font-family;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+    }
+
+    button,
+    a {
+        &.action.primary {
+            background-color: @color-base-green;
+            color: @color-white;
+
+            &:hover {
+                background-color: @color-base-green-hover;
+            }
+
+        }
+
+        &.action.secondary {
+            background-color: @color-white2;
+            color: @color-base-green;
+            border: 1px solid @color-base-green;
+
+            &:hover {
+                background-color: @color-base-green-hover;
+                color: @color-white;
+                border: 1px solid @color-base-green-hover;
+                box-shadow: none;
+            }
+        }
+
+        &.action.tertiary {
+            border: 1px solid @color-base-green;
+            background-color: transparent;
+            color: @color-white;
+
+        }
+
+        &.action.gray {
+            background-color: @color-gray57;
+            color: @color-white;
+
+            &:hover {
+                background-color: @color-gray99;
+            }
+        }
+    }
+
+    input.input {
+        max-width: 360px;
+        height: 45px;
+        border-radius: 4px;
+        border: 1px solid @color-gray58;
+        background-color: @color-white;
+
+        &:hover {
+            border-color: @color-base-green;
+        }
+
+        &:user-invalid::placeholder {
+            color: transparent;
+        }
+    }
+
+    a.arrow-link {
+        color: @color-base-green;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 600;
+
+        .lib-icon-font(
+            @_icon-font-position: after,
+            @_icon-font:@icomoon-font-family,
+            @_icon-font-content: @_icon-ctrl,
+            @_icon-font-color: @color-green
+        );
+
+        &:after {
+            transform: rotate(90deg);
+        }
+
+        &:hover {
+            color: @color-base-green-hover;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <container name="header.right" htmlTag="div" htmlClass="header-right" />
+
+        <move element="top.search" destination="header-wrapper" after="logo"/>
+        <move element="header.right" destination="header-wrapper" after="top.search"/>
+        <move element="header.links" destination="header.right" before="-"/>
+        <move element="minicart" destination="header.right" before="-"/>
+
+        <referenceBlock name="my-account-link" remove="true" />
+        <referenceBlock name="register-link" remove="true" />
+        <referenceBlock name="header" remove="true"/>
+        <referenceContainer name="compare-link-wrapper" remove="true"/>
+    </body>
+</page>
+

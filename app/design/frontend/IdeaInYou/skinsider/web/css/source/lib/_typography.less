@@ -349,6 +349,7 @@
     a,
     .alink {
         .lib-link();
+        text-transform: uppercase;
     }
 }
 
@@ -369,52 +370,13 @@
     @_dt-margin-bottom: @dt__margin-bottom,
     @_dt-margin-top: @dt__margin-top
 ) {
-    ul,
-    ol {
-        & {
-            .lib-font-size-value(@_list-margin-top);
-            .lib-css(margin-top, @fontValue);
-        }
+   ul, ol {
+       .lib-list-reset-styles();
 
-        & {
-            .lib-font-size-value(@_list-margin-bottom);
-            .lib-css(margin-bottom, @fontValue);
-        }
-
-        > li {
-            & {
-                .lib-font-size-value(@_list-item-margin-top);
-                .lib-css(margin-top, @fontValue);
-            }
-
-            & {
-                .lib-font-size-value(@_list-item-margin-bottom);
-                .lib-css(margin-bottom, @fontValue);
-            }
-        }
-
-        ul,
-        ol {
-            margin-bottom: 0;
-        }
-    }
-
-    dl {
-        .lib-css(margin-bottom, @_dl-margin-bottom);
-        .lib-css(margin-top, @_dl-margin-top);
-    }
-
-    dt {
-        .lib-css(font-weight, @_dt-font-weight);
-        .lib-css(margin-bottom, @_dt-margin-bottom);
-        .lib-css(margin-top, @_dt-margin-top);
-    }
-
-    dd {
-        .lib-css(margin-bottom, @_dd-margin-bottom);
-        .lib-css(margin-top, @_dd-margin-top);
-        margin-left: 0;
-    }
+       li {
+           .lib-list-reset-styles();
+       }
+   }
 }
 
 //

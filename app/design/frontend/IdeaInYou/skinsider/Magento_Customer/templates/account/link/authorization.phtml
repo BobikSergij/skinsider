@@ -15,5 +15,15 @@ if ($block->isLoggedIn()) {
 ?>
 <li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
     <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
-        <?= /* @noEscape */ $dataPostParam ?>><?= $escaper->escapeHtml(' My Account') ?></a>
+        <?= /* @noEscape */ $dataPostParam ?>>
+        <span><?= $escaper->escapeHtml(' My Account') ?></span>
+    </a>
 </li>
+
+<script type="text/x-magento-init">
+  {
+     ".nav-toggle": {
+         "mobileSearch": {}
+     }
+  }
+</script>

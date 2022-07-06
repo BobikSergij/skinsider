@@ -9,10 +9,29 @@
         <move element="header.links" destination="header.right" before="-"/>
         <move element="minicart" destination="header.right" before="-"/>
 
+        <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="my-account-link" remove="true" />
         <referenceBlock name="register-link" remove="true" />
         <referenceBlock name="header" remove="true"/>
         <referenceContainer name="compare-link-wrapper" remove="true"/>
+
+        <referenceContainer name="footer">
+            <container name="social.wrap" as="socialWrap" label="Social Wrap" htmlTag="div" htmlClass="social-wrap">
+                <block class="Magento\Cms\Block\Block" name="social_wrap">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">social_wrap</argument>
+                    </arguments>
+                </block>
+            </container>
+            <container name="new.footer.container" as="footerContainer" label="Footer Container" htmlTag="div" htmlClass="new-footer-container">
+                <block class="Magento\Cms\Block\Block" name="new_footer_block">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">new_footer_block</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+        <move element="form.subscribe" destination="new.footer.container" before="-"/>
     </body>
 </page>
 

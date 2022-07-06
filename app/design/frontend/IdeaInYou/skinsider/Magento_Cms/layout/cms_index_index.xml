@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/source/lib/carousel/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <referenceContainer name="main">
+        <block name="main.banner.info" as="main.banner.info" before="-" template="Magento_Cms::main-banner.phtml"/>
+            <block class="Magefan\Blog\Block\Sidebar\Recent" name="blog.sidebar.recent" template="sidebar/recent.phtml" before="about.info">
+                <action method="setBlockTitle">
+                    <argument name="time" xsi:type="string">Latest Blog Posts</argument>
+                </action>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="about.info" as="about_us_info" template="Magento_Cms::about-us.phtml" after="-">
+                <block class="Magento\Cms\Block\Block" name="about-skinsider-block">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">about_skinsider_block</argument>
+                    </arguments>
+                </block>
+            </block>
+    </referenceContainer>
+</body>
+</page>
+

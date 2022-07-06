@@ -1,0 +1,41 @@
+& when (@media-common = true) {
+    .product-item{
+        box-shadow: 0 0 4px 0 rgba(0,0,0,.08);
+        .lib-css(background, @color-white);
+        border-radius: 2px;
+        .product-item-details{
+            text-align: center;
+            padding: 20px;
+        }
+        .product-item-name{
+            a{
+                text-transform: none;
+                .lib-css(color, @links-color);
+                .lib-css(font-weight, @font-weight__semibold);
+                letter-spacing: .02em;
+                margin: 0 0 10px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+
+            }
+        }
+        .price-box{
+            display: flex;
+            flex-direction: column-reverse;
+            .price-label{
+                display: none;
+            }
+            .old-price{
+                margin: 0 0 5px;
+                .lib-css(color, @color-price-item);
+                .price{
+                    padding-left: 3px;
+                    padding-right: 3px;
+                    margin-right: 0.57143rem;
+                    text-decoration: line-through;
+                }
+            }
+        }
+    }
+}
+

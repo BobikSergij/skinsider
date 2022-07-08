@@ -60,7 +60,7 @@
                 <div class="main-content-post">
                     <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>
                         <div class="post-item-date">
-                            <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                            <span class="value"><?= $block->escapeHtml(__('Posted on'))?> <?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                         </div>
                     <?php } ?>
                     <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
@@ -69,6 +69,9 @@
                 </div>
             </div>
         <?php } ?>
+    </div>
+    <div class="button-all-blog">
+        <a href="<?= $block->getBaseUrl('')?>blog"><?= $block->escapeHtml(__('View All Posts'))?></a>
     </div>
 </div>
 <?php } ?>

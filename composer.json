@@ -17,9 +17,17 @@
     },
     "version": "2.4.4",
     "require": {
-        "magento/product-community-edition": "2.4.4",
+        "amasty/base": "^1.13",
+        "amasty/cron-schedule-list": "^1.0",
+        "amasty/module-elastic-search": "^1.15",
+        "amasty/module-elastic-search-graphql": "^1.0",
+        "amasty/module-elastic-search-pro": "^1.15",
+        "amasty/module-multiple-wishlist": "^1.1",
+        "amasty/xsearch": "^1.18",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
-        "magento/composer-root-update-plugin": "~2.0"
+        "magento/composer-root-update-plugin": "~2.0",
+        "magento/product-community-edition": "2.4.4",
+        "mageplaza/module-lookbook": "^4.0"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -72,14 +80,21 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "repositories": [
-        {
+    "repositories": {
+        "0": {
             "type": "composer",
             "url": "https://repo.magento.com/"
+        },
+        "amasty": {
+            "type": "composer",
+            "url": "https://composer.amasty.com/community/"
+        },
+        "mageplaza": {
+            "type": "composer",
+            "url": "https://repo.mageplaza.com"
         }
-    ],
+    },
     "extra": {
         "magento-force": "override"
     }
 }
-

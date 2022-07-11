@@ -13,18 +13,18 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Skinsider
- * @package     Skinsider_BestSellers
+ * @category    IdeaInYou
+ * @package     IdeaInYou_BestSellers
  * @copyright   Copyright (c) 2018-2019 GiaPhuGroup Co., Ltd. All rights reserved. (http://www.giaphugroup.com/)
  * @license     https://www.giaphugroup.com/LICENSE.txt
  */
 
-namespace Skinsider\BestSellers\Block\Widget;
+namespace IdeaInYou\BestSellers\Block\Widget;
 
 class BestsellersProducts extends \Magento\Catalog\Block\Product\AbstractProduct implements \Magento\Widget\Block\BlockInterface
 {
     /**
-     * @var \Skinsider\BestSellers\Model\ResourceModel\Product\CollectionFactory
+     * @var \IdeaInYou\BestSellers\Model\ResourceModel\Product\CollectionFactory
      */
     protected $productCollectionFactory;
 
@@ -41,20 +41,20 @@ class BestsellersProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     /**
      * @var string
      */
-    protected $_template = 'Skinsider_BestSellers::widget/bestsellers-products.phtml';
+    protected $_template = 'IdeaInYou_BestSellers::widget/bestsellers-products.phtml';
 
     /**
      * NewWidget constructor.
      *
      * @param \Magento\Catalog\Block\Product\Context $context
-     * @param \Skinsider\BestSellers\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+     * @param \IdeaInYou\BestSellers\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Catalog\Model\Product\Attribute\Source\Status $catalogProductStatus
      * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility
      * @param array $data
      */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
-        \Skinsider\BestSellers\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        \IdeaInYou\BestSellers\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Catalog\Model\Product\Attribute\Source\Status $catalogProductStatus,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         array $data = []
@@ -66,7 +66,7 @@ class BestsellersProducts extends \Magento\Catalog\Block\Product\AbstractProduct
     }
 
     /**
-     * @return \Skinsider\BestSellers\Model\ResourceModel\Product\Collection
+     * @return \IdeaInYou\BestSellers\Model\ResourceModel\Product\Collection
      */
     public function getProductCollection()
     {

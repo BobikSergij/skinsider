@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  * GiaPhuGroup Co., Ltd.
  *
@@ -14,12 +13,14 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Skinsider
- * @package     Skinsider_BestSellers
+ * @category    IdeaInYou
+ * @package     IdeaInYou_BestSellers
  * @copyright   Copyright (c) 2018-2019 GiaPhuGroup Co., Ltd. All rights reserved. (http://www.giaphugroup.com/)
  * @license     https://www.giaphugroup.com/LICENSE.txt
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Skinsider_BestSellers" setup_version="2.1.0" />
-</config>
+
+\Magento\Framework\Component\ComponentRegistrar::register(
+    \Magento\Framework\Component\ComponentRegistrar::MODULE,
+    'IdeaInYou_BestSellers',
+    __DIR__
+);

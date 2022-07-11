@@ -1,3 +1,4 @@
+@import "expand/_product-styles.less";
 & when (@media-common = true) {
     .page-header .panel.wrapper {
         .lib-css(color, @links-color);
@@ -116,7 +117,7 @@
                 .col-12 {
                     .lib-vendor-prefix-display();
                     justify-content: center;
-                    align-items: center;
+                    .lib-vendor-box-align();
                 }
 
                 .socialLinks--alt {
@@ -263,7 +264,7 @@
                 margin: 0 auto;
                 .lib-vendor-prefix-display();
                 justify-content: space-between;
-                align-items: center;
+                .lib-vendor-box-align();
             }
 
             .footer-payment-icons {
@@ -390,13 +391,20 @@
             max-width: 300px;
         }
 
-        .block-search {
+        .amsearch-wrapper-block {
             width: 40%;
             padding: 0;
-
-            .action.search {
-                &:before {
-                    .lib-font-size(22px);
+            max-width: 626px;
+            .amsearch-button.-loupe{
+                background-size: 20px;
+                width: 30px;
+                height: 30px;
+            }
+            .amsearch-input-wrapper{
+                input{
+                    &::-webkit-input-placeholder{
+                        display: none;
+                    }
                 }
             }
         }

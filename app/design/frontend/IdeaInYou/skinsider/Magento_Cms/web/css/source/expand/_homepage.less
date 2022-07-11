@@ -1,8 +1,5 @@
 & when (@media-common = true) {
     .cms-index-index {
-        .nav-sections {
-            display: none;
-        }
 
         .page-title-wrapper {
             display: none;
@@ -117,7 +114,7 @@
                         margin-top: 13px;
                         .lib-vendor-prefix-display();
                         flex-direction: column;
-                        align-items: center;
+                        .lib-vendor-box-align();
 
                         .main {
                             .lib-css(color, @color-title);
@@ -530,7 +527,7 @@
                     position: absolute;
                     transition: all .3s ease 0s;
                     opacity: 0;
-                    visibility: hidden;
+                    .lib-visibility-hidden();
                     width: 100%;
                 }
 

@@ -1,5 +1,16 @@
 @import "expand/_product-styles.less";
+
 & when (@media-common = true) {
+    .page-header{
+        overflow: hidden;
+        border: none;
+        margin: 0;
+        .amsearch-wrapper-block{
+            width: 100%;
+            padding: 16px;
+
+        }
+    }
     .page-header .panel.wrapper {
         .lib-css(color, @links-color);
 
@@ -111,8 +122,8 @@
         }
 
         .footer.content {
-             & > .social-wrap {
-                 border-bottom: 1px solid #eaeaea;
+            & > .social-wrap {
+                border-bottom: 1px solid #eaeaea;
 
                 .col-12 {
                     .lib-vendor-prefix-display();
@@ -330,7 +341,14 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .page-wrapper {
+        .logo{
+            width: 22%;
+        }
+        .amsearch-wrapper-block{
+            width: 45%;
+        }
         .header-right {
+            width: 28%;
             .authorization-link a {
                 span {
                     display: block;
@@ -350,7 +368,15 @@
 
         .switcher {
             padding: 0 15px;
-            margin: 10px 0;
+            margin: 11px 0;
+            .options{
+                .action.toggle{
+                    &.active:after,
+                    &:after{
+                        margin-left: 8px;
+                    }
+                }
+            }
 
             .options ul.dropdown {
                 li {
@@ -361,6 +387,7 @@
 
         .panel.header {
             max-width: 1920px;
+            padding: 0;
         }
     }
 
@@ -371,7 +398,7 @@
 
         .header-right {
             justify-content: flex-end;
-            width: 25%;
+            width: 10%;
             max-width: 300px;
 
             .authorization-link a {
@@ -392,36 +419,35 @@
         }
 
         .amsearch-wrapper-block {
-            width: 40%;
+            width: 55%;
             padding: 0;
             max-width: 626px;
-            .amsearch-button.-loupe{
+
+            .amsearch-button.-loupe {
                 background-size: 20px;
                 width: 30px;
                 height: 30px;
-            }
-            .amsearch-input-wrapper{
-                input{
-                    &::-webkit-input-placeholder{
-                        display: none;
-                    }
-                }
             }
         }
 
         .header.content {
             justify-content: space-between;
-            padding: 20px 20px 0;
+            padding: 20px 20px 15px;
 
             .action.showcart {
                 &:before {
                     margin: 0 7px 0 0;
                 }
             }
+
+            .amsearch-input-wrapper {
+                width: 100%;
+            }
         }
 
         .nav-sections {
             margin-bottom: 0;
+            border: 1px solid @color-border-header;
 
             .nav-sections-items {
                 .lib-vendor-prefix-display();
@@ -512,7 +538,6 @@
     .page-wrapper {
         .header.content {
             justify-content: space-between;
-
             .nav-toggle {
                 position: relative;
                 top: unset;

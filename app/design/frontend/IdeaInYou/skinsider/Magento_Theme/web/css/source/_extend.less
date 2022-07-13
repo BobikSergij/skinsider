@@ -1,16 +1,18 @@
 @import "expand/_product-styles.less";
 
 & when (@media-common = true) {
-    .page-header{
+    .page-header {
         overflow: hidden;
         border: none;
         margin: 0;
-        .amsearch-wrapper-block{
+
+        .amsearch-wrapper-block {
             width: 100%;
             padding: 16px;
 
         }
     }
+
     .page-header .panel.wrapper {
         .lib-css(color, @links-color);
 
@@ -341,14 +343,17 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .page-wrapper {
-        .logo{
+        .logo {
             width: 22%;
         }
-        .amsearch-wrapper-block{
+
+        .amsearch-wrapper-block {
             width: 45%;
         }
+
         .header-right {
             width: 28%;
+
             .authorization-link a {
                 span {
                     display: block;
@@ -369,10 +374,11 @@
         .switcher {
             padding: 0 15px;
             margin: 11px 0;
-            .options{
-                .action.toggle{
+
+            .options {
+                .action.toggle {
                     &.active:after,
-                    &:after{
+                    &:after {
                         margin-left: 8px;
                     }
                 }
@@ -538,6 +544,7 @@
     .page-wrapper {
         .header.content {
             justify-content: space-between;
+
             .nav-toggle {
                 position: relative;
                 top: unset;

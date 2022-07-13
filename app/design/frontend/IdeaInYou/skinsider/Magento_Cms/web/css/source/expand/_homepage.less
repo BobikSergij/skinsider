@@ -228,12 +228,20 @@
 
             .item {
                 .lib-visually-hidden();
+                width: unset;
+                position: relative;
+                height: unset;
+                margin: 0;
 
                 .img {
                     display: block;
                     max-height: 374px;
                     align-items: flex-start;
                     .lib-visually-hidden();
+                    width: unset;
+                    position: relative;
+                    height: unset;
+                    margin: 0;
 
                     &:hover {
                         transform: scale(1.1);
@@ -420,6 +428,7 @@
                 .item {
                     .mplookbook-lookbook {
                         margin-bottom: 20px;
+                        cursor: pointer;
                     }
 
                     padding: 0 10px;
@@ -756,7 +765,7 @@
                     max-height: 230px;
 
                     &:hover {
-                        margin-bottom: 0;
+                        margin-bottom: 12px;
                     }
                 }
             }

@@ -228,12 +228,20 @@
 
             .item {
                 .lib-visually-hidden();
+                width: unset;
+                position: relative;
+                height: unset;
+                margin: 0;
 
                 .img {
                     display: block;
                     max-height: 374px;
                     align-items: flex-start;
                     .lib-visually-hidden();
+                    width: unset;
+                    position: relative;
+                    height: unset;
+                    margin: 0;
 
                     &:hover {
                         transform: scale(1.1);
@@ -320,7 +328,6 @@
                     padding: 0;
                     margin-bottom: 30px;
                     border-radius: 2px;
-                    .lib-visually-hidden();
                     @_shadow: 0 0 4px 0 rgba(0, 0, 0, .08);
                     .lib-css(box-shadow, @_shadow, 1);
 
@@ -331,7 +338,6 @@
                             margin: 0 0 1rem;
                             text-overflow: ellipsis;
                             text-transform: unset;
-                            .lib-visually-hidden();
                             .lib-css(color, @theme__color__primary-alt);
                             .lib-font-size(18px);
                             line-height: inherit;
@@ -420,6 +426,7 @@
                 .item {
                     .mplookbook-lookbook {
                         margin-bottom: 20px;
+                        cursor: pointer;
                     }
 
                     padding: 0 10px;
@@ -756,7 +763,7 @@
                     max-height: 230px;
 
                     &:hover {
-                        margin-bottom: 0;
+                        margin-bottom: 12px;
                     }
                 }
             }

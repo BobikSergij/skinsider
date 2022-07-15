@@ -2,14 +2,15 @@
 
 & when (@media-common = true) {
     .page-header {
-        overflow: hidden;
         border: none;
         margin: 0;
 
         .amsearch-wrapper-block {
             width: 100%;
             padding: 16px;
-
+            .lib-visibility-hidden();
+            visibility: unset;
+            height: unset;
         }
     }
 

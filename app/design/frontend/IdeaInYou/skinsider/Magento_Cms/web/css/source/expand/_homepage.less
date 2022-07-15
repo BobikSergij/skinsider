@@ -1,5 +1,8 @@
 & when (@media-common = true) {
     .cms-index-index {
+        .amsearch-overlay-block{
+            display: none;
+        }
 
         .page-title-wrapper {
             display: none;
@@ -246,7 +249,6 @@
                     &:hover {
                         transform: scale(1.1);
                         transition: transform .5s ease 0s;
-                        margin-bottom: 18px;
                     }
                 }
 
@@ -301,6 +303,7 @@
                 h2 {
                     .lib-font-size(25px);
                     margin: 0 0 40px;
+                    .lib-css(font-weight, @font-weight__semibold);
                 }
 
                 p {
@@ -466,7 +469,7 @@
 
                 a {
                     &:before {
-                        height: 16px;
+                        height: 18px;
                     }
 
                     .lib-icon-font(
@@ -761,10 +764,6 @@
             .item {
                 .img {
                     max-height: 230px;
-
-                    &:hover {
-                        margin-bottom: 12px;
-                    }
                 }
             }
         }

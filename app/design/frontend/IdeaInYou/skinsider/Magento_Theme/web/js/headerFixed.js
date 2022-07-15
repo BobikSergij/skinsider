@@ -5,9 +5,9 @@ define([
 
 
         _create: function () {
-            this.HeaderFix();
+            this.headerFix();
         },
-        HeaderFix: function () {
+        headerFix: function () {
             let $headerClass = $(this.element);
             $(window).scroll(function(){
                 if ($(window).scrollTop() >= 80) {

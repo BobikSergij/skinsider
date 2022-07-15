@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5326694753af2106d189e5b5d64123c",
+    "content-hash": "d6301618a4efba82866fcac7462ae901",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -46,6 +46,38 @@
                 "cbor"
             ],
             "time": "2020-10-27T07:22:41+00:00"
+        },
+        {
+            "name": "amasty/ajax-scroll",
+            "version": "1.4.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2tvenom/CBOREncode.git",
+                "reference": "42aedccb861d01fc0554782348cc08f8ebf22332"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2tvenom/CBOREncode/zipball/42aedccb861d01fc0554782348cc08f8ebf22332",
+                "reference": "42aedccb861d01fc0554782348cc08f8ebf22332",
+                "shasum": ""
+            },
+            "require": {
+                "amasty/base": ">=1.13.3",
+                "php": ">=7.3"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\Scroll\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "AJAX Scroll by Amasty"
         },
         {
             "name": "amasty/base",
@@ -4185,6 +4217,190 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "magefan/module-admin-user-guide",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magefan/module-admin-user-guide.git",
+                "reference": "35f950396e7a443cf93e00603e45b2da23c03b58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magefan/module-admin-user-guide/zipball/35f950396e7a443cf93e00603e45b2da23c03b58",
+                "reference": "35f950396e7a443cf93e00603e45b2da23c03b58",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magefan\\AdminUserGuide\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Admin panel user guides.",
+            "time": "2021-12-30T07:25:20+00:00"
+        },
+        {
+            "name": "magefan/module-blog",
+            "version": "2.10.9.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magefan/module-blog.git",
+                "reference": "56be9ab5ddcf7144ac2ec672453314d475ee3e49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magefan/module-blog/zipball/56be9ab5ddcf7144ac2ec672453314d475ee3e49",
+                "reference": "56be9ab5ddcf7144ac2ec672453314d475ee3e49",
+                "shasum": ""
+            },
+            "require": {
+                "magefan/module-blog-graph-ql": ">=2.1.6",
+                "magefan/module-community": ">=2.1.10",
+                "magefan/module-wysiwyg-advanced": ">=2.0.12"
+            },
+            "suggest": {
+                "magefan/module-blog-amp": "Install this module to activate Blog integration with the Plumrocket AMP extension.",
+                "magefan/module-blog-comments-recaptcha": "Install this module to activate ReCaptcha on blog comments form to protect against spam.",
+                "magefan/module-blog-graph-ql": "Install this module to activate GraphQl integration for the blog."
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magefan\\Blog\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Implements Blog functionality on Magento 2 store",
+            "time": "2022-07-05T14:24:42+00:00"
+        },
+        {
+            "name": "magefan/module-blog-amp",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2tvenom/CBOREncode.git",
+                "reference": "47e2815e166b0efae35ee128f93eebff3de038e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2tvenom/CBOREncode/zipball/47e2815e166b0efae35ee128f93eebff3de038e6",
+                "reference": "47e2815e166b0efae35ee128f93eebff3de038e6",
+                "shasum": ""
+            },
+            "require": {
+                "magefan/module-blog": ">=2.10.1"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magefan\\BlogAmp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Add AMP view for Blog.",
+            "time": "2021-05-17T07:13:08+00:00"
+        },
+        {
+            "name": "magefan/module-blog-graph-ql",
+            "version": "2.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magefan/module-blog-graph-ql.git",
+                "reference": "b1e02dad25e8208c01c428805fd3f0e5db42fbe9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magefan/module-blog-graph-ql/zipball/b1e02dad25e8208c01c428805fd3f0e5db42fbe9",
+                "reference": "b1e02dad25e8208c01c428805fd3f0e5db42fbe9",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magefan\\BlogGraphQl\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "GrapQl for Magento 2 Blog extension by Magefan",
+            "time": "2022-06-01T10:09:27+00:00"
+        },
+        {
+            "name": "magefan/module-community",
+            "version": "2.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magefan/module-community.git",
+                "reference": "ff7fb0142f5326dcb35276a00a3015f5c2cbc2e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magefan/module-community/zipball/ff7fb0142f5326dcb35276a00a3015f5c2cbc2e6",
+                "reference": "ff7fb0142f5326dcb35276a00a3015f5c2cbc2e6",
+                "shasum": ""
+            },
+            "require": {
+                "magefan/module-admin-user-guide": ">=2.0.1"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magefan\\Community\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2022-04-19T07:01:39+00:00"
+        },
+        {
+            "name": "magefan/module-wysiwyg-advanced",
+            "version": "2.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magefan/module-wysiwyg-advanced.git",
+                "reference": "760b0746bb4f7acd0da10a9b0bff928bd52cfad9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magefan/module-wysiwyg-advanced/zipball/760b0746bb4f7acd0da10a9b0bff928bd52cfad9",
+                "reference": "760b0746bb4f7acd0da10a9b0bff928bd52cfad9",
+                "shasum": ""
+            },
+            "require": {
+                "magefan/module-community": ">=2.1.8"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magefan\\WysiwygAdvanced\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Extend TinyMCE 4 in Magento 2",
+            "time": "2022-04-20T08:57:37+00:00"
         },
         {
             "name": "magento/adobe-ims",
@@ -18615,12 +18831,12 @@
             "version": "1.4.12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mageplaza/module-core.git",
+                "url": "https://github.com/2tvenom/CBOREncode.git",
                 "reference": "85d1074fdee1259d438618c977ba6e21b76c4f39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mageplaza/module-core/zipball/85d1074fdee1259d438618c977ba6e21b76c4f39",
+                "url": "https://api.github.com/repos/2tvenom/CBOREncode/zipball/85d1074fdee1259d438618c977ba6e21b76c4f39",
                 "reference": "85d1074fdee1259d438618c977ba6e21b76c4f39",
                 "shasum": ""
             },

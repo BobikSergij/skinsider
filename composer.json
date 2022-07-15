@@ -17,6 +17,7 @@
     },
     "version": "2.4.4",
     "require": {
+        "amasty/ajax-scroll": "^1.4",
         "amasty/base": "^1.13",
         "amasty/cron-schedule-list": "^1.0",
         "amasty/module-elastic-search": "^1.15",
@@ -24,13 +25,11 @@
         "amasty/module-elastic-search-pro": "^1.15",
         "amasty/module-multiple-wishlist": "^1.1",
         "amasty/xsearch": "^1.18",
+        "magefan/module-blog-amp": "^2.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
         "magento/product-community-edition": "2.4.4",
-        "mageplaza/module-lookbook": "^4.0",
-        "magento/composer-root-update-plugin": "~2.0",
-        "magento/product-community-edition": "2.4.4",
-        "magefan/module-blog-amp": "^2.0"
+        "mageplaza/module-lookbook": "^4.0"
     },
     "autoload": {
         "exclude-from-classmap": [

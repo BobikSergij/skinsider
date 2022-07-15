@@ -5,18 +5,20 @@ define([
 
 
         _create: function () {
+            this.HeaderFix();
+        },
+        HeaderFix: function () {
             let $headerClass = $(this.element);
-            function HeaderFix() {
-                if($(this).scrollTop() > 44) {
+            $(window).scroll(function(){
+                if ($(window).scrollTop() >= 80) {
                     $headerClass.addClass('fixed');
-                } else {
+                }
+                else {
                     $headerClass.removeClass('fixed');
                 }
-            }
-            new HeaderFix();
-            $(window).scroll(HeaderFix);
+            });
         }
-    });
+});
 
     return $.IdeaInYou.headerFixed;
 });

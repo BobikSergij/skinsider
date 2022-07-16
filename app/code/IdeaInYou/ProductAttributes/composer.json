@@ -1,0 +1,21 @@
+{
+  "name": "idea-in-you/product-attributes",
+  "version": "1.0.0",
+  "description": "N/A",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*",
+    "amasty/module-elastic-search-pro": "1.15.*"
+  },
+  "license": [
+    "Proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "IdeaInYou\\ProductAttributes\\": ""
+    }
+  }
+}

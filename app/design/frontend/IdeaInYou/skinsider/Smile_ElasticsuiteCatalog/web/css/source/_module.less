@@ -1,0 +1,270 @@
+// /**
+//  * DISCLAIMER
+//  *
+//  * Do not edit or add to this file if you wish to upgrade Smile ElasticSuite to newer
+//  * versions in the future.
+//  *
+//  *
+//  * @category  Smile
+//  * @package   Smile\ElasticsuiteCatalog
+//  * @author    Aurelien FOUCRET <aurelien.foucret@smile.fr>
+//  * @copyright 2020 Smile
+//  * @license   Open Software License ("OSL") v. 3.0
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .smile-es-range-slider {
+        [data-role=from-label] {
+            display: block;
+            float: left;
+            padding: 0 0 @indent__xs;
+        }
+
+        [data-role=to-label] {
+            display: block;
+            float: right;
+            padding: 0 0 @indent__xs;
+        }
+
+        [data-role=message-box] {
+            font-size: @font-size__s;
+            flex: 1;
+            padding: 6px 0 0;
+
+            &.empty {
+                .lib-form-validation-note();
+                padding: 0;
+            }
+        }
+
+        .actions-toolbar {
+            display: flex;
+            margin: 15px 0;
+        }
+
+        .ui-slider {
+            margin: @indent__xs;
+            clear: both;
+        }
+
+        .ui-slider-handle {
+            .lib-css(background, @active__color);
+            padding: 0;
+            margin: -3px 0 0 -7px;
+            border-radius: 15px;
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .filter {
+
+        .block-subtitle.filter-current-subtitle {
+            border-bottom: none;
+            font-weight: @font-weight__bold;
+            display: none;
+        }
+
+        .block-subtitle.no-filter {
+            border-bottom: none;
+            font-weight: @font-weight__bold;
+            padding: 0;
+        }
+
+        .field.search {
+            input[type="text"] {
+                font-size: @font-size__s;
+            }
+        }
+
+        .actions {
+            text-align: right;
+            margin: @indent__s 0 0;
+
+            div.secondary {
+                display: inline-block;
+
+                a {
+                    .lib-css(color, @link__color);
+                    text-decoration: underline;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: transparent;
+                    }
+
+                }
+            }
+        }
+
+        .filter-options {
+            dt.filter-options-title[aria-expanded="true"]:after {
+                .lib-css(content, @icon-up);
+            }
+        }
+
+        .no-results-message p {
+            margin: 9px @indent__s 0;
+            background-color: #FFEEEE;
+            padding: @indent__xs;
+            color: #AA0000;
+        }
+    }
+
+    .smile-elasticsuite-autocomplete-result {
+        .product-image-box {
+            float: left;
+            padding: 0 @indent__xs;
+            width: 55px;
+        }
+
+        .product-shop {
+            float: left;
+            margin: 0 @indent__s 0 0;
+            padding: 0;
+            white-space: normal;
+            width: 60%;
+        }
+
+        .product-item {
+            .price-box {
+                margin: @indent__xs 0;
+            }
+        }
+
+        .category-mini-crumb {
+            font-style: italic;
+            display: block;
+            margin-bottom: 2px;
+            font-size: @font-size__s;
+            color: #929292;
+        }
+
+        .product-attribute-label {
+            text-transform: uppercase;
+            vertical-align: super;
+            font-size: @font-size__xs;
+            color: #777;
+        }
+
+        .price-box {
+            span.old-price {
+                display:block;
+            }
+        }
+    }
+
+    .field.search {
+        display: none;
+    }
+
+    .sidebar {
+        .filter {
+            &-current {
+                .items {
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-wrap ();
+                    padding: @indent__xs 0;
+                    margin-bottom: @indent__s;
+
+                    .item {
+                        .lib-vendor-prefix-display();
+                        max-width: 100%;
+                        padding: @indent__s - 3;
+                        margin: 0 @indent__s @indent__s 0;
+                        background: @color-gray90;
+                    }
+                }
+            }
+
+
+            &-options {
+                margin-top: @indent__base;
+
+                &-title {
+                    text-transform: none;
+                    .lib-font-size(16);
+                    font-weight: 800;
+                }
+
+                &-content {
+                    .actions {
+                        text-align: left;
+
+                        .action {
+                            text-transform: capitalize;
+                            text-decoration: none;
+                        }
+
+                    }
+                }
+
+                .items {
+                    .item {
+                        margin: @indent__base - 5 0 0 0;
+
+                        a {
+                            .lib-font-size(13);
+                            text-transform: none;
+                        }
+                    }
+                }
+            }
+
+            &-content {
+                .block-actions.filter-actions {
+                    height: 40px;
+                    padding: 0;
+                    .filter-clear {
+                        height: 40px;
+                        width: 100%;
+                        border: 2px solid black;
+                        .lib-vendor-prefix-display();
+                        .lib-vendor-box-align ();
+                        justify-content: center;
+                        transition: .3s linear all;
+
+                         span {
+                            font-weight: 800;
+                            letter-spacing: 1px;
+                            transition: .3s linear all;
+                        }
+                    }
+
+                    &:hover {
+                        .filter-clear {
+                            .lib-css(background, @color-black);
+
+                            span {
+                            .lib-css(color, @color-white)
+
+                        }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-layout-1column {
+        .filter-options {
+            .filter {
+                &-options {
+                    &-content {
+                        padding: @indent__s;
+                    }
+                }
+            }
+        }
+    }
+}

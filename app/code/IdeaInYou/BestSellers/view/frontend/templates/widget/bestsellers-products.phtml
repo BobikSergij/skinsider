@@ -126,9 +126,10 @@
                                 echo $block->getProductPriceHtml($_item, $type);
                                 ?>
 
-                                <?php if ($templateType): ?>
-                                    <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
-                                <?php endif; ?>
+                                <!-- Reviews Stars -->
+                                <div class="product-list-rating-stars">
+                                    <?php echo $block->getReviewsSummaryHtml($_item, false, true); ?>
+                                </div>
 
                                 <?php if ($showWishlist || $showCompare || $showCart): ?>
                                     <div class="product-item-actions">

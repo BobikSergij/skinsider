@@ -10,9 +10,8 @@
 $url = $block->getReviewsUrl() . '#reviews';
 $urlForm = $block->getReviewsUrl() . '#review-form';
 ?>
-
 <?php $rating = $block->getRatingSummary(); ?>
-<div class="product-reviews-summary short<?= !$rating ? ' no-rating' : '' ?>">
+<div class="product-reviews-summary short">
     <div class="rating-summary">
         <span class="label"><span><?= $block->escapeHtml(__('Rating')) ?>:</span></span>
         <div class="rating-result"

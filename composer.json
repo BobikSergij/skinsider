@@ -29,7 +29,9 @@
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
         "magento/product-community-edition": "2.4.4",
-        "mageplaza/module-lookbook": "^4.0"
+        "mageplaza/module-lookbook": "^4.0",
+        "smile/elasticsuite": "~2.10.0",
+        "stripe/stripe-payments": "^3.2"
     },
     "autoload": {
         "exclude-from-classmap": [

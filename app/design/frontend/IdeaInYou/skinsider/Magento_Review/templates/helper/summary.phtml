@@ -12,6 +12,7 @@ $urlForm = $block->getReviewsUrl() . '#review-form';
 <?php if ($block->isReviewEnabled() && $block->getReviewsCount()) : ?>
     <?php $rating = $block->getRatingSummary(); ?>
     <div class="product-reviews-summary<?= !$rating ? ' no-rating' : '' ?>" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+        <div class="rating-start">
         <?php if ($rating) :?>
         <div class="rating-summary">
              <span class="label"><span><?= $block->escapeHtml(__('Rating')) ?>:</span></span>
@@ -23,14 +24,22 @@ $urlForm = $block->getReviewsUrl() . '#review-form';
                  </span>
              </div>
          </div>
+        <?php else: ?>
+            <div class="rating-empty">
+                <span class="icon-rating-empty"></span>
+            </div>
         <?php endif;?>
         <div class="reviews-actions">
+            <div class="rating-result">
             <a class="action view"
                href="<?= $block->escapeUrl($url) ?>">
-                <span itemprop="reviewCount"><?= $block->escapeHtml($block->getReviewsCount()) ?></span>&nbsp;
-                <span><?= ($block->getReviewsCount() == 1) ? $block->escapeHtml(__('review')) : $block->escapeHtml(__('reviews')) ?></span>
+                <span>(<?= $block->escapeHtml($block->getReviewsCount()) ?> <?= ($block->getReviewsCount() == 1) ? $block->escapeHtml(__('review')) : $block->escapeHtml(__('reviews')) ?>)</span>
             </a>
-            <a class="action add" href="<?= $block->escapeUrl($urlForm) ?>"><?= $block->escapeHtml(__('Add Your Review')) ?></a>
+            </div>
+        </div>
+        </div>
+        <div class="rating-write">
+            <a class="action add" href="<?= $block->escapeUrl($urlForm) ?>"><?= $block->escapeHtml(__('Write a Review')) ?></a>
         </div>
     </div>
 <?php elseif ($block->isReviewEnabled() && $block->getDisplayIfEmpty()) : ?>

@@ -3,7 +3,15 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+    .page-products {
+        .columns {
+            padding-top: 0;
+        }
+    }
+
+
     .filter {
+
 
         &-title {
             padding-bottom: @indent__base;
@@ -42,7 +50,6 @@
 
         &-current {
             margin: 0;
-
 
 
             .items {
@@ -178,23 +185,123 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
     body {
-        &.filter-active {
-            .page-header {
-                display: none;
-            }
-
-            .page-wrapper {
-                height: 0;
-                margin-top: -999999em;
-                visibility: hidden;
-            }
-
-            .columns {
-                z-index: 999;
+        .columns {
+            .sidebar-main {
+                show-hide-toggle {
+                    .lib-icon-font(
+                        @icon-down,
+                        @_icon-font-size: 8px,
+                        @_icon-font-position: after,
+                        @_icon-font-margin: 2px 0 0 1px
+                    );
+                }
+                .show-hide-toggle.filter-open {
+                    .lib-icon-font(
+                        @icon-up,
+                        @_icon-font-size: 8px,
+                        @_icon-font-position: after,
+                        @_icon-font-margin: 2px 0 0 1px
+                    );
+                }
             }
         }
+    }
+}
+
+
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body {
+
+        .sidebar.sidebar-main {
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-wrap(wrap);
+            justify-content: space-evenly;
+            text-align: center;
+            margin: @indent__base 0;
+
+            .block.filter {
+                display: none;
+                order: 3;
+                width: 100%;
+                text-align: left;
+                border: #ecf0f1 solid 1px;
+                margin: @indent__base 0;
+
+                .filter-title {
+                    padding-bottom: 0;
+
+                    [data-role="title"] {
+                        margin: @indent__base @indent__s;
+                        .lib-vendor-prefix-display();
+
+                        .show-hide-toggle {
+                            margin-left: @indent__base - 5;
+                        }
+
+                    }
+
+                    .show-hide-toggle {
+                        .lib-icon-font(
+                            @icon-down,
+                            @_icon-font-size: 12px,
+                            @_icon-font-position: after,
+                            @_icon-font-margin: 2px 0 0 5px
+                        );
+                    }
+                    .show-hide-toggle.filter-open {
+                        .lib-icon-font(
+                            @icon-up,
+                            @_icon-font-size: 12px,
+                            @_icon-font-position: after,
+                            @_icon-font-margin: 2px 0 0 5px
+                        );
+                    }
+                }
+
+                .filter-content {
+
+                    [data-role="title"] {
+                        margin: 0 @indent__s;
+                        .lib-font-size(16);
+                        font-weight: 800;
+                    }
+                }
+            }
+
+            .filter-toggler, .widget.block {
+                min-width: 38%;
+                max-height: 30px;
+                padding: @indent__s;
+                .lib-css(background, @color-black);
+                .lib-css(color, @color-white);
+                line-height: 30px;
+                .lib-font-size(16);
+                letter-spacing: 1px;
+                text-align: center;
+                text-transform: uppercase;
+                border: 1px solid #484848;
+            }
+
+
+            .filter-toggler {
+                margin: @indent__s;
+                margin-left: 0;
+
+            }
+
+            .widget.block {
+                margin: @indent__s;
+                margin-right: 0;
+            }
+
+            .filter-options {
+                margin-top: 0;
+            }
+        }
+
     }
 
     .filter {
@@ -203,18 +310,7 @@
             visibility: visible;
             z-index: 99;
 
-            .filter-options-item:last-child {
-                margin-bottom: @indent__xl;
-            }
-
             .filter-title {
-                border-bottom: 1px solid @border-color__base;
-                height: 48px;
-                left: 0;
-                position: fixed;
-                right: 0;
-                top: 0;
-                z-index: 2;
 
                 strong {
                     .lib-css(box-shadow, none);
@@ -233,28 +329,15 @@
                 }
             }
 
-            .filter-subtitle {
-                .lib-css(background, @toolbar-background);
-                display: block;
-                height: 50px;
-                left: 0;
-                line-height: 32px;
-                position: fixed;
-                right: 0;
-                top: 0;
-                z-index: 1;
-            }
-
             .filter-options {
                 .lib-css(background, @color-white);
-                bottom: 0;
                 display: block;
-                left: 0;
                 overflow: scroll;
-                position: fixed;
-                right: 0;
-                top: 50px;
-                z-index: 10;
+
+                 > div {
+                     border: 1px solid #ecf0f1;
+                     margin: 0;
+                 }
             }
         }
     }
@@ -276,6 +359,7 @@
 
     .filter .filter-current {
         border-width: 1px 0;
+        display: none;
 
         .items {
             display: none;
@@ -360,6 +444,19 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+
+    .widget.block {
+        .toolbar-trigger {
+            display: none;
+        }
+    }
+
+    .sidebar-main {
+        .filter-toggler {
+            display: none;
+        }
+    }
 
     .filter {
         &-content {

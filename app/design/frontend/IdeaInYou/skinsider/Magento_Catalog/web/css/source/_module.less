@@ -39,6 +39,7 @@
 
 & when (@media-common = true) {
 
+
     //
     //  Category view
     //  ---------------------------------------------
@@ -103,6 +104,7 @@
         .category-extended {
             display: none;
         }
+
         .read-more {
             margin: @indent__xl 0;
             color: @color-blue1;
@@ -178,10 +180,10 @@
         .additional-attributes {
             width: auto;
             .lib-table-resize(
-            @_th-padding-left: 0,
-            @_th-padding-right: @indent__l,
-            @_th-padding-bottom: @indent__s,
-            @_td-padding-bottom: @indent__s
+                @_th-padding-left: 0,
+                @_th-padding-right: @indent__l,
+                @_th-padding-bottom: @indent__s,
+                @_td-padding-bottom: @indent__s
             );
         }
     }
@@ -267,12 +269,12 @@
                     &:after {
                         content: '*';
                         .lib-typography(
-                        @_font-size: @form-field-label-asterisk__font-size,
-                        @_color: @form-field-label-asterisk__color,
-                        @_font-family: @form-field-label-asterisk__font-family,
-                        @_font-weight: @form-field-label-asterisk__font-weight,
-                        @_line-height: @form-field-label-asterisk__line-height,
-                        @_font-style: @form-field-label-asterisk__font-style
+                            @_font-size: @form-field-label-asterisk__font-size,
+                            @_color: @form-field-label-asterisk__color,
+                            @_font-family: @form-field-label-asterisk__font-family,
+                            @_font-weight: @form-field-label-asterisk__font-weight,
+                            @_line-height: @form-field-label-asterisk__line-height,
+                            @_font-style: @form-field-label-asterisk__font-style
                         );
                         .lib-css(margin, @form-field-label-asterisk__margin);
                     }
@@ -675,10 +677,11 @@
 
     .page-layout-1column {
         .product-info-main {
-            width: 40%;
+            width: 45%;
         }
+
         .product.media {
-            width: 57%;
+            width: 50%;
         }
     }
 
@@ -757,6 +760,7 @@
 
             &.attribute {
                 .lib-font-size(13);
+
                 img {
                     height: auto;
                     max-width: 100%;

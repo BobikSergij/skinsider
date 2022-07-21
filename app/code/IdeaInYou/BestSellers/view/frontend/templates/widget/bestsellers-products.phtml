@@ -91,23 +91,20 @@
                                                         <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
                                                     </button>
                                                 <?php else: ?>
-                                                    <?php
-                                                    $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
-                                                    $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
-                                                    ?>
-                                                    <button class="action tocart primary" data-post='<?= /* @noEscape */
-                                                    $postData ?>' type="button"
-                                                            title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
-                                                        <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
-                                                    </button>
-                                                <?php endif; ?>
-                                            <?php else: ?>
-                                                <?php if ($_item->getIsSalable()): ?>
-                                                    <div class="stock available">
-                                                        <span><?= $block->escapeHtml(__('In stock')) ?></span></div>
-                                                <?php else: ?>
-                                                    <div class="stock unavailable">
-                                                        <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                    <?php if ($_item->getIsSalable()): ?>
+                                                        <?php
+                                                        $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                                        $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
+                                                        ?>
+                                                        <button class="action tocart primary" data-post='<?= /* @noEscape */
+                                                        $postData ?>' type="button"
+                                                                title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
+                                                            <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <div class="stock unavailable">
+                                                            <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         </div>

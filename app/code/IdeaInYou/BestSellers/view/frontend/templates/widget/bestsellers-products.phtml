@@ -79,10 +79,10 @@
                                         <?= $block->getImage($_item, $image)->toHtml() ?>
                                     </a>
                                 <?php } ?>
-                                <div class="button-container">
-                                    <?php if ($showCart): ?>
-                                        <div class="actions-primary">
-                                            <?php if ($_item->isSaleable()): ?>
+                                <?php if ($showCart): ?>
+                                    <?php if ($_item->isSaleable()): ?>
+                                        <div class="button-container">
+                                            <div class="actions-primary">
                                                 <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
                                                     <button class="action tocart primary"
                                                             data-mage-init='{"redirectUrl":{"url":"<?= $block->escapeUrl($block->getAddToCartUrl($_item)) ?>"}}'
@@ -96,20 +96,26 @@
                                                         $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
                                                         $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
                                                         ?>
-                                                        <button class="action tocart primary" data-post='<?= /* @noEscape */
-                                                        $postData ?>' type="button"
+                                                        <button class="action tocart primary"
+                                                                data-post='<?= /* @noEscape */
+                                                                $postData ?>' type="button"
                                                                 title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
                                                             <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
                                                         </button>
                                                     <?php else: ?>
                                                         <div class="stock unavailable">
-                                                            <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                            <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+                                                        </div>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
-                                            <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="button-container-unavailable">
+                                            <button><span><?= $block->escapeHtml(__('Out of stock')) ?></span></button>
                                         </div>
                                     <?php endif; ?>
-                                </div>
+                                <?php endif; ?>
                             </div>
                             <div class="product-item-details">
                                 <strong class="product-item-name">
@@ -195,4 +201,5 @@
                     }
                 }
             }
-        </script>
+
+</script>

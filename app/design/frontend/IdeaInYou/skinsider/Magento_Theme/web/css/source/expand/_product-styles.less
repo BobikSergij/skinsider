@@ -38,6 +38,13 @@
                     top: 0;
                     width: 100%;
                 }
+                .button-container-unavailable{
+                    bottom: 10px;
+                    transition: all .3s ease 0s;
+                    button{
+                        .lib-css(background, @theme__color__primary-alt);
+                    }
+                }
             }
         }
 
@@ -49,7 +56,7 @@
                 opacity: 0;
                 position: absolute;
             }
-
+            .button-container-unavailable,
             .button-container {
                 z-index: 2;
                 padding: 0;
@@ -69,6 +76,15 @@
                     .lib-css(color, @color-white);
                     border: 2px solid @theme__color__primary-alt;
                     font-family: @libre-font-family;
+                }
+            }
+            .button-container-unavailable{
+                bottom: 0;
+                button{
+                    border: none;
+                    .lib-css(background, @color-out-stock);
+                    padding: 12px 0 10px;
+                    letter-spacing: .05em;
                 }
             }
         }

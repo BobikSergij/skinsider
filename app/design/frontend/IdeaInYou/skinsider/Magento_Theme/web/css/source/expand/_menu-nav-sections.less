@@ -1,0 +1,117 @@
+& when (@media-common = true) {
+    .page-wrapper {
+        .sections.nav-sections {
+            ul.level0 {
+                li {
+                    width: 25%;
+
+                    a {
+                        line-height: unset;
+                        min-width: max-content;
+                    }
+                }
+
+                li.level1 {
+                    a {
+                        .ui-menu-icon:after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            ul.level1 {
+                display: block!important;
+                position: unset!important;
+                column-count: 1;
+                left: 0!important;
+                border: none;
+                box-shadow: none;
+                max-width: 100%;
+                z-index: 0;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .page-wrapper {
+        .sections.nav-sections {
+            ul.level0 {
+                -webkit-column-count: 4;
+                -moz-column-count: 4;
+                column-count: 4;
+
+                li.parent > a {
+                    font-weight: 700;
+                }
+
+                li {
+                    width: 25%;
+
+                    a {
+                        font-weight: 400;
+                        font-size: 15px;
+                        line-height: unset;
+                        padding: 5px 0 5px 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-wrapper {
+        .sections.nav-sections {
+            ul.level0 {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+
+                li.parent > a {
+                    font-weight: 700;
+                }
+
+                li {
+                    width: 25%;
+
+                    a {
+                        font-weight: 400;
+                        font-size: 15px;
+                        line-height: unset;
+                        padding: 5px 0 5px 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-wrapper {
+        .sections.nav-sections {
+            ul.level0 {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+
+                li.parent > a {
+                    font-weight: 700;
+                }
+
+                li {
+                    width: 25%;
+
+                    a {
+                        font-weight: 400;
+                        font-size: 15px;
+                        line-height: unset;
+                        padding: 5px 0 5px 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+

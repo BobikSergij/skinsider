@@ -9,11 +9,11 @@
  * @var \Magento\Framework\Escaper $escaper
  */
 $dataPostParam = '';
-$accountlink = '';
+$accountLink = '';
 $signOutLink = '';
 if ($block->isLoggedIn()) {
     $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
-    $accountlink = $block->getBaseUrl() . '/customer/account/';
+    $accountLink = $block->getBaseUrl() . '/customer/account/';
     $signOutLink = $block->getBaseUrl() . '/customer/account/logout/';
 }
 ?>
@@ -33,10 +33,10 @@ if ($block->isLoggedIn()) {
      ".nav-toggle": {
          "mobileSearch": {}
      },
-     ".authorization-link": {
+     ".header-right": {
          "myAccountPopup":{
              "isLoggedIn": "<?= $block->isLoggedIn() ?>",
-             "accountlink": "<?= $accountlink ?>",
+             "accountLink": "<?= $accountLink ?>",
              "signOutLink": "<?= $signOutLink ?>"
          }
     }

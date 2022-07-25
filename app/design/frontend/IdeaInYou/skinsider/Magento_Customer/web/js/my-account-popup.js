@@ -16,7 +16,7 @@ define([
                 responsive: true,
                 innerScroll: true,
                 buttons: [],
-                modalVisibleClass: '_show service-contact',
+                modalVisibleClass: '_show account-popup',
             }
 
         },
@@ -28,7 +28,6 @@ define([
         _create: function () {
             $(document).on('click', '.authorization-link', (function (e) {
                 if ( this.options.isLoggedIn ) {
-                    //e.preventDefault();
                     this._initModal();
                 }
             }).bind(this));

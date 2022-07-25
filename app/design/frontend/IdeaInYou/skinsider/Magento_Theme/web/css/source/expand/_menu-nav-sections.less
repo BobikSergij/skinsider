@@ -45,27 +45,18 @@
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
-                .lib-css(column-count, 4);
+                .lib-vendor-prefix-column-count(4);
             }
         }
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .page-wrapper {
-        .sections.nav-sections {
-            ul.level0 {
-                .lib-css(column-count, 3);
-            }
-        }
-    }
-}
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
-                .lib-css(column-count, 3);
+                .lib-vendor-prefix-column-count(3);
             }
         }
     }

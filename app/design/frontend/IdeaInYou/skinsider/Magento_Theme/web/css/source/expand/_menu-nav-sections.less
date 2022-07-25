@@ -2,12 +2,19 @@
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
+                li.parent > a {
+                    font-weight: 700;
+                }
+
                 li {
                     width: 25%;
 
                     a {
                         line-height: unset;
                         min-width: max-content;
+                        font-weight: 400;
+                        .lib-font-size(15px);
+                        padding: 5px 0 5px 10px;
                     }
                 }
 
@@ -38,24 +45,7 @@
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
-                -webkit-column-count: 4;
-                -moz-column-count: 4;
-                column-count: 4;
-
-                li.parent > a {
-                    font-weight: 700;
-                }
-
-                li {
-                    width: 25%;
-
-                    a {
-                        font-weight: 400;
-                        font-size: 15px;
-                        line-height: unset;
-                        padding: 5px 0 5px 10px;
-                    }
-                }
+                .lib-css(column-count, 4);
             }
         }
     }
@@ -65,24 +55,7 @@
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
-                -webkit-column-count: 3;
-                -moz-column-count: 3;
-                column-count: 3;
-
-                li.parent > a {
-                    font-weight: 700;
-                }
-
-                li {
-                    width: 25%;
-
-                    a {
-                        font-weight: 400;
-                        font-size: 15px;
-                        line-height: unset;
-                        padding: 5px 0 5px 10px;
-                    }
-                }
+                .lib-css(column-count, 3);
             }
         }
     }
@@ -92,24 +65,7 @@
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
-                -webkit-column-count: 3;
-                -moz-column-count: 3;
-                column-count: 3;
-
-                li.parent > a {
-                    font-weight: 700;
-                }
-
-                li {
-                    width: 25%;
-
-                    a {
-                        font-weight: 400;
-                        font-size: 15px;
-                        line-height: unset;
-                        padding: 5px 0 5px 10px;
-                    }
-                }
+                .lib-css(column-count, 3);
             }
         }
     }

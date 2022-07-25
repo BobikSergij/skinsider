@@ -42,7 +42,7 @@ $urlForm = $block->getReviewsUrl() . '#review-form';
         </div>
         </div>
         <div class="rating-write">
-            <a class="action add" href="<?= $block->escapeUrl($urlForm) ?>"><?= $block->escapeHtml(__('Write a Review')) ?></a>
+            <a class="action add"><?= $block->escapeHtml(__('Write a Review')) ?></a>
         </div>
     </div>
 <?php elseif ($block->isReviewEnabled() && $block->getDisplayIfEmpty()) : ?>
@@ -51,18 +51,16 @@ $urlForm = $block->getReviewsUrl() . '#review-form';
             <div class="rating-result">
                 <div class="rating-empty">
                     <span class="icon-rating-empty"></span>
-                    <span class="icon-rating-empty"></span>
-                    <span class="icon-rating-empty"></span>
-                    <span class="icon-rating-empty"></span>
-                    <span class="icon-rating-empty"></span>
                 </div>
                 <div class="text-empty">
                     <p>(<?= $block->escapeHtml(__('No reviews yet')) ?>)</p>
                 </div>
             </div>
-            <a class="action add" href="<?= $block->escapeUrl($urlForm) ?>">
+            <div class="rating-write">
+            <a class="action add">
                 <?= $block->escapeHtml(__('Write a Review')) ?>
             </a>
+            </div>
         </div>
     </div>
 <?php endif; ?>

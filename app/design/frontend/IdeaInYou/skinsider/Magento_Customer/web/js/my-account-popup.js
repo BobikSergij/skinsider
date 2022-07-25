@@ -9,7 +9,7 @@ define([
     $.widget('IdeaInYou.myAccountPopup', {
         options: {
             isLoggedIn: {},
-            accountlink: {},
+            accountLink: {},
             signOutLink: {},
             modalOptions: {
                 type: 'popup',
@@ -35,7 +35,7 @@ define([
         _initModal: function () {
             let modalOptions = this.options.modalOptions,
                 template = '<div class="logged-account-popup"> ' +
-                '<a class="dashboard" href="'+ this.options.accountlink +'"><span>Dashboard</span></a>'+
+                '<a class="dashboard" href="'+ this.options.accountLink +'"><span>Dashboard</span></a>'+
                 '<a class="sign-out" href="'+ this.options.signOutLink +'"><span>Sing Out</span></a>' +
                 '</div>';
 

@@ -243,17 +243,10 @@ $_imageHover = 'hover';
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         </div>
-                                        <?= ($pos && strpos($pos, $viewMode . '-primary')) ?
-                                            /* @noEscape */
-                                            $secureRenderer->renderStyleAsTag(
+                                        <?= ($pos && strpos($pos, $viewMode . '-actions')) ?
+                                            /* @noEscape */ $secureRenderer->renderStyleAsTag(
                                                 $position,
-                                                'product-item-info_' . $_product->getId() . ' div.actions-primary'
-                                            ) : '' ?>
-                                        <?= ($pos && strpos($pos, $viewMode . '-secondary')) ?
-                                            /* @noEscape */
-                                            $secureRenderer->renderStyleAsTag(
-                                                $position,
-                                                'product-item-info_' . $_product->getId() . ' div.actions-secondary'
+                                                'product-item-info_' . $_product->getId() . ' div.product-item-actions'
                                             ) : '' ?>
                                     </div>
                                 </div>

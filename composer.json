@@ -17,6 +17,7 @@
     },
     "version": "2.4.4",
     "require": {
+        "aftership/aftership-apps-magento2": "^1.0",
         "amasty/ajax-scroll": "^1.4",
         "amasty/base": "^1.13",
         "amasty/cron-schedule-list": "^1.0",
@@ -25,13 +26,17 @@
         "amasty/module-elastic-search-pro": "^1.15",
         "amasty/module-multiple-wishlist": "^1.1",
         "amasty/xsearch": "^1.18",
+        "godatafeed/godatafeed-feed-management": "^2.0",
+        "klaviyo/magento2-extension": "^4.0",
         "magefan/module-blog-amp": "^2.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "~2.0",
         "magento/product-community-edition": "2.4.4",
         "mageplaza/module-lookbook": "^4.0",
         "smile/elasticsuite": "~2.10.0",
-        "stripe/stripe-payments": "^3.2"
+        "stripe/stripe-payments": "^3.2",
+        "trustpilot/module-reviews": "^2.6",
+        "weltpixel/module-google-tag-manager": "^1.11"
     },
     "autoload": {
         "exclude-from-classmap": [

@@ -5,16 +5,21 @@
     .page-header {
         border: none;
         margin: 0;
+        transition: position .5s;
 
         &.fixed {
-            position: fixed;
-            top: 0;
-            z-index: 3;
-            width: 100%;
-            background: #fff;
+            transition: position .5s;
 
             .panel.wrapper {
                 display: none;
+            }
+
+            .header.content {
+                position: fixed;
+                top: 0;
+                z-index: 3;
+                width: 100%;
+                background: #fff;
             }
         }
 
@@ -540,11 +545,11 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
-
-}
-
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-header {
+        min-height: 68px;
+    }
+
     .page-wrapper {
         .logo {
             width: 22%;
@@ -760,6 +765,10 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        min-height: 186px;
+    }
+
     .page-wrapper {
         .header.content {
             justify-content: space-between;

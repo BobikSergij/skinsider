@@ -1,0 +1,149 @@
+<?php
+/**
+ * @var \IdeaInYou\Alsoviewed\Block\Widget\ListProduct $block
+ *  * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php if (($_products = $block->getLoadedProductCollection()) && $_products->getSize()): ?>
+    <?php
+    if ($block->getMode() === 'grid') {
+        $viewMode = 'grid';
+        $hoverimg = 'hover';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $showCart = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    }
+    if ($block->getMode() === 'list') {
+        $viewMode = 'list';
+        $hoverimg = 'hover';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $showCart = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    ?>
+    <ol class="product-items<?= ($block->getMode() === 'list') ? '' : ' product-items-images' ?> also-viewed owl-carousel">
+        <?php foreach ($_products->getItems() as $_product): ?>
+            <li class="product-item">
+
+                <div class="product-item-info">
+
+                    <?php // Product Image ?>
+                    <div class="product-item-photo">
+                        <?php
+                        $productImage = $block->getImage($_product, $imageDisplayArea);
+
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $product = $objectManager->create('Magento\Catalog\Model\Product')->load($_product->getId());
+                        $images = $product->getMediaGalleryImages();
+                        $i = 1;
+                        ?>
+                        <?php if (!empty($images)) { ?>
+                            <?php foreach ($images as $child) { ?>
+                                <?php if ($i < 3): ?>
+                                    <a class="img-<?= $i++ ?>"
+                                       href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>">
+                                        <img src="<?php echo $child->getUrl(); ?>" alt="none"/>
+                                    </a>
+                                <?php endif; ?>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <a href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>"
+                               class="product-item-photo">
+                                <?php echo $productImage->toHtml(); ?>
+                            </a>
+                        <?php } ?>
+                        <?php if (!($_product->isSaleable())): ?>
+                            <div class="button-container-unavailable">
+                                <button><span><?= $block->escapeHtml(__('Out of stock')) ?></span></button>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($showCart): ?>
+                            <?php if ($_product->isSaleable()): ?>
+                                <div class="button-container">
+                                    <div class="actions-primary">
+                                        <?php if ($_product->getTypeInstance()->hasRequiredOptions($_product)): ?>
+                                            <button class="action tocart primary"
+                                                    data-mage-init='{"redirectUrl":{"url":"<?= $block->escapeUrl($block->getAddToCartUrl($_product)) ?>"}}'
+                                                    type="button"
+                                                    title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
+                                                <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                            </button>
+                                        <?php else: ?>
+                                            <?php if ($_product->getIsSalable()): ?>
+                                                <?php
+                                                $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                                $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_product), ['product' => $_product->getEntityId()])
+                                                ?>
+                                                <button class="action tocart primary" data-post='<?= /* @noEscape */
+                                                $postData ?>' type="button"
+                                                        title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
+                                                    <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                </button>
+                                            <?php else: ?>
+                                                <div class="stock unavailable">
+                                                    <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product details product-item-details">
+                        <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
+                        <strong class="product name product-item-name">
+                            <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                               title="<?= $block->escapeHtmlAttr($block->stripTags($_product->getName(), null, true)) ?>"
+                               class="product-item-link"
+                            ><?= $block->escapeHtml($this->helper('Magento\Catalog\Helper\Output')->productAttribute($_product, $_product->getName(), 'name')) ?></a>
+                        </strong>
+                        <?= /* @noEscape */
+                        $block->getProductPrice($_product) ?>
+                        <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+
+
+                        <?= $block->getProductDetailsHtml($_product) ?>
+
+                    </div>
+
+            </li>
+        <?php endforeach; ?>
+    </ol>
+<?php endif; ?>
+<script type="text/x-magento-init">
+            {
+                ".also-viewed.owl-carousel": {
+                    "owlCarousel": {
+                        "center": false,
+                        "items": 4,
+                        "margin":16,
+                        "loop": false,
+                        "nav": true,
+                        "dots": false,
+                        "responsiveClass": true,
+                        "navText": ["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+                        "responsive": {
+                            "0": {
+                                "items": 2,
+                                "margin":16
+                            },
+                            "360": {
+                                "items": 2,
+                                "margin":16
+                            },
+                             "768": {
+                                "items": 3,
+                                "margin":30
+                            },
+                             "880": {
+                                "items": 4,
+                                "margin":30
+                            }
+                        }
+                    }
+                }
+            }
+
+</script>

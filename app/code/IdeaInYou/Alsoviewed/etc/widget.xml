@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="alsoviewed_products" class="IdeaInYou\Alsoviewed\Block\Widget\ListProduct" is_email_compatible="true" ttl="86400">
+        <label translate="true">Also Viewed Products</label>
+        <description></description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Products to Display</label>
+                <value>6</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Magento_Catalog::product/list.phtml" selected="true">
+                        <label translate="true">Default Template</label>
+                    </option>
+                    <option name="sidebar" value="product/sidebar/list.phtml">
+                        <label translate="true">Sidebar Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="mode" xsi:type="select" visible="true"
+                    source_model="IdeaInYou\Alsoviewed\Model\Config\Source\Listingmode">
+                <label translate="true">Mode</label>
+            </parameter>
+            <parameter name="basis" xsi:type="multiselect" required="true" visible="true"
+                    source_model="IdeaInYou\Alsoviewed\Model\Config\Source\Basis">
+                <label translate="true">Offer Recommendations for</label>
+            </parameter>
+            <parameter name="block_css" xsi:type="text" required="false" visible="true">
+                <label translate="true">Block css classes</label>
+                <value>widget alsoviewed-products</value>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

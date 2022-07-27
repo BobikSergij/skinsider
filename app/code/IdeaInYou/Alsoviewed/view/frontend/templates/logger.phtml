@@ -1,0 +1,11 @@
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "IdeaInYou_Alsoviewed/js/logger": {
+                "url": "<?= $this->getUrl('alsoviewed/product/log') ?>",
+                "id": "<?= $this->getRequest()->getParam('id') ?>",
+                "limit": "<?= $this->helper(\IdeaInYou\Alsoviewed\Helper\Data::class)->getLogLimit() ?>"
+            }
+        }
+    }
+</script>

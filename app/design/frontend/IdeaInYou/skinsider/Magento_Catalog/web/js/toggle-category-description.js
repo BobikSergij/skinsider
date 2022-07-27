@@ -1,6 +1,5 @@
 define([
-    "jquery",
-    "toggleCategoryDescription"
+    "jquery"
 ], function ($) {
     $.widget("IdeaInYou.toggleCategoryDescription", {
         _create: function () {
@@ -9,7 +8,7 @@ define([
         _toggle: function () {
 
             let extended = $('.category-extended');
-            let readMore = $('.read-more');
+            let readMore = this.element;
 
 
             readMore.on('click', function () {

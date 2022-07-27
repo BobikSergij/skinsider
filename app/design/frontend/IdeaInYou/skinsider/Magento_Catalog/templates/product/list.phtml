@@ -94,10 +94,10 @@ $_imageHover = 'hover';
                                     <?php echo $productImage->toHtml(); ?>
                                 </a>
                             <?php } ?>
-                            <div class="button-container">
-                                <?php if ($showCart): ?>
-                                    <div class="actions-primary">
-                                        <?php if ($_product->isSaleable()): ?>
+                            <?php if ($showCart): ?>
+                                <?php if ($_product->isSaleable()): ?>
+                                    <div class="button-container">
+                                        <div class="actions-primary">
                                             <?php if ($_product->getTypeInstance()->hasRequiredOptions($_product)): ?>
                                                 <button class="action tocart primary"
                                                         data-mage-init='{"redirectUrl":{"url":"<?= $block->escapeUrl($block->getAddToCartUrl($_product)) ?>"}}'
@@ -121,28 +121,32 @@ $_imageHover = 'hover';
                                                         <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
                                                 <?php endif; ?>
                                             <?php endif; ?>
-                                        <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="button-container-unavailable">
+                                        <button><span><?= $block->escapeHtml(__('Out of stock')) ?></span></button>
                                     </div>
                                 <?php endif; ?>
-                            </div>
+                            <?php endif; ?>
                         </div>
-                            <div class="product details product-item-details">
-                                <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
-                                <strong class="product name product-item-name">
-                                    <a class="product-item-link"
-                                       href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
-                                        <?= /* @noEscape */
-                                        $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
-                                    </a>
-                                </strong>
-                                <?= /* @noEscape */
-                                $block->getProductPrice($_product) ?>
-                                <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                        <div class="product details product-item-details">
+                            <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
+                            <strong class="product name product-item-name">
+                                <a class="product-item-link"
+                                   href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                    <?= /* @noEscape */
+                                    $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                </a>
+                            </strong>
+                            <?= /* @noEscape */
+                            $block->getProductPrice($_product) ?>
+                            <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
 
 
-                                <?= $block->getProductDetailsHtml($_product) ?>
+                            <?= $block->getProductDetailsHtml($_product) ?>
 
-                            </div>
+                        </div>
                     </div>
                     <?= ($pos && strpos($pos, $viewMode . '-actions')) ?
                         /* @noEscape */
@@ -164,6 +168,7 @@ $_imageHover = 'hover';
             }
         }
     }
+
 
 
     </script>
@@ -233,21 +238,15 @@ $_imageHover = 'hover';
                                                         <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
                                                 <?php else: ?>
                                                     <div class="stock unavailable">
-                                                        <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                                                        <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span>
+                                                    </div>
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         </div>
-                                        <?= ($pos && strpos($pos, $viewMode . '-primary')) ?
-                                            /* @noEscape */
-                                            $secureRenderer->renderStyleAsTag(
+                                        <?= ($pos && strpos($pos, $viewMode . '-actions')) ?
+                                            /* @noEscape */ $secureRenderer->renderStyleAsTag(
                                                 $position,
-                                                'product-item-info_' . $_product->getId() . ' div.actions-primary'
-                                            ) : '' ?>
-                                        <?= ($pos && strpos($pos, $viewMode . '-secondary')) ?
-                                            /* @noEscape */
-                                            $secureRenderer->renderStyleAsTag(
-                                                $position,
-                                                'product-item-info_' . $_product->getId() . ' div.actions-secondary'
+                                                'product-item-info_' . $_product->getId() . ' div.product-item-actions'
                                             ) : '' ?>
                                     </div>
                                 </div>
@@ -314,16 +313,18 @@ $_imageHover = 'hover';
             }
         }
     }
-    </script>
+
+        </script>
     <?php endif; ?>
 
 <?php endif; ?>
 
 <script type="text/x-magento-init">
 {
-    "*": {
+    ".read-more": {
         "toggleCategoryDescription": {}
     }
 }
+
 </script>
 

@@ -1,29 +1,33 @@
 @import "expand/_product-styles.less";
+@import "expand/_menu-nav-sections.less";
 
 & when (@media-common = true) {
     .page-header {
         border: none;
         margin: 0;
+        transition: position .5s;
 
         &.fixed {
-            position: fixed;
-            top: 0;
-            z-index: 3;
-            width: 100%;
-            background: #fff;
+            transition: position .5s;
 
             .panel.wrapper {
                 display: none;
             }
+
+            .header.content {
+                position: fixed;
+                top: 0;
+                z-index: 3;
+                width: 100%;
+                background: #fff;
+            }
         }
 
         .amsearch-wrapper-block {
-            .lib-visually-hidden();
             height: unset;
             width: 100%;
-            padding: 16px;
+            margin: 16px;
             position: relative;
-            margin: 0;
         }
     }
 
@@ -541,11 +545,11 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
-
-}
-
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .page-header {
+        min-height: 138px;
+    }
+
     .page-wrapper {
         .logo {
             width: 22%;
@@ -761,6 +765,10 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        min-height: 186px;
+    }
+
     .page-wrapper {
         .header.content {
             justify-content: space-between;
@@ -806,6 +814,7 @@
 
         .header-right {
             margin-right: 15px;
+            width: min-content;
 
             .authorization-link a {
                 span {

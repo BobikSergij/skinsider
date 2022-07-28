@@ -7,6 +7,10 @@
         margin: 0;
         transition: position .5s;
 
+        .switcher-label{
+            display: none;
+        }
+
         &.fixed {
             transition: position .5s;
 
@@ -113,35 +117,62 @@
             .minicart-wrapper {
                 .counter.qty {
                     position: absolute;
-                    right: -16px;
-                    top: -11px;
+                    right: 7px;
+                    top: 4px;
                     border-radius: 50%;
                     margin: 0;
                     height: 20px;
+                    width: 20px;
                     min-width: 14px;
                     line-height: 20px;
                     .lib-css(font-weight, @font-weight__heavier);
                     .lib-css(background, @theme__color__primary-alt);
+                    display: block;
                     .counter-label{
                         display: none;
                     }
+                    .counter-number{
+                        display: block;
+                        padding: 0 6px;
+                        .lib-css(color, @color-white);
+                        font-family: @libre-font-family;
+                    }
+                }
+                .action.showcart{
+                    margin-left: 5px;
+                    .lib-icon-font(
+                        @_icon-font: @icomoon-font-family,
+                        @_icon-font-content: @_icon-shopping-cart,
+                        @_icon-font-color: @color-shopping-cart,
+                        @_icon-font-margin: 0 3px 0 0,
+                        @_icon-font-size: 20px,
+                        @_icon-font-line-height: 20px
+                    );
                 }
             }
 
             .minicart-wrapper.active {
                 .action.showcart {
-                    opacity: 0.5;
+                    &:before{
+                        opacity: 0.5;
+                    }
                 }
 
                 .block-minicart {
                     border: 1px solid @color-gray80;
-                    right: -20px;
+                    right: 0;
+                    top: 100%;
                     width: 320px;
+                    position: absolute;
+                    z-index: 5;
+                    .lib-css(background, @color-white);
                     padding: 0;
 
                     &:after,
                     &:before,
-                    button.close {
+                    button.close,
+                    .block-title,
+                    .subtitle{
                         display: none;
                     }
 
@@ -225,6 +256,7 @@
                         border-bottom: 1px solid @color-border-header;
                         min-height: unset;
                         border-top: none;
+                        margin: 0;
                         &:last-of-type{
                             border-bottom: none;
                         }
@@ -246,6 +278,8 @@
                                 max-width: 60px;
                                 img{
                                     max-width: 60px;
+                                    min-height: unset;
+                                    max-height: 60px;
                                 }
                             }
                         }
@@ -546,9 +580,6 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .page-header {
-        min-height: 138px;
-    }
 
     .page-wrapper {
         .logo {
@@ -634,12 +665,6 @@
             .cart-text {
                 display: none;
             }
-            .minicart-wrapper.active{
-                .block-minicart{
-                    top: 20px;
-                    margin-top: 32px;
-                }
-            }
         }
 
         .logo {
@@ -663,10 +688,17 @@
         .header.content {
             justify-content: space-between;
             padding: 20px 20px 15px;
-
-            .action.showcart {
-                &:before {
-                    margin: 0 7px 0 0;
+            .minicart-wrapper{
+                .action.showcart {
+                    margin-left: 20px;
+                    &:before {
+                        margin: 0 7px 0 0;
+                    }
+                }
+            }
+            .minicart-wrapper{
+                .counter.qty{
+                    top: 16px;
                 }
             }
 
@@ -765,10 +797,6 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .page-header {
-        min-height: 186px;
-    }
-
     .page-wrapper {
         .header.content {
             justify-content: space-between;

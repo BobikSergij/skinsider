@@ -27,7 +27,6 @@
         .column.main {
             padding-bottom: @indent__base;
 
-
             .opc-wrapper {
                 width: 50%;
                 float: left;
@@ -73,22 +72,24 @@
                         .payment-group {
                             > .payment-method {
                                 padding: @indent__l 0 @indent__xl 0;
+                                border-bottom: 2px solid #ebebeb;
 
 
-                                    border-bottom: 2px solid #ebebeb;
-                                }
-
-                                &-content {
-                                    .actions-toolbar {
-                                        margin-top: @indent__s;
-
-                                        .primary {
-                                            text-align: unset;
-                                        }
-                                    }
+                                .action-edit-address {
+                                    display: none;
                                 }
                             }
 
+                            &-content {
+                                .actions-toolbar {
+                                    margin-top: @indent__s;
+
+                                    > .primary {
+                                        text-align: left;
+                                    }
+                                }
+                            }
+                        }
 
 
                         .discount-code {
@@ -108,6 +109,10 @@
                                 .control {
                                     margin-bottom: @indent__s;
                                 }
+                            }
+
+                            .primary {
+                                text-align: left;
                             }
 
 
@@ -335,6 +340,7 @@
     .checkout-index-index {
 
         .column.main {
+
             .opc-wrapper, .opc-sidebar {
                 width: 100%;
                 float: unset;
@@ -345,6 +351,15 @@
                     .actions-toolbar {
                         .lib-vendor-prefix-display();
                         justify-content: center;
+                    }
+                }
+            }
+
+            #payment {
+                .actions-toolbar {
+                    .primary {
+                        text-align: left;
+                        margin: @indent__s 0 0 0;
                     }
                 }
             }

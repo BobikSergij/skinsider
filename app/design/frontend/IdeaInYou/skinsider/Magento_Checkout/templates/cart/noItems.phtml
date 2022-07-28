@@ -8,15 +8,7 @@
 ?>
 <div class="cart-empty">
     <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
-    <p><?= $block->escapeHtml(__('You have no items in your shopping cart.')) ?></p>
-    <p><?= $block->escapeHtml(
-        __(
-            'Click <a href="%1">here</a> to continue shopping.',
-            $block->escapeUrl($block->getContinueShoppingUrl())
-        ),
-        ['a']
-    ) ?>
-    </p>
+    <h3><?= $block->escapeHtml(__('Your cart is empty')) ?></h3>
     <?= $block->getChildHtml('shopping.cart.table.after') ?>
 </div>
 <script type="text/x-magento-init">

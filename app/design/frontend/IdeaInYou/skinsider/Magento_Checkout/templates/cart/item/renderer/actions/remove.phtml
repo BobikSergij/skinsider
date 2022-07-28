@@ -9,8 +9,7 @@
 <a href="#"
    title="<?= $block->escapeHtml(__('Remove item')) ?>"
    class="action action-delete"
-   data-post='<?= /* @noEscape */ $block->getDeletePostJson() ?>'>
-    <span>
-        <?= $block->escapeHtml(__('Remove item')) ?>
-    </span>
+   data-post='<?= /* @noEscape */
+   $block->getDeletePostJson() ?>'>
+    <span class="remove-cross"></span>
 </a>

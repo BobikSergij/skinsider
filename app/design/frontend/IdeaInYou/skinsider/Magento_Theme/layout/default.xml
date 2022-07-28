@@ -33,7 +33,6 @@
             </container>
         </referenceContainer>
         <move element="form.subscribe" destination="new.footer.container" before="-"/>
-        <referenceBlock name="top.search1" remove="true"/>
     </body>
 </page>
 

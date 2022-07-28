@@ -23,7 +23,7 @@
 
 & when (@media-common = true) {
     .catalog-category-view {
-        .products.list {
+        .products-list {
             .product-item {
                 padding: 0;
                 &:hover {
@@ -32,6 +32,12 @@
 
                         img {
                             max-height: 262px;
+                            min-height: 262px;
+                        }
+                        .img-1{
+                            img{
+                                max-width: 262px;
+                            }
                         }
                     }
                 }
@@ -457,13 +463,14 @@
 //  _____________________________________________
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
     .catalog-category-view {
-        .products.list {
+        .products-list {
             .product-item {
                 padding: 0;
                 .lib-vendor-prefix-display();
 
                 .product-item-info {
                     .lib-vendor-prefix-display();
+                    width: 100%;
                 }
 
                 .product-item-photo {

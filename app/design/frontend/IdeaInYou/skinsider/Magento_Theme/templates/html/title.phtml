@@ -9,6 +9,11 @@
  */
 $cssClass = $block->getCssClass() ? ' ' . $block->getCssClass() : '';
 $titleHtml = '';
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+
+$totalItems = $cart->getQuote()->getItemsCount();
+
 if (trim($block->getPageHeading())) {
     $titleHtml = '<span class="base" data-ui-id="page-title-wrapper" '
         . $block->getAddBaseAttribute()
@@ -18,14 +23,29 @@ if (trim($block->getPageHeading())) {
 }
 ?>
 <?php if ($titleHtml) : ?>
-<div class="page-title-wrapper<?= $block->escapeHtmlAttr($cssClass) ?>">
-    <h1 class="page-title"
-        <?php if ($block->getId()) : ?> id="<?= $block->escapeHtmlAttr($block->getId()) ?>" <?php endif; ?>
-        <?php if ($block->getAddBaseAttributeAria()) : ?>
-            aria-labelledby="<?= $block->escapeHtmlAttr($block->getAddBaseAttributeAria()) ?>"
-        <?php endif; ?>>
-        <?= /* @noEscape */ $titleHtml ?>
-    </h1>
-    <?= $block->getChildHtml() ?>
-</div>
+    <div class="page-title-wrapper<?= $block->escapeHtmlAttr($cssClass) ?>">
+        <h1 class="page-title"
+            <?php if ($block->getId()) : ?> id="<?= $block->escapeHtmlAttr($block->getId()) ?>" <?php endif; ?>
+            <?php if ($block->getAddBaseAttributeAria()) : ?>
+                aria-labelledby="<?= $block->escapeHtmlAttr($block->getAddBaseAttributeAria()) ?>"
+            <?php endif; ?>>
+            <?php $handle = $this->getLayout()->getUpdate()->getHandles(); ?>
+
+            <?php if (!in_array('checkout_cart_index', $handle)) : ?>
+                <?= /* @noEscape */
+                $titleHtml ?>
+
+            <?php else : ?>
+
+                <?php if ($totalItems == 1) : ?>
+                    <?= /* @noEscape */
+                    $titleHtml . "&nbsp;" . '(' . $totalItems . "&nbsp;" . 'item' . ')' ?>
+                <?php else : ?>
+                    <?= /* @noEscape */
+                    $titleHtml . "&nbsp;" . '(' . $totalItems . "&nbsp;" . 'items' . ')' ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        </h1>
+        <?= $block->getChildHtml() ?>
+    </div>
 <?php endif; ?>

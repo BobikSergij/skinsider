@@ -45,3 +45,14 @@ script;
     ?>
     <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
 </div>
+
+
+<script>
+    setTimeout(function () {
+        require([
+            'jquery',
+            'accordion'], function ($) {
+            $("#checkoutSteps").accordion();
+        });
+    }, 2000)
+</script>

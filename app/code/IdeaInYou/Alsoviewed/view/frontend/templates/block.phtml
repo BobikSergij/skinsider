@@ -1,0 +1,58 @@
+<?php
+/**
+ * @var \IdeaInYou\Alsoviewed\Block\Widget\ListProduct $block
+ *  * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php if ($block->getEnabled()) : ?>
+    <div class="block <?= $block->escapeHtml($block->getBlockCss()); ?> alsoviewed-products" style="display: none;" data-mage-init='{"IdeaInYou_Alsoviewed/js/list": <?= $block->escapeHtmlAttr($block->getJsonConfig()) ?>}'>
+        <?php if ($block->getBlockTitle()) : ?>
+            <div class="block-title"><strong><?= $block->escapeHtml($block->getBlockTitle()); ?></strong></div>
+        <?php else:?>
+            <div class="block-title"><strong><?= $escaper->escapeHtml(__('Customers Also Viewed')) ?></strong></div>
+        <?php endif; ?>
+        <div class="block-content"></div>
+    </div>
+<?php endif ?>
+<script type="text/x-magento-init">
+{
+    ".block-content":{
+        "viewedClass":{
+        }
+    }
+}
+</script>
+<script type="text/x-magento-init">
+            {
+                ".also-viewed.owl-carousel": {
+                    "owlCarousel": {
+                        "center": false,
+                        "items": 4,
+                        "margin":16,
+                        "loop": false,
+                        "nav": true,
+                        "dots": false,
+                        "responsiveClass": true,
+                        "navText": ["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+                        "responsive": {
+                            "0": {
+                                "items": 2,
+                                "margin":16
+                            },
+                            "360": {
+                                "items": 2,
+                                "margin":16
+                            },
+                             "768": {
+                                "items": 3,
+                                "margin":30
+                            },
+                             "880": {
+                                "items": 4,
+                                "margin":30
+                            }
+                        }
+                    }
+                }
+            }
+</script>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <alsoviewed>
+            <product_tab>
+                <enabled>1</enabled>
+                <sort_order>100</sort_order>
+                <title>We Recommend</title>
+                <block_title>People who viewed this product also viewed</block_title>
+                <basis>current</basis>
+                <products_count>4</products_count>
+                <mode>grid</mode>
+                <block_css>widget alsoviewed-products</block_css>
+            </product_tab>
+            <log>
+                <ignore_user_agent>1</ignore_user_agent>
+                <ignored_user_agent><![CDATA[008|Applebot|bingbot|facebookexternalhit|FlipboardProxy|googlebot|Googlebot|MetaURI|msnbot|redditbot|slurp|tm_crawler|TweetmemeBot|Twitterbot|Yandex]]></ignored_user_agent>
+                <ignore_ip_address>0</ignore_ip_address>
+                <ignored_ip_address></ignored_ip_address>
+            </log>
+            <session>
+                <limit>10</limit>
+            </session>
+            <perfomance>
+                <chunk_size>500</chunk_size>
+            </perfomance>
+        </alsoviewed>
+    </default>
+</config>

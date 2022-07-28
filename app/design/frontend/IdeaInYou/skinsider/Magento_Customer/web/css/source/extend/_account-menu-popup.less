@@ -1,6 +1,59 @@
+
 & when (@media-common = true) {
-    .logged-account-popup {
-        .lib-vendor-prefix-display();
-        .lib-vendor-prefix-flex-direction(column);
+
+    .modal-popup {
+        .modal-inner-wrap {
+
+            .action-close {
+                margin: 0;
+                padding: @indent__s;
+                border: 0;
+                border-radius: 0;
+                .lib-css(background, @color-black);
+
+                &:before {
+                    .lib-css(color, @color-white);
+                    transition: .3s linear all;
+                }
+
+                &:hover {
+                    &:before {
+                        .lib-css(color, @color-gray37);
+                    }
+                }
+
+            }
+
+            .logged-account-popup {
+                .lib-vendor-prefix-display();
+                .lib-vendor-prefix-flex-direction();
+
+                > a {
+                    padding: @indent__s + 5 0;
+                    .lib-font-size(14);
+
+                    &:not(:last-child) {
+                        border-bottom: 1px solid #ebebeb;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .modal-popup {
+        .modal-inner-wrap {
+            width: 40%;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .modal-popup {
+        .modal-inner-wrap {
+            width: 25%;
+        }
     }
 }

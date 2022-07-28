@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="IdeaInYou_Alsoviewed::alsoviewed"
+            title="Also Viewed Products"
+            translate="title"
+            module="IdeaInYou_Alsoviewed"
+            sortOrder="20"
+            dependsOnModule="Magento_Catalog"
+            parent="Magento_Catalog::catalog"
+            resource="IdeaInYou_Alsoviewed::alsoviewed"
+        />
+        <add id="IdeaInYou_Alsoviewed::alsoviewed_log"
+            title="Log"
+            translate="title"
+            sortOrder="10"
+            module="IdeaInYou_Alsoviewed"
+            parent="IdeaInYou_Alsoviewed::alsoviewed"
+            action="alsoviewed/log/index"
+            resource="IdeaInYou_Alsoviewed::log"
+        />
+        <add id="IdeaInYou_Alsoviewed::alsoviewed_relation"
+            title="Relations"
+            translate="title"
+            sortOrder="20"
+            module="IdeaInYou_Alsoviewed"
+            parent="IdeaInYou_Alsoviewed::alsoviewed"
+            action="alsoviewed/relation/index"
+            resource="IdeaInYou_Alsoviewed::relation"
+        />
+    </menu>
+</config>

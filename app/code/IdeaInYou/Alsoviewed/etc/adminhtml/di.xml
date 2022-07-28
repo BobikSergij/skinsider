@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="IdeaInYou\Alsoviewed\Model\Relation\Locator\LocatorInterface"
+        type="IdeaInYou\Alsoviewed\Model\Relation\Locator\RegistryLocator"/>
+    <type name="IdeaInYou\Alsoviewed\Ui\DataProvider\AbstractDataProvider">
+        <arguments>
+            <argument name="addFieldStrategies" xsi:type="array">
+                <item name="product_name" xsi:type="object">IdeaInYou\Alsoviewed\Ui\DataProvider\AddProductNameFieldToCollection</item>
+                <item name="related_product_name" xsi:type="object">IdeaInYou\Alsoviewed\Ui\DataProvider\AddRelatedProductNameFieldToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

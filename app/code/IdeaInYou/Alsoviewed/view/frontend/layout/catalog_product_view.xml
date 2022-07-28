@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block class="IdeaInYou\Alsoviewed\Block\Widget\ListProduct"
+                   name="alsoviewed.products.tab"
+                   template="IdeaInYou_Alsoviewed::product/sidebar/list.phtml"
+                   after="catalog.product.related">
+            </block>
+        </referenceContainer>
+        <referenceBlock name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="alsoviewed.logger" template="IdeaInYou_Alsoviewed::logger.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

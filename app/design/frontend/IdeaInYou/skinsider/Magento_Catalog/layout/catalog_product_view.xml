@@ -6,8 +6,12 @@
  */
 -->
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/source/lib/carousel/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+    </head>
     <body>
         <referenceContainer name="content">
+            <block name="main.review.popup" as="main.review.popup" before="-" template="Magento_Catalog::popup/review-popup.phtml"/>
             <referenceBlock name="product.info.details">
                 <referenceBlock name="product.attributes" remove="true"/>
                 <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.howtouse" as="howtouse" template="Magento_Catalog::product/view/howToUseTab.phtml" group="detailed_info">
@@ -22,6 +26,18 @@
                         <argument name="sort_order" xsi:type="string">20</argument>
                     </arguments>
                 </block>
+            </referenceBlock>
+            <referenceContainer name="product.info.main">
+                <block class="Magento\Cms\Block\Block" name="product-info-sale-block" after="-">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">product_info_sale_block</argument>
+                    </arguments>
+                </block>
+            </referenceContainer>
+            <referenceBlock name="product.info.description">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Description</argument>
+                </arguments>
             </referenceBlock>
         </referenceContainer>
     </body>

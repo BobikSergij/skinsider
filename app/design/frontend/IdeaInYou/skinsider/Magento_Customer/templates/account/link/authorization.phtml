@@ -10,11 +10,29 @@
  */
 $dataPostParam = '';
 $accountLink = '';
+$ordersLink = '';
+$wishListLink = '';
+$addressBookLink = '';
+$accountInfoLink = '';
+$paymentMethodsLink = '';
+$billingLink = '';
+$productReviewsLink = '';
+$newsletterSubscrLink = '';
 $signOutLink = '';
+
 if ($block->isLoggedIn()) {
     $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
     $accountLink = $block->getBaseUrl() . '/customer/account/';
-    $signOutLink = $block->getBaseUrl() . '/customer/account/logout/';
+    $ordersLink = $block->getBaseUrl() . 'sales/order/history/';
+    $wishListLink = $block->getBaseUrl() . 'wishlist/';
+    $addressBookLink = $block->getBaseUrl() . 'customer/address/new/';
+    $accountInfoLink = $block->getBaseUrl() . 'customer/account/edit/';
+    $paymentMethodsLink = $block->getBaseUrl() . 'vault/cards/listaction/';
+    $billingLink = $block->getBaseUrl() . 'paypal/billing_agreement/';
+    $productReviewsLink = $block->getBaseUrl() . 'review/customer/';
+    $newsletterSubscrLink = $block->getBaseUrl() . 'newsletter/manage/';
+    $signOutLink = $block->getBaseUrl() . 'customer/account/logout/';
+
 }
 ?>
 <li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
@@ -37,6 +55,14 @@ if ($block->isLoggedIn()) {
          "myAccountPopup":{
              "isLoggedIn": "<?= $block->isLoggedIn() ?>",
              "accountLink": "<?= $accountLink ?>",
+             "ordersLink": "<?= $ordersLink ?>",
+             "wishListLink": "<?= $wishListLink ?>",
+             "addressBookLink": "<?= $addressBookLink ?>",
+             "accountInfoLink": "<?= $accountInfoLink ?>",
+             "paymentMethodsLink": "<?= $paymentMethodsLink ?>",
+             "billingLink": "<?= $billingLink ?>",
+             "productReviewsLink": "<?= $productReviewsLink ?>",
+             "newsletterSubscrLink": "<?= $newsletterSubscrLink ?>",
              "signOutLink": "<?= $signOutLink ?>"
          }
     }

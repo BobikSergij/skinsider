@@ -40,6 +40,9 @@ if (trim($block->getPageHeading())) {
                 <?php if ($totalItems == 1) : ?>
                     <?= /* @noEscape */
                     $titleHtml . "&nbsp;" . '(' . $totalItems . "&nbsp;" . 'item' . ')' ?>
+                <?php elseif ($totalItems == 0): ?>
+                    <?= /* @noEscape */
+                    $titleHtml . "&nbsp;" . '(' . '0' . "&nbsp;" . 'items' . ')' ?>
                 <?php else : ?>
                     <?= /* @noEscape */
                     $titleHtml . "&nbsp;" . '(' . $totalItems . "&nbsp;" . 'items' . ')' ?>
@@ -49,3 +52,4 @@ if (trim($block->getPageHeading())) {
         <?= $block->getChildHtml() ?>
     </div>
 <?php endif; ?>
+

@@ -161,6 +161,10 @@
     }
 
     .form-create-account {
+        width: 100%;
+        padding: @indent__base;
+        box-shadow: 0 0 3px rgba(red(@baseColor), green(@baseColor), blue(@baseColor), 1);
+        box-sizing: border-box;
         .fieldset-fullname {
             .fields {
                 .field {
@@ -360,7 +364,7 @@
 
     .password-strength-meter {
         background-color: @_password-default;
-        height: @form-element-input__height;
+        //height: @form-element-input__height;
         line-height: @form-element-input__height;
         padding: @form-element-input__padding;
         position: relative;
@@ -718,7 +722,6 @@
     .form.password.reset,
     .form.send.confirmation,
     .form.password.forget,
-    .form.create.account,
     .form.search.advanced,
     .form.form-orders-search {
         min-width: 600px;

@@ -25,7 +25,7 @@ $products = $block->getProducts();
         }'>
         <?php foreach ($products as $id => $product): ?>
             <li class="amsearch-item product-item"
-                data-click-url="<?= $escaper->escapeUrl($block->getFullLink($product['url'])) ?>">
+                onclick="location.href='<?= $escaper->escapeUrl($block->getFullLink($product['url'])) ?>'"
                 <a class="amsearch-image"
                    title="<?= $escaper->escapeHtmlAttr($block->stripTags($product['name'])); ?>"
                    href="<?= $escaper->escapeUrl($block->getFullLink($product['url'])) ?>">

@@ -211,6 +211,7 @@
                     .button-bottom {
                         .lib-vendor-box-align();
                         .lib-vendor-prefix-display();
+                        .lib-vendor-prefix-flex-direction();
                         justify-content: space-between;
                         padding: 14px 20px;
 
@@ -238,6 +239,56 @@
                             border: none;
                             padding: 0;
                             font-family: @libre-font-family;
+                        }
+
+                        .actions {
+
+                            &:first-child {
+                                min-height: 50px;
+                                padding: @indent__xs;
+                                .lib-vendor-prefix-display();
+                                .lib-vendor-prefix-flex-direction();
+                                justify-content: center;
+                                transition: .2s all linear;
+
+                                &:hover {
+                                    .lib-css(background, @theme__color__primary-alt);
+
+                                    span, a {
+                                        .lib-css(color, @color-white)
+
+                                    }
+                                }
+                            }
+
+                            &:last-child {
+                                width: 100%;
+                                margin-top: @indent__base;
+
+                                .primary {
+                                    .lib-vendor-prefix-display();
+                                    justify-content: space-evenly;
+
+                                    > div {
+                                        width: 50%;
+
+                                        .stripe-payments-express-minicart {
+                                            margin: 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            button {
+                                width: 50%;
+                                transition: .2s linear all;
+
+                                &:hover {
+                                    .lib-css(background, @theme__color__primary-alt);
+                                    .lib-css(color, @color-white)
+                                }
+                            }
+
                         }
                     }
 
@@ -449,9 +500,10 @@
         }
 
         .footer.content {
-            .trustpilot-widget iframe{
-                height: 50px!important;
+            .trustpilot-widget iframe {
+                height: 50px !important;
             }
+
             & > .social-wrap {
                 border-bottom: 1px solid #eaeaea;
 
@@ -534,34 +586,39 @@
                             width: 100%;
                             max-width: 100%;
                             margin: 0;
-                            .label{
+
+                            .label {
                                 display: none;
                             }
-                            input{
+
+                            input {
                                 padding: 10px 40px 10px 20px;
                                 .lib-font-size(14px);
                                 font-family: @libre-font-family;
                                 @_shadow: 0 0 0 0.25rem rgba(0, 0, 0, .03);
                                 .lib-css(box-shadow, @_shadow, 1);
-                                &::-webkit-input-placeholder{
+
+                                &::-webkit-input-placeholder {
                                     .lib-css(color, @color-gray60);
                                 }
                             }
                         }
                     }
+
                     .module-heading,
-                    .subscribe-description{
+                    .subscribe-description {
                         letter-spacing: 0.1em;
                         font-family: @libre-font-family;
                     }
 
-                    .module-heading{
+                    .module-heading {
                         .lib-font-size(25px);
                         margin-bottom: 14px;
                         text-transform: uppercase;
                         .lib-css(font-weight, @font-weight__semibold);
                     }
-                    .subscribe-description{
+
+                    .subscribe-description {
                         .lib-font-size(12px);
                         line-height: 1.8333;
                     }
@@ -630,7 +687,8 @@
                     }
                 }
             }
-            .footer-column{
+
+            .footer-column {
                 padding: 0 15px;
             }
         }
@@ -899,7 +957,8 @@
 
                 div[data-appearance='contained'] {
                     width: 100%;
-                    .footer-column-heading{
+
+                    .footer-column-heading {
                         .lib-line-height(20px);
                         .lib-font-size(18px);
                     }
@@ -927,37 +986,45 @@
         }
     }
 }
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .page-wrapper{
-        .footer.content{
-            .new-footer-container{
+    .page-wrapper {
+        .footer.content {
+            .new-footer-container {
                 .lib-vendor-prefix-flex-direction(unset);
                 align-items: unset;
-                .newsletter{
+
+                .newsletter {
                     max-width: 35%;
-                    .module-heading{
+
+                    .module-heading {
                         margin-top: 0;
                     }
                 }
-                div[data-appearance='contained']{
-                    .links{
+
+                div[data-appearance='contained'] {
+                    .links {
                         justify-content: end;
                     }
-                    .footer-column{
+
+                    .footer-column {
                         width: 35%;
                         padding: 0 5px;
-                        &:last-of-type{
+
+                        &:last-of-type {
                             width: 20%;
                         }
                     }
                 }
             }
-            .trustpilot-widget iframe{
-                height: 20px!important;
+
+            .trustpilot-widget iframe {
+                height: 20px !important;
             }
         }
     }
 }
+
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .page-wrapper {
         .header.content {

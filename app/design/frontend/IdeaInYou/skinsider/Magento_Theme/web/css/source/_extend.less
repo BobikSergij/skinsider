@@ -244,12 +244,13 @@
                         .actions {
 
                             &:first-child {
-                                min-height: 50px;
+                                min-height: 40px;
                                 padding: @indent__xs;
                                 .lib-vendor-prefix-display();
                                 .lib-vendor-prefix-flex-direction();
                                 justify-content: center;
                                 transition: .2s all linear;
+                                border-radius: 3px;
 
                                 &:hover {
                                     .lib-css(background, @theme__color__primary-alt);
@@ -263,14 +264,14 @@
 
                             &:last-child {
                                 width: 100%;
-                                margin-top: @indent__base;
+                                margin-top: @indent__s;
 
                                 .primary {
                                     .lib-vendor-prefix-display();
                                     justify-content: space-evenly;
 
                                     > div {
-                                        width: 50%;
+                                        width: 45%;
 
                                         .stripe-payments-express-minicart {
                                             margin: 0;
@@ -280,7 +281,8 @@
                             }
 
                             button {
-                                width: 50%;
+                                display: inline-block;
+                                width: 45%;
                                 transition: .2s linear all;
 
                                 &:hover {

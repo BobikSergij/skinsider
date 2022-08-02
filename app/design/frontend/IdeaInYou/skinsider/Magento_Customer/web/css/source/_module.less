@@ -20,6 +20,12 @@
 
 & when (@media-common = true) {
 
+    .account {
+        .sidebar-additional {
+            display: none;   // sidebar hidden
+        }
+    }
+
     .page-title-wrapper {
         display: none;
     }
@@ -580,8 +586,6 @@
 
                 .product-items {
 
-                    justify-content: center;
-
                     .product-item {
                         max-width: unset;
                         width: 30%;
@@ -742,7 +746,6 @@
                 width: 60%;
 
                 .product-items {
-                    justify-content: space-evenly;
 
                     .product-item {
                         width: 45%;
@@ -947,7 +950,6 @@
         .columns {
             .column.main {
                 .product-items {
-                    justify-content: space-evenly;
 
                     .product-item {
                         width: 100%;
@@ -991,8 +993,6 @@
                 }
 
                 .product-items {
-                    justify-content: space-evenly;
-
                     .product-item {
                         width: 45%;
                         padding: @indent__s;

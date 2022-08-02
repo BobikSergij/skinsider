@@ -32,7 +32,21 @@
             width: 100%;
             margin: 0 16px;
             position: relative;
+
+            .amsearch-message-block{
+                margin: 20px 0;
+                padding: 0;
+            }
+            .amsearch-input{
+                &:focus{
+                    border-color: @color-gray60;
+                }
+            }
         }
+
+    }
+    .amsearch-overlay-block{
+        display: none!important;
     }
 
     .page-header .panel.wrapper {
@@ -134,14 +148,21 @@
                     }
 
                     .counter-number {
-                        display: block;
-                        padding: 0 6px;
+                        .lib-vendor-prefix-display();
+                        justify-content: center;
                         .lib-css(color, @color-white);
                         font-family: @libre-font-family;
+                        &.empty{
+                            display: none;
+                        }
                     }
-
-                    &.empty {
-                        display: none;
+                    &.empty{
+                        .counter-number{
+                            display: none;
+                            &.empty{
+                                .lib-vendor-prefix-display();
+                            }
+                        }
                     }
                 }
 
@@ -595,6 +616,7 @@
 
                             input {
                                 padding: 10px 40px 10px 20px;
+                                margin: 0;
                                 .lib-font-size(14px);
                                 font-family: @libre-font-family;
                                 @_shadow: 0 0 0 0.25rem rgba(0, 0, 0, .03);
@@ -892,6 +914,9 @@
 
             .amsearch-input-wrapper {
                 width: 100%;
+                .amsearch-input{
+                    padding-left: 45px;
+                }
             }
         }
 
@@ -914,10 +939,6 @@
 
                 ul {
                     text-align: center;
-                }
-
-                .level0.parent > .level-top {
-                    padding-right: 12px;
                 }
             }
         }

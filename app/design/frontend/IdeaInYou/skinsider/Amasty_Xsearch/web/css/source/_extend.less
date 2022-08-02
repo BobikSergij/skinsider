@@ -16,6 +16,58 @@
 
     .amsearch-result-section {
         display: unset;
+        max-height: 500px;
+        .amsearch-link.-view-all{
+            display: none;
+        }
+        .bottom-view-all{
+            width: 100%;
+
+            .amsearch-title{
+                display: none;
+            }
+            .amsearch-link.-view-all{
+                .lib-vendor-prefix-display();
+                .lib-vendor-box-align();
+                justify-content: center;
+                .lib-font-size(16px);
+                font-family: @libre-font-family;
+                .lib-css(color, @color-search-view-all)!important;
+                text-transform: unset;
+                padding: 3px 10px 4px;
+                margin: 4px 0 0;
+                .amsearch-count{
+                    &:after,
+                    &:before{
+                        display: none;
+                    }
+                    padding: 0 7px;
+                }
+                span{
+                    .lib-css(color, @color-search-view-all);
+                    .lib-font-size(16px);
+                    border: none;
+                    font-family: @libre-font-family;
+                    text-transform: unset;
+                    width: unset;
+                }
+                .text{
+                    .lib-icon-font(
+                        @_icon-font: @icomoon-font-family,
+                        @_icon-font-content: @_icon-arrow-right,
+                        @_icon-font-color: @color-search-view-all,
+                        @_icon-font-position: after,
+                        @_icon-font-margin: 0 0 0 7px,
+                        @_icon-font-size: 14px
+                    );
+                }
+                &:hover{
+                    border-radius: 8px;
+                    .lib-css(background, @color-background-search-hover);
+                    text-decoration: none;
+                }
+            }
+        }
 
         .amsearch-block-header {
             .lib-css(color, @color-gray-middle2);
@@ -26,14 +78,18 @@
             span {
                 width: 100%;
                 line-height: 16px;
-                .lib-font-size(15px);
-                border-bottom: 1px solid @color-gray-middle2;
-                padding-bottom: 4px;
+                .lib-font-size(13px);
+                border-bottom: 1px solid @color-gray-darken0;
+                padding-bottom: 3px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                .lib-css(color, @color-gray60);
+                font-family: @lato-font-family;
             }
         }
 
         .amsearch-link, .amsearch-highlight {
-            .lib-css(color, @theme__color__primary)!important;
+            .lib-css(color, @theme__color__primary-alt);
             font-family: 'Libre Baskerville',serif;
         }
 
@@ -43,15 +99,26 @@
 
             .amsearch-item-container {
                 padding: 0;
+                &.-page{
+                    display: none;
+                }
 
                 .amsearch-tab-items {
+                    padding: 0 10px;
                     .amsearch-item {
                         margin: 0;
                         background: unset;
                         border-radius: unset;
-
                         .amsearch-link {
-                            padding: 2px 0;
+                            padding: 8px 10px 8px;
+                            text-transform: unset;
+                            .lib-css(color, @color-gray20);
+                            .lib-font-size(15px);
+                            .lib-line-height(16px);
+                            &:hover{
+                                .lib-css(background, @color-background-search-hover);
+                                border-radius: 8px;
+                            }
                         }
                     }
                 }
@@ -59,12 +126,17 @@
         }
 
         .amsearch-products-section {
-            padding: 10px 20px;
+            padding: 10px;
+            border: none;
+            .amsearch-product-list{
+                width: 100%;
+
+            }
 
             .amsearch-block-header {
                 .lib-vendor-prefix-flex-direction(column);
                 line-height: 16px;
-                padding: 0;
+                padding: 0 10px;
 
                 .amsearch-title {
                     .amsearch-count {
@@ -79,17 +151,22 @@
                 }
             }
 
-            .amsearch-product-list {
-                border-top: 1px solid @color-gray-middle2;
-            }
-
             .amsearch-item.product-item {
+                cursor: pointer;
                 max-width: 100%!important;
-                padding: 10px 0;
-                border-bottom: 1px solid @color-gray-middle2;
+                padding: 10px;
+                border-bottom: 1px solid @color-gray-darken0;
+                box-shadow: none;
                 min-height: unset;
                 .lib-vendor-prefix-flex-direction(row)!important;
                 .lib-vendor-prefix-flex-wrap(unset);
+                &:hover{
+                    .lib-css(background, @color-background-search-hover);
+                    border-radius: 8px;
+                }
+                .product-image-container{
+                    max-width: 70px;
+                }
 
                 .amsearch-image {
                     width: 70px;
@@ -108,14 +185,32 @@
                     padding: 0;
                     margin-left: 10px;
                     text-align: left;
+                    .product-item-link{
+                        .lib-css(color, @color-gray20);
+                        &:hover{
+                            text-decoration: none;
+                        }
+                    }
+                    .amsearch-wrapper-inner{
+                        .old-price{
+                            flex-basis: unset;
+                            padding: 0;
+                            margin: 0;
+                        }
+                    }
 
                     .product-item-link, .product-reviews-summary {
-                        .lib-font-size(12px);
+                        .lib-font-size(15px);
                         padding: 0;
+                        text-transform: unset;
+                        justify-content: left;
+                        margin-bottom: 2px;
 
                         .rating-result {
                             &:before {
-                                .lib-css(color, @color-yellow1);
+                                .lib-css(color, @color-search-star);
+                                .lib-line-height(16px);
+                                height: unset;
                             }
                         }
                     }
@@ -126,12 +221,18 @@
                         padding: 0;
 
                         .price-container {
-                            line-height: 15px;
+                            .lib-line-height(15px);
                             .lib-font-size(15px);
+                            padding: 0;
                         }
                     }
                 }
             }
         }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .amsearch-result-section{
+        max-height: unset;
     }
 }

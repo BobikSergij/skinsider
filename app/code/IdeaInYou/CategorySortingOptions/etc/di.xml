@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Config">
+        <plugin name="AddSortingOptionsPlugin"
+                type="IdeaInYou\CategorySortingOptions\Plugin\AddSortingOptionsPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="SetCollectionPlugin"
+                type="IdeaInYou\CategorySortingOptions\Plugin\SetCollectionPlugin"/>
+    </type>
+</config>

@@ -6,44 +6,50 @@
 
     .amsearch-collapsible-title {
         &:after {
-            display: none!important;
+            display: none !important;
         }
     }
 
     .amsearch-form-block {
-        width: 100%!important;
+        width: 100% !important;
     }
 
     .amsearch-result-section {
         display: unset;
         max-height: 500px;
-        .amsearch-link.-view-all{
+
+        .amsearch-link.-view-all {
             display: none;
         }
-        .bottom-view-all{
+
+        .bottom-view-all {
             width: 100%;
 
-            .amsearch-title{
+            .amsearch-title {
                 display: none;
             }
-            .amsearch-link.-view-all{
+
+            .amsearch-link.-view-all {
                 .lib-vendor-prefix-display();
                 .lib-vendor-box-align();
                 justify-content: center;
                 .lib-font-size(16px);
                 font-family: @libre-font-family;
-                .lib-css(color, @color-search-view-all)!important;
+                .lib-css(color, @color-search-view-all) !important;
                 text-transform: unset;
                 padding: 3px 10px 4px;
                 margin: 4px 0 0;
-                .amsearch-count{
+
+                .amsearch-count {
                     &:after,
-                    &:before{
+                    &:before {
                         display: none;
                     }
+
                     padding: 0 7px;
                 }
-                span{
+
+                span {
                     .lib-css(color, @color-search-view-all);
                     .lib-font-size(16px);
                     border: none;
@@ -51,7 +57,8 @@
                     text-transform: unset;
                     width: unset;
                 }
-                .text{
+
+                .text {
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
                         @_icon-font-content: @_icon-arrow-right,
@@ -61,7 +68,8 @@
                         @_icon-font-size: 14px
                     );
                 }
-                &:hover{
+
+                &:hover {
                     border-radius: 8px;
                     .lib-css(background, @color-background-search-hover);
                     text-decoration: none;
@@ -71,9 +79,9 @@
 
         .amsearch-block-header {
             .lib-css(color, @color-gray-middle2);
-            font-family: 'Libre Baskerville',serif;
-            padding-bottom: 0!important;
-            margin-bottom: 6px!important;
+            font-family: 'Libre Baskerville', serif;
+            padding-bottom: 0 !important;
+            margin-bottom: 6px !important;
 
             span {
                 width: 100%;
@@ -90,32 +98,40 @@
 
         .amsearch-link, .amsearch-highlight {
             .lib-css(color, @theme__color__primary-alt);
-            font-family: 'Libre Baskerville',serif;
+            font-family: 'Libre Baskerville', serif;
         }
 
         .amsearch-items-section {
-            max-width: unset!important;
+            max-width: unset !important;
             padding: 10px 0 0 0;
 
             .amsearch-item-container {
                 padding: 0;
-                &.-page{
+
+                .amsearch-description {
+                    display: none;
+                }
+
+                &.-page {
                     display: none;
                 }
 
                 .amsearch-tab-items {
                     padding: 0 10px;
+
                     .amsearch-item {
                         margin: 0;
                         background: unset;
                         border-radius: unset;
+
                         .amsearch-link {
                             padding: 8px 10px 8px;
                             text-transform: unset;
                             .lib-css(color, @color-gray20);
                             .lib-font-size(15px);
                             .lib-line-height(16px);
-                            &:hover{
+
+                            &:hover {
                                 .lib-css(background, @color-background-search-hover);
                                 border-radius: 8px;
                             }
@@ -128,7 +144,8 @@
         .amsearch-products-section {
             padding: 10px;
             border: none;
-            .amsearch-product-list{
+
+            .amsearch-product-list {
                 width: 100%;
 
             }
@@ -153,18 +170,20 @@
 
             .amsearch-item.product-item {
                 cursor: pointer;
-                max-width: 100%!important;
+                max-width: 100% !important;
                 padding: 10px;
                 border-bottom: 1px solid @color-gray-darken0;
                 box-shadow: none;
                 min-height: unset;
-                .lib-vendor-prefix-flex-direction(row)!important;
+                .lib-vendor-prefix-flex-direction(row) !important;
                 .lib-vendor-prefix-flex-wrap(unset);
-                &:hover{
+
+                &:hover {
                     .lib-css(background, @color-background-search-hover);
                     border-radius: 8px;
                 }
-                .product-image-container{
+
+                .product-image-container {
                     max-width: 70px;
                 }
 
@@ -185,14 +204,17 @@
                     padding: 0;
                     margin-left: 10px;
                     text-align: left;
-                    .product-item-link{
+
+                    .product-item-link {
                         .lib-css(color, @color-gray20);
-                        &:hover{
+
+                        &:hover {
                             text-decoration: none;
                         }
                     }
-                    .amsearch-wrapper-inner{
-                        .old-price{
+
+                    .amsearch-wrapper-inner {
+                        .old-price {
                             flex-basis: unset;
                             padding: 0;
                             margin: 0;
@@ -231,8 +253,35 @@
         }
     }
 }
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amsearch-result-section {
+        .amsearch-items-section {
+            .lib-vendor-prefix-display();
+
+            div {
+                width: 100%;
+            }
+
+            .amsearch-block-header {
+                padding: 0 10px 2px;
+            }
+
+            .amsearch-item-container {
+                .amsearch-tab-items {
+                    .amsearch-item {
+                        .amsearch-link {
+                            padding: 8px 0 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .amsearch-result-section{
+    .amsearch-result-section {
         max-height: unset;
     }
 }

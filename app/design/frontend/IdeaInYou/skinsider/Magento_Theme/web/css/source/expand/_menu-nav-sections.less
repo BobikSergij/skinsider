@@ -90,7 +90,7 @@
 
             .level0.nav-3 {
                 ul.level0 {
-                    .lib-vendor-prefix-column-count(3);
+                    .lib-vendor-prefix-column-count(4);
                     min-width: 454px;
                 }
             }
@@ -167,6 +167,30 @@
             .navigation li.level1 {
                 a {
                     .lib-css(color, @theme__color__primary);
+                }
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .page-wrapper {
+        .sections.nav-sections {
+            .navigation a {
+                padding: 0 20px;
+            }
+            .level0.nav-2 {
+                &:hover {
+                    ul.level0 {
+                        min-width: 878px;
+                        left: -15px;
+                    }
+                }
+            }
+            .navigation {
+                .level0 {
+                    .submenu {
+                        min-width: 217px;
+                    }
                 }
             }
         }

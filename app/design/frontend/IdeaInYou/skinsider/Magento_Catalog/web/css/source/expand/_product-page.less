@@ -1,23 +1,5 @@
 & when (@media-common = true) {
     .catalog-product-view {
-        .breadcrumbs {
-            display: block;
-
-            .items {
-                .lib-vendor-prefix-display();
-                .lib-vendor-prefix-flex-wrap(wrap);
-
-                a {
-                    .lib-css(color, @color-price-item);
-                }
-
-                .item:not(:last-child):after {
-                    .lib-font-size(14px);
-                    .lib-line-height(16px);
-                }
-            }
-        }
-
         .fotorama__thumb {
             background: none;
         }
@@ -908,19 +890,6 @@
 
                 .review-form {
                     max-width: unset;
-                }
-            }
-        }
-
-        .breadcrumbs {
-            margin: 0 auto;
-
-            .items {
-                min-height: 80px;
-                .lib-vendor-box-align();
-
-                .item:not(:last-child):after {
-                    margin: 0 14px;
                 }
             }
         }

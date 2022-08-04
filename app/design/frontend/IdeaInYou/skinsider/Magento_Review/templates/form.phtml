@@ -99,7 +99,10 @@ $product = $block->getProduct();
         <div class="field review-field-email required">
             <label for="email_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
             <div class="control">
-                <input type="email" name="title" id="email_field" class="input-text" data-validate="{required:true}" data-bind="value: review().email" />
+                <input name="email" type="email" id="email_field"
+                       data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true, 'validate-email':true}"
+                />
             </div>
         </div>
         <div class="field review-field-summary required">

@@ -25,9 +25,26 @@ $product = $block->getProduct();
     </div>
     <div class="review-block-content">
     <div class="review-add-img">
-        <a href="<?= $block->escapeHtml($block->getProductInfo()->getProductUrl()) ?>">
-            <img src="<?= $block->getBaseUrl()?>media/catalog/product/cache/<?= $block->getProductInfo()->getImage()?>" alt="none"/>
-        </a>
+        <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $product = $objectManager->create('Magento\Catalog\Model\Product')->load($block->getProductInfo()->getId());
+        $images = $product->getMediaGalleryImages();
+        $i = 1;
+        ?>
+        <?php if (!empty($images)) { ?>
+            <?php foreach ($images as $child) { ?>
+                <?php if ($i < 2): ?>
+                    <a class="img-<?= $i++ ?>"
+                       href="<?= $block->escapeUrl($block->getProductUrl($block->getProductInfo()->getId())) ?>">
+                        <img src="<?php echo $child->getUrl(); ?>" alt="none"/>
+                    </a>
+                <?php endif; ?>
+            <?php } ?>
+        <?php } else { ?>
+            <a href="<?= $block->escapeHtml($block->getProductInfo()->getProductUrl()) ?>">
+                <img src="<?= $block->getBaseUrl()?>media/catalog/product/cache/<?= $block->getProductInfo()->getImage()?>" alt="none"/>
+            </a>
+        <?php } ?>
         <div class="name">
             <p><?= $block->escapeHtml($block->getProductInfo()->getName()) ?></p>
         </div>
@@ -74,19 +91,25 @@ $product = $block->getProduct();
         </fieldset>
     <?php endif ?>
         <div class="field review-field-nickname required">
-            <label for="nickname_field" class="label"><span><?= $block->escapeHtml(__('Nickname')) ?></span></label>
+            <label for="nickname_field" class="label"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
             <div class="control">
                 <input type="text" name="nickname" id="nickname_field" class="input-text" data-validate="{required:true}" data-bind="value: nickname()" />
             </div>
         </div>
+        <div class="field review-field-email required">
+            <label for="email_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input type="email" name="title" id="email_field" class="input-text" data-validate="{required:true}" data-bind="value: review().email" />
+            </div>
+        </div>
         <div class="field review-field-summary required">
-            <label for="summary_field" class="label"><span><?= $block->escapeHtml(__('Summary')) ?></span></label>
+            <label for="summary_field" class="label"><span><?= $block->escapeHtml(__('Review Subject')) ?></span></label>
             <div class="control">
                 <input type="text" name="title" id="summary_field" class="input-text" data-validate="{required:true}" data-bind="value: review().title" />
             </div>
         </div>
         <div class="field review-field-text required">
-            <label for="review_field" class="label"><span><?= $block->escapeHtml(__('Review')) ?></span></label>
+            <label for="review_field" class="label"><span><?= $block->escapeHtml(__('Comments')) ?></span></label>
             <div class="control">
                 <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
             </div>

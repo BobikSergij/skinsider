@@ -1,0 +1,66 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+ * @package Multiple Wishlist for Magento 2
+ */
+?>
+<?php
+/** @var \Amasty\MWishlist\Block\Account\Wishlist\WishlistList\Tab $block */
+
+$wishlists = $block->getWishlists();
+?>
+
+<?php /** @var \Amasty\MWishlist\Model\Wishlist $wishlist */ ?>
+
+<section class="amwishlist-content-tab <?= /** @noEscape */
+$block->isActiveTab() ? '-active' : '' ?>"
+         data-amwishlist-js="content-tab"
+         data-tab-id="<?= /** @noEscape */
+         $block->getListType() ?>">
+    <?php if ($wishlists->getSize()): ?>
+        <table class="wishlist-table">
+            <tr class="account-wishlists-table-headings">
+                <th class="account-wishlists-table-heading name">Wishlist name</th>
+                <th class="account-wishlists-table-heading item">Items</th>
+                <th class="account-wishlists-table-heading shared">Shared</th>
+                <th class="account-wishlists-table-heading actions">Actions</th>
+            </tr>
+            <?php foreach ($wishlists as $wishlist): ?>
+                <tr class="table-wishlists-row">
+                    <td class="wishlist-name">
+                        <a href="<?= $block->escapeHtml($block->getViewUrl($wishlist->getWishlistId())) ?>"
+                           title="<?= $block->escapeHtml(__('Go to wishlist page')) ?>">
+                            <?= $block->escapeHtml($block->renderName($wishlist->getName())) ?></a>
+                    </td>
+                    <td class="item-qty-wishlist"><?= $block->escapeHtml(__('%1', $wishlist->getItemCollection()->getSize())) ?></td>
+                    <td class="<?= $wishlist->getId() ?>"></td>
+                    <td class="actions-cell">
+                        <li class="action-edit" data-id="<?= $wishlist->getId() ?>"
+                            data-mage-init='{"editWishlistNamePopup": {
+                                "updateWishlistUrl": "<?= $block->getUrl() . 'mwishlist/wishlist/update/wishlist_id/' . $wishlist->getId() . '/' ?>",
+                                "wishlistId": "<?= $wishlist->getId() ?>"
+                            }}'
+                            title="<?= $block->escapeHtml(__('Edit wishlist name')) ?>"
+                        ><a href="#"></a>
+                        </li>
+                        <li class="amwishlist-item -error"
+                            data-mwishlist-delete
+                            data-mwishlist-ajax='<?= /** @noEscape */
+                            $block->getDeleteData($wishlist->getWishlistId()) ?>'
+                            title="<?= $block->escapeHtml(__('Delete wishlist')) ?>"
+                            ><a class="amwishlist-button -clear"
+                               href="#">
+                            </a>
+                        </li>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+    <?php else: ?>
+        <div class="message info empty"><span><?= $block->escapeHtml($block->getEmptyMessage()) ?></span></div>
+    <?php endif ?>
+</section>
+
+

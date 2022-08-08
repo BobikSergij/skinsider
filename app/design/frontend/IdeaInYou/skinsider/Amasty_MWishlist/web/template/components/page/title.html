@@ -1,0 +1,63 @@
+<div class="amwishlist-title-block">
+    <div class="amwishlist-field-block -editable -title"
+         data-bind="css: {
+                        '-active': isEditNameActive(),
+                        '-error': errors.length
+                    }">
+        <div class="amwishlist-field">
+            <input class="amwishlist-input -clear"
+                   name="wishlist[name]"
+                   type="text"
+                   data-bind="value: listName,
+                              hasFocus: isEditNameActive(),
+                              event: {
+                                    input: function(ui, event) {
+                                        listName(event.target.value);
+                                    }
+                              }"
+            >
+            <button class="amwishlist-button -clear -remove"
+                    type="button"
+                    data-bind="visible: listName().length && isEditNameActive(),
+                               event: {
+                                     click: function () {
+                                        listName('');
+                                     }
+                               }">
+            </button>
+        </div>
+        <button class="amwishlist-button -primary -fill -save"
+                name="do"
+                type="submit"
+                data-bind="
+                   css: {
+                        '-disabled': errors.length || !listName().length || !isNameValid()
+                   },
+                   visible: isEditNameActive(),
+                   i18n: 'Save'">
+        </button>
+        <button class="amwishlist-button -clear -edit"
+                data-bind="
+                    event: {
+                       click: function () {
+                           isEditNameActive(true);
+                       }
+                    },
+                    visible: !isEditNameActive()">
+        </button>
+    </div>
+    <ul class="amwishlist-messages-list" data-bind="foreach: errors, visible: errors().length">
+        <li class="amwishlist-item" html="$data"></li>
+    </ul>
+
+    <aside class="amwishlist-overlay-block"
+           data-bind="css: {
+                        '-active': isEditNameActive()
+                  },
+                  event: {
+                     click: function () {
+                        clickOverlay();
+                     }
+                  }">
+    </aside>
+</div>

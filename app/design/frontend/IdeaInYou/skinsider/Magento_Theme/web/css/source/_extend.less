@@ -11,7 +11,7 @@
             .lib-vendor-prefix-flex-wrap(wrap);
 
             a {
-                .lib-css(color, @color-price-item)!important;
+                .lib-css(color, @color-price-item) !important;
                 text-transform: unset;
             }
 
@@ -22,6 +22,7 @@
             }
         }
     }
+
     .page-header {
         border: none;
         margin: 0;
@@ -53,20 +54,22 @@
             margin: 0 16px;
             position: relative;
 
-            .amsearch-message-block{
+            .amsearch-message-block {
                 margin: 20px 0;
                 padding: 0;
             }
-            .amsearch-input{
-                &:focus{
+
+            .amsearch-input {
+                &:focus {
                     border-color: @color-gray60;
                 }
             }
         }
 
     }
-    .amsearch-overlay-block{
-        display: none!important;
+
+    .amsearch-overlay-block {
+        display: none !important;
     }
 
     .page-header .panel.wrapper {
@@ -172,14 +175,17 @@
                         justify-content: center;
                         .lib-css(color, @color-white);
                         font-family: @libre-font-family;
-                        &.empty{
+
+                        &.empty {
                             display: none;
                         }
                     }
-                    &.empty{
-                        .counter-number{
+
+                    &.empty {
+                        .counter-number {
                             display: none;
-                            &.empty{
+
+                            &.empty {
                                 .lib-vendor-prefix-display();
                             }
                         }
@@ -330,6 +336,10 @@
                                     .lib-css(background, @theme__color__primary-alt);
                                     .lib-css(color, @color-white)
                                 }
+                            }
+
+                            .stripe-payments-express-minicart {
+                                display: none;
                             }
 
                         }
@@ -946,7 +956,8 @@
 
             .amsearch-input-wrapper {
                 width: 100%;
-                .amsearch-input{
+
+                .amsearch-input {
                     padding-left: 45px;
                 }
             }

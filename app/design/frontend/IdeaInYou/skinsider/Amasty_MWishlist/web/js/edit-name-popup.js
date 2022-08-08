@@ -18,7 +18,6 @@ define([
 
         _create: function () {
             this._initModal();
-            console.log(this.options.wishlistId)
         },
 
         _initModal: function () {
@@ -31,7 +30,7 @@ define([
                     '</div>';
 
             let shareIndicator = $('.' + self.options.wishlistId);
-            if (localStorage.getItem('shareable-' + self.options.wishlistId)) {
+            if (localStorage.getItem('shared-wishlist-id-' + self.options.wishlistId)) {
                 $(shareIndicator).text('Yes')
             } else {
                 $(shareIndicator).text('No')
@@ -48,7 +47,7 @@ define([
 
                 $('body').append(this.modalWindow);
 
-                if (localStorage.getItem('shareable-' + self.options.wishlistId)) {
+                if (localStorage.getItem('shared-wishlist-id' + self.options.wishlistId)) {
                     toBeShared.prop('checked', true);
                 } else {
                     toBeShared.prop('checked', false);
@@ -81,10 +80,10 @@ define([
                     });
 
                     if (toBeShared.is(":checked")) {
-                        localStorage.setItem('shareable-' + self.options.wishlistId, 'true')
+                        localStorage.setItem('shared-wishlist-id' + self.options.wishlistId, 'true')
                     } else {
-                        if (localStorage.getItem('shareable-' + self.options.wishlistId)) {
-                            localStorage.removeItem('shareable-' + self.options.wishlistId)
+                        if (localStorage.getItem('shared-wishlist-id' + self.options.wishlistId)) {
+                            localStorage.removeItem('shared-wishlist-id' + self.options.wishlistId)
                         }
                     }
                 })

@@ -11,9 +11,9 @@
 $columns = $block->getColumns();
 /** @var \IdeaInYou\MultipleWishlist\Helper\Helper $helper */
 $helper = $this->helper('IdeaInYou\MultipleWishlist\Helper\Helper');
-//$a = $helper->getWishlist();
-//$a->setData('shared',1);
-//$shareLink= $a->getSharingCode();
+$a = $helper->getWishlist(6);
+$a->setData('shared',1);
+$shareLink= $a->getSharingCode();
 ?>
 
 <!-- get wishlist ID !!!-->
@@ -21,7 +21,7 @@ $helper = $this->helper('IdeaInYou\MultipleWishlist\Helper\Helper');
 
 <div class="share-link-div">
     <h4 class="share-link-title">Share this Wish List with friends:</h4>
-    <input readonly value="Link to be shared goes here">
+    <input readonly value="<?= $shareLink ?>">
 </div>
 
 <div data-mage-init='{"shareLink": {}}' class="amwishlist-product-grid products-grid wishlist">

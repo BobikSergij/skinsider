@@ -47,7 +47,7 @@ define([
 
                 $('body').append(this.modalWindow);
 
-                if (localStorage.getItem('shared-wishlist-id' + self.options.wishlistId)) {
+                if (localStorage.getItem('shared-wishlist-id-' + self.options.wishlistId)) {
                     toBeShared.prop('checked', true);
                 } else {
                     toBeShared.prop('checked', false);
@@ -80,10 +80,10 @@ define([
                     });
 
                     if (toBeShared.is(":checked")) {
-                        localStorage.setItem('shared-wishlist-id' + self.options.wishlistId, 'true')
+                        localStorage.setItem('shared-wishlist-id-' + self.options.wishlistId, 'true')
                     } else {
-                        if (localStorage.getItem('shared-wishlist-id' + self.options.wishlistId)) {
-                            localStorage.removeItem('shared-wishlist-id' + self.options.wishlistId)
+                        if (localStorage.getItem('shared-wishlist-id-' + self.options.wishlistId)) {
+                            localStorage.removeItem('shared-wishlist-id-' + self.options.wishlistId)
                         }
                     }
                 })

@@ -1,0 +1,49 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+ * @package Multiple Wishlist for Magento 2
+ */
+?>
+<?php
+/** @var \Amasty\MWishlist\Block\Account\Wishlist\Items $block */
+
+$columns = $block->getColumns();
+/** @var \IdeaInYou\MultipleWishlist\Helper\Helper $helper */
+$helper = $this->helper('IdeaInYou\MultipleWishlist\Helper\Helper');
+//$a = $helper->getWishlist();
+//$a->setData('shared',1);
+//$shareLink= $a->getSharingCode();
+?>
+
+<!-- get wishlist ID !!!-->
+
+
+<div class="share-link-div">
+    <h4 class="share-link-title">Share this Wish List with friends:</h4>
+    <input readonly value="Link to be shared goes here">
+</div>
+
+<div data-mage-init='{"shareLink": {}}' class="amwishlist-product-grid products-grid wishlist">
+    <?php if (count($block->getItems())): ?>
+        <ol class="amwishlist-items">
+            <?php foreach ($block->getItems() as $item): ?>
+                <li id="item_<?= $block->escapeHtmlAttr($item->getId()) ?>"
+                    class="amwishlist-item"
+                    data-row="amwishlist-item product-item"
+                    data-amwishlist-js="product-item">
+                    <?php foreach ($columns as $column): ?>
+                        <?= $column->setItem($item)->toHtml(); ?>
+                    <?php endforeach; ?>
+                    <div class="amwishlist-item -error">
+                        <?= $block->getChildBlock('remove')->setItem($item)->toHtml() ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php else: ?>
+        <div class="amwishlist-message message info empty">
+            <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>

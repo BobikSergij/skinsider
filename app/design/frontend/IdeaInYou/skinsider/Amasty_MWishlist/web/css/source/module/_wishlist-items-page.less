@@ -1,0 +1,150 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .account.amwishlist-wishlist-index.mwishlist-wishlist-index {
+
+        .amwishlist-button.-clear.-edit {
+            &:hover {
+                filter: none;
+
+                &:before {
+                    .lib-css(color, @theme__color__primary);
+                }
+            }
+        }
+
+        .amwishlist-field-block.-editable.-active .amwishlist-input {
+            border-color: @theme__color__primary;
+        }
+
+        .amwishlist-button.-clear.-remove {
+            &:hover {
+                &:after {
+                    .lib-css(color, @theme__color__primary)
+                }
+            }
+        }
+
+        .amwishlist-button.-fill.-primary:not(.-disabled) {
+            .lib-css(background, @theme__color__primary);
+            border: none;
+        }
+
+        .share-link-div {
+            margin: 0 auto;
+            width: 75%;
+            text-align: center;
+            padding: @indent__base @indent__l;
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-direction();
+            .lib-vendor-box-align();
+            justify-content: space-between;
+            .lib-css(background, @color-gray90);
+
+            .share-link-title {
+                margin: @indent__xs 0 @indent__s 0;
+            }
+
+            input {
+                width: 90%;
+                height: 20px;
+                padding: @indent__s;
+            }
+
+        }
+
+        .amwishlist-product-grid {
+            .amwishlist-items {
+                .amwishlist-item {
+
+                    .amwishlist-name {
+                        min-height: 75px;
+                    }
+
+                    .amwishlist-image-block {
+                        margin: 0;
+                    }
+
+                    .price-box {
+                        .price-label {
+                            display: none;
+                        }
+                    }
+
+                    &:hover {
+                        .lib-css(background, none);
+                        z-index: 0;
+
+                        .amwishlist-inner {
+                            z-index: 999;
+                            transform: translateY(-35px);
+                        }
+                    }
+
+                    .product-reviews-summary.short {
+                        display: none;
+                    }
+
+                    .amwishlist-inner {
+                        .lib-css(background, none);
+                        transition: .2s all linear;
+                        top: 50%;
+
+                        .comment-box, .amwishlist-field.-qty {
+                            display: none;
+                        }
+
+                        .amwishlist-button.-tocart {
+                            width: 100%;
+                            border: none;
+                            font-family: 'Libre_Baskerville';
+                            .lib-font-size(15);
+                            margin-bottom: @indent__xs;
+
+                            &:hover {
+                                border: 2px solid @color-black;
+                            }
+                        }
+
+                        .unavailable.stock {
+                            .lib-css(background, @theme__color__primary);
+                            padding: 10px;
+                            box-sizing: border-box;
+                            width: 100%;
+                            border: none;
+                            border-radius: 3px;
+                            font-family: 'Libre_Baskerville';
+                            text-transform: uppercase;
+                            .lib-css(color, @color-white);
+                            .lib-font-size(15);
+                            text-align: center;
+                            max-height: 40px;
+                            margin-bottom: @indent__xs;
+                        }
+                    }
+
+                    .amwishlist-button.-clear {
+                        height: 40px;
+                        .lib-font-size(15);
+                        box-sizing: border-box;
+                        .lib-css(background, @color-white);
+                        font-family: 'Libre_Baskerville';
+                        border-radius: 3px;
+                        border: 2px solid @color-black;
+                        transition: .2s linear all;
+
+                        &:hover {
+                            .lib-css(background, @theme__color__primary);
+                            .lib-css(color, @color-white);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}

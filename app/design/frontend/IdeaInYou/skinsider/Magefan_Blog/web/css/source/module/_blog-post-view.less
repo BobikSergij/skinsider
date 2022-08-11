@@ -4,13 +4,14 @@
 
 & when (@media-common = true) {
     .blog-post-view.page-layout-2columns-right {
+
+        .sidebar.sidebar-additional {
+            display: none;
+        }
+
         .column.main {
             width: 100%;
             float: none;
-
-            .sidebar.sidebar-additional {
-                display: none;
-            }
 
             .post-view {
                 padding: @indent__m;

@@ -1,0 +1,95 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .blog-post-view.page-layout-2columns-right {
+        .column.main {
+            width: 100%;
+            float: none;
+
+            .post-view {
+                padding: @indent__m;
+                box-shadow: 0 0 3px rgba(red(@baseColor), green(@baseColor), blue(@baseColor), 1);
+
+                .post-content {
+
+                    .post-ftimg-hld {
+                        img {
+                            transition: .2s all linear;
+                        }
+                    }
+
+
+                    &:hover {
+                        .post-ftimg-hld {
+                            img {
+                                filter: brightness(80%);
+                            }
+                        }
+                    }
+
+                    .post-info {
+                        margin-bottom: @indent__base;
+
+                        > div {
+                            display: inline-block;
+                            .lib-css(color, @color-price-item);
+                            .lib-font-size(15);
+                            font-weight: 700;
+
+                            a {
+                                text-transform: none;
+                                .lib-css(color, @color-price-item) !important;
+                                .lib-font-size(15);
+                                font-weight: 700;
+                            }
+                        }
+                    }
+
+                    .post-footer {
+                        .addthis_toolbox.addthis_default_style {
+
+                            a {
+                                margin-right: @indent__xs;
+
+                                .at-icon-wrapper {
+                                    width: 30px !important; // svg not overridable
+                                    height: 30px !important;
+
+                                    .at-icon {
+                                        width: 30px !important;
+                                        height: 30px !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .post-bottom {
+                    margin-top: @indent__xl;
+
+                    .post-nextprev-hld {
+                        .nextprev-link {
+                            padding: @indent__base - 5;
+                            .lib-css(background, @color-white);
+                            .lib-css(color, @theme__color__primary);
+                            .lib-font-size(16);
+                            font-weight: 700;
+                            font-family: 'Libre Baskerville', serif;
+                            letter-spacing: 1px;
+                            border: 2px solid @theme__color__primary;
+                            transition: .2s linear all;
+
+                            &:hover {
+                                .lib-css(background, @theme__color__primary);
+                                .lib-css(color, @color-white);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

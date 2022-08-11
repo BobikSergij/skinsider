@@ -147,7 +147,7 @@
                     margin: @indent__s 0;
 
                     a {
-                        .lib-css(color, @color-darkie-gray);
+                        .lib-css(color, @theme__color__primary-alt) !important;
                         transition: 0.5s linear;
 
                         &:hover {
@@ -197,6 +197,7 @@
                         @_icon-font-margin: 2px 0 0 1px
                     );
                 }
+
                 .show-hide-toggle.filter-open {
                     .lib-icon-font(
                         @icon-up,
@@ -209,7 +210,6 @@
         }
     }
 }
-
 
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
@@ -234,27 +234,25 @@
                     padding-bottom: 0;
 
                     [data-role="title"] {
-                        margin: @indent__base @indent__s;
+                        padding: 14px;
                         .lib-vendor-prefix-display();
-
-                        .show-hide-toggle {
-                            margin-left: @indent__base - 5;
-                        }
-
+                        .lib-vendor-prefix-flex-direction(column);
                     }
 
                     .show-hide-toggle {
+                        .lib-vendor-box-align();
                         .lib-icon-font(
                             @icon-down,
-                            @_icon-font-size: 12px,
+                            @_icon-font-size: 8px,
                             @_icon-font-position: after,
                             @_icon-font-margin: 2px 0 0 5px
                         );
                     }
+
                     .show-hide-toggle.filter-open {
                         .lib-icon-font(
                             @icon-up,
-                            @_icon-font-size: 12px,
+                            @_icon-font-size: 8px,
                             @_icon-font-position: after,
                             @_icon-font-margin: 2px 0 0 5px
                         );
@@ -267,6 +265,12 @@
                         margin: 0 @indent__s;
                         .lib-font-size(16);
                         font-weight: 800;
+                    }
+                }
+
+                .active {
+                    .filter .filter-current + .block-actions {
+                        display: block;
                     }
                 }
             }
@@ -334,10 +338,10 @@
                 display: block;
                 overflow: scroll;
 
-                 > div {
-                     border: 1px solid #ecf0f1;
-                     margin: 0;
-                 }
+                > div {
+                    border: 1px solid #ecf0f1;
+                    margin: 0;
+                }
             }
         }
     }
@@ -402,6 +406,12 @@
 
             .items {
                 display: block;
+
+                .item {
+                    a {
+                        .lib-font-size(14px);
+                    }
+                }
             }
 
             & + .block-actions {

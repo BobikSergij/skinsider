@@ -153,7 +153,7 @@
 
         .price-box {
             span.old-price {
-                display:block;
+                display: block;
             }
         }
     }
@@ -173,10 +173,47 @@
 
                     .item {
                         .lib-vendor-prefix-display();
+                        .lib-vendor-box-align();
                         max-width: 100%;
-                        padding: @indent__s - 3;
+                        padding: 5.5px @indent__s;
                         margin: 0 @indent__s @indent__s 0;
                         background: @color-gray90;
+
+                        .filter-value {
+                            .lib-css(color, @links-color);
+                            letter-spacing: .02em;
+                        }
+
+                        .action.remove {
+                            position: relative;
+                            margin: 0 5px;
+                            line-height: unset;
+                            top: 0;
+
+                            span {
+                                position: relative;
+                                font-size: 0;
+
+                                &:after,
+                                &:before {
+                                    position: absolute;
+                                    left: 5px;
+                                    content: ' ';
+                                    height: 9px;
+                                    width: 1px;
+                                    bottom: 0;
+                                    .lib-css(background, @color-black);
+                                }
+
+                                &:before {
+                                    transform: rotate(45deg);
+                                }
+
+                                &:after {
+                                    transform: rotate(-45deg);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -219,6 +256,8 @@
                 .block-actions.filter-actions {
                     height: 40px;
                     padding: 0;
+                    margin: 0;
+
                     .filter-clear {
                         height: 40px;
                         width: 100%;
@@ -228,7 +267,7 @@
                         justify-content: center;
                         transition: .3s linear all;
 
-                         span {
+                        span {
                             font-weight: 800;
                             letter-spacing: 1px;
                             transition: .3s linear all;
@@ -240,9 +279,9 @@
                             .lib-css(background, @color-black);
 
                             span {
-                            .lib-css(color, @color-white)
+                                .lib-css(color, @color-white)
 
-                        }
+                            }
                         }
                     }
                 }

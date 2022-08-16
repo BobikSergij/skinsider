@@ -146,6 +146,12 @@
                 display: none;
             }
 
+            .header.links {
+                .link.wishlist {
+                    display: none;
+                }
+            }
+
             .header.links,
             .minicart-wrapper {
                 .lib-vendor-prefix-display();
@@ -259,7 +265,6 @@
                     .button-bottom {
                         .lib-vendor-box-align();
                         .lib-vendor-prefix-display();
-                        .lib-vendor-prefix-flex-direction();
                         justify-content: space-between;
                         padding: 14px 20px;
 
@@ -290,36 +295,36 @@
                         }
 
                         .actions {
+                            width: 100%;
 
-                            &:first-child {
-                                min-height: 40px;
-                                padding: @indent__xs;
-                                .lib-vendor-prefix-display();
-                                .lib-vendor-prefix-flex-direction();
-                                justify-content: center;
-                                transition: .2s all linear;
-                                border-radius: 3px;
+                            min-height: 40px;
+                            padding: @indent__xs;
+                            .lib-vendor-prefix-display();
+                            .lib-vendor-prefix-flex-direction();
+                            justify-content: center;
+                            transition: .2s all linear;
+                            border-radius: 3px;
 
-                                &:hover {
-                                    .lib-css(background, @theme__color__primary-alt);
+                            &:hover {
+                                .lib-css(background, @theme__color__primary-alt);
 
-                                    span, a {
-                                        .lib-css(color, @color-white)
+                                span,
+                                a,
+                                button {
+                                    .lib-css(color, @color-white)
 
-                                    }
                                 }
                             }
 
                             &:last-child {
                                 width: 100%;
-                                margin-top: @indent__s;
 
                                 .primary {
                                     .lib-vendor-prefix-display();
                                     justify-content: space-evenly;
 
                                     > div {
-                                        width: 45%;
+                                        display: none;
 
                                         .stripe-payments-express-minicart {
                                             margin: 0;
@@ -330,7 +335,6 @@
 
                             #top-cart-btn-checkout {
                                 display: inline-block;
-                                width: 45%;
                                 transition: .2s linear all;
 
                                 &:hover {
@@ -339,7 +343,8 @@
                                 }
                             }
 
-                            .stripe-payments-express-minicart {
+                            .stripe-payments-express-minicart,
+                            .paypal {
                                 display: none;
                             }
 
@@ -749,7 +754,12 @@
         }
 
         .copyright {
+            display: none;
             .lib-css(background-color, @theme__color__primary-alt);
+
+            &.main {
+                display: block;
+            }
 
             .footer-content {
                 max-width: 1200px;
@@ -757,6 +767,13 @@
                 .lib-vendor-prefix-display();
                 justify-content: space-between;
                 .lib-vendor-box-align();
+
+                .copyright-text {
+                    .lib-font-size(14px);
+                    .lib-line-height(24px);
+                    letter-spacing: .02em;
+                    padding: 13px;
+                }
             }
 
             .footer-payment-icons {
@@ -812,6 +829,20 @@
                     );
                 }
             }
+        }
+    }
+
+    ._show.account-popup {
+        .modal-header {
+            .lib-css(background, @color-border-header);
+        }
+
+        .modal-title {
+            border-bottom: none;
+            .lib-font-size(14px);
+            text-align: left;
+            .lib-css(font-weight, @font-weight__bold);
+            text-transform: uppercase;
         }
     }
 }
@@ -1040,16 +1071,6 @@
 
         .copyright {
             padding-bottom: 50px;
-
-            .footer-content {
-                span {
-                    padding: 13px 0;
-                }
-            }
-
-            .footer-payment-icons {
-
-            }
         }
     }
 }

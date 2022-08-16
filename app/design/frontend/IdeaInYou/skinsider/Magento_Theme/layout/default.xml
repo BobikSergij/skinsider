@@ -8,6 +8,11 @@
         <move element="header.right" destination="header-wrapper" after="top.search"/>
         <move element="header.links" destination="header.right" before="-"/>
         <move element="minicart" destination="header.right" before="-"/>
+        <referenceBlock name="authorization-link">
+            <arguments>
+                <argument name="customer_view_model" xsi:type="object">IdeaInYou\Base\ViewModel\CustomerData</argument>
+            </arguments>
+        </referenceBlock>
 
         <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="my-account-link" remove="true" />

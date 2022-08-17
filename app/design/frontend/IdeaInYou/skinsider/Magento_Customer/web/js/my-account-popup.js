@@ -23,6 +23,7 @@ define([
                 type: 'popup',
                 responsive: true,
                 innerScroll: true,
+                title:  'Welcome back',
                 buttons: [],
                 modalVisibleClass: '_show account-popup',
             }

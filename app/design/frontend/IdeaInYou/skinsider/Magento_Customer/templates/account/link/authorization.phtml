@@ -19,7 +19,6 @@ $billingLink = '';
 $productReviewsLink = '';
 $newsletterSubscrLink = '';
 $signOutLink = '';
-
 if ($block->isLoggedIn()) {
     $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
     $accountLink = $block->getBaseUrl() . '/customer/account/';
@@ -32,7 +31,6 @@ if ($block->isLoggedIn()) {
     $productReviewsLink = $block->getBaseUrl() . 'review/customer/';
     $newsletterSubscrLink = $block->getBaseUrl() . 'newsletter/manage/';
     $signOutLink = $block->getBaseUrl() . 'customer/account/logout/';
-
 }
 ?>
 <li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">

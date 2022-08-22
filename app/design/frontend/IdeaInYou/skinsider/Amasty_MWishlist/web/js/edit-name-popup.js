@@ -25,8 +25,8 @@ define([
             let self = this;
             let modalOptions = this.options,
                 template = '<div class="edit-name-' + self.options.wishlistId + '" > ' +
-                    '<div class="modal-title">Edit wishlist name</div>' + '<div class="new-name-container">' + '<label for="new-name">Wish List Name:</label>' + '<input name="new-name" class="new-name">' + '</div>' + '<div class="input-container">' + '<input class="to-be-shared" name="shareable" type="checkbox">' +
-                    '<label for="shareable">Share Wishlist?</label>' + '</div>' + '<button class="amend-wishlist-name" type="button">Save Wishlist</button>' +
+                    '<div class="modal-title">Edit wishlist name</div>' + '<div class="new-name-container">' + '<label for="new-name">Wish List Name:</label>' +
+                    '<input name="new-name" class="new-name">' + '</div>' + '<button class="amend-wishlist-name" type="button">Save Wishlist</button>' +
                     '</div>';
 
             let shareIndicator = $('.' + self.options.wishlistId);

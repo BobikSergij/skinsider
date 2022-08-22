@@ -117,8 +117,15 @@
 
                         .payment-group {
                             > .payment-method {
-                                padding: @indent__l 0 @indent__xl 0;
-                                border-bottom: 2px solid #ebebeb;
+                                padding: @indent__s 0;
+                                border: 1px solid gray;
+                                &:not(:last-child) {
+                                    border-bottom: none;
+                                }
+
+                                 > div, .stripe-payments-card-form {
+                                     padding: @indent__base - 5 @indent__m;
+                                 }
 
                                 .billing-address-details {
                                     margin-bottom: @indent__base;
@@ -126,6 +133,15 @@
 
 
                                 .action-edit-address {
+                                    display: none;
+                                }
+
+                                .radio {
+                                    height: 20px;
+                                    width: 20px;
+                                }
+
+                                .payment-method-note {
                                     display: none;
                                 }
                             }
@@ -232,11 +248,6 @@
                     }
 
                     .checkout-shipping-address {
-                        .form-login {
-                            .label {
-                                display: none;
-                            }
-                        }
 
                         .form-shipping-address {
                             #shipping-new-address-form {

@@ -17,13 +17,6 @@ $shareLink= $a->getSharingCode();
 ?>
 
 <!-- get wishlist ID !!!-->
-
-
-<div class="share-link-div">
-    <h4 class="share-link-title">Share this Wish List with friends:</h4>
-    <input readonly value="<?= $shareLink ?>">
-</div>
-
 <div data-mage-init='{"shareLink": {}}' class="amwishlist-product-grid products-grid wishlist">
     <?php if (count($block->getItems())): ?>
         <ol class="amwishlist-items">

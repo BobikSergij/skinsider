@@ -12,6 +12,14 @@
 
     .amsearch-form-block {
         width: 100% !important;
+        .amsearch-result-section{
+            display: none;
+        }
+        &.-opened{
+            .amsearch-result-section{
+                display: block;
+            }
+        }
     }
 
     .amsearch-result-section {

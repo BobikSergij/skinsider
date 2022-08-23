@@ -203,6 +203,25 @@
                     height: 50px;
                     text-transform: uppercase;
                 }
+
+                .paypal-button {
+                    background: #0070ba;
+                    height: 30px;
+                    padding: 10px 15px;
+                    border-radius: 3px;
+                    color: white;
+                    font-size: 16px;
+                    .lib-vendor-prefix-display();
+                    justify-content: center;
+                    cursor: pointer;
+
+                    span, strong {
+                        .lib-vendor-prefix-display();
+                        .lib-vendor-prefix-flex-direction();
+                        justify-content: center;
+                        margin-right: @indent__xs;
+                    }
+                }
             }
         }
 

@@ -4,6 +4,7 @@
 //----------------------------------------
 & when (@media-common = true) {
 
+
     .collapsible-container {
         padding: @indent__m;
         border-bottom: 2px solid #ebebeb;
@@ -88,6 +89,34 @@
                     }
 
                     #payment {
+                        .payment-methods {
+                            .payment-method {
+                                .payment-method-content {
+                                    padding: @indent__s @indent__m;
+
+
+                                    .checkout-billing-address, .billing-address-same-as-shipping-block, .billing-address-details {
+                                        display: none;
+                                    }
+
+                                    #payment_form_paypal_express {
+                                        display: none;
+                                    }
+                                }
+
+                                [data-bind="if: stripePaymentsError()"] {
+                                    padding: 0;
+                                }
+
+                            }
+
+                            .payment-method.stripe-payments {
+                                .payment-method-content.stripe-payments-card-form {
+                                    padding: @indent__xs @indent__m @indent__base - 5;
+                                }
+                            }
+                        }
+
 
                         .fieldset.address {
                             .lib-vendor-prefix-display();
@@ -116,16 +145,23 @@
 
 
                         .payment-group {
-                            > .payment-method {
+
+                            .step-title {
+                                margin-bottom: @indent__xl;
+                            }
+
+                            .payment-method {
                                 padding: @indent__s 0;
-                                border: 1px solid gray;
+                                border: 1px solid #dee5e7;
+
+
                                 &:not(:last-child) {
                                     border-bottom: none;
                                 }
 
-                                 > div, .stripe-payments-card-form {
-                                     padding: @indent__base - 5 @indent__m;
-                                 }
+                                > div, .stripe-payments-card-form {
+                                    padding: @indent__base - 5 @indent__m;
+                                }
 
                                 .billing-address-details {
                                     margin-bottom: @indent__base;
@@ -144,16 +180,35 @@
                                 .payment-method-note {
                                     display: none;
                                 }
-                            }
-
-                            &-content {
                                 .actions-toolbar {
                                     margin-top: @indent__s;
 
                                     > .primary {
                                         text-align: left;
+
+                                        .paypal-button {
+                                            width: 100%;
+                                            height: 40px;
+                                            background: #0070ba;
+                                            padding: 10px 15px;
+                                            border-radius: 3px;
+                                            color: white;
+                                            font-size: 16px;
+                                            .lib-vendor-prefix-display();
+                                            justify-content: center;
+                                            cursor: pointer;
+
+                                            span, strong {
+                                                .lib-vendor-prefix-display();
+                                                .lib-vendor-prefix-flex-direction();
+                                                justify-content: center;
+                                                margin-right: @indent__xs;
+                                            }
+
+                                        }
                                     }
                                 }
+
                             }
                         }
 
@@ -180,13 +235,46 @@
                             .primary {
                                 text-align: left;
                             }
-
-
                         }
 
                         .field-tooltip.toggle, .action-update, .action-cancel {
                             display: none;
                         }
+
+
+                        .payment-method {
+                            .action.action-help {
+                                display: none;
+                            }
+
+                            &:not(._active) {
+                                .payment-method-content {
+                                    display: none;
+                                }
+                            }
+
+                            &._active {
+
+                                .lib-css(background, @color-white-smoke);
+
+                                .payment-method-content {
+                                    display: block;
+                                }
+                            }
+
+                            .primary {
+                                width: 40%;
+
+                                .action.primary.checkout {
+                                    width: 100%;
+                                    padding: @indent__base - 5;
+                                    text-transform: uppercase;
+                                    letter-spacing: 1px;
+                                    font-family: 'Libre Baskerville', serif;
+                                }
+                            }
+                        }
+
                     }
 
                     > div {
@@ -315,9 +403,6 @@
 
                 .payment-method-title {
                     .lib-font-size(18);
-                    padding-bottom: @indent__s;
-                    margin-bottom: @indent__s;
-                    border-bottom: 1px solid #ebebeb;
 
                 }
             }
@@ -425,10 +510,14 @@
             }
 
             #payment {
-                .actions-toolbar {
-                    .primary {
-                        text-align: left;
-                        margin: @indent__s 0 0 0;
+                .payment-method {
+                    .payment-method-content {
+                        .actions-toolbar {
+                            .primary {
+                                margin: @indent__s 0 0 0;
+                                width: 100%;
+                            }
+                        }
                     }
                 }
             }

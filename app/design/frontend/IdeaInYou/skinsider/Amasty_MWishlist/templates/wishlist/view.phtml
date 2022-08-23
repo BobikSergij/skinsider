@@ -28,6 +28,12 @@
             <?php else: ?>
                 <div class="message info empty"><span><?= $block->escapeHtml(__('You have no items in your wish list.')) ?></span></div>
             <?php endif ?>
+
+            <?php if ($block->hasWishlistItems() && $block->getWishlistItemsCount() > 1) :?>
+                <button type="button" data-role="all-tocart" title="<?= $block->escapeHtmlAttr(__('Add All to Cart')) ?>" class="action tocart">
+                    <span><?= $block->escapeHtml(__('Add All to Cart')) ?></span>
+                </button>
+            <?php endif;?>
         </div>
     </form>
 <?php endif ?>

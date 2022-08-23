@@ -207,19 +207,33 @@
                 .paypal-button {
                     background: #0070ba;
                     height: 30px;
-                    padding: 10px 15px;
+                    padding: @indent__s @indent__base - 5;
                     border-radius: 3px;
                     color: white;
-                    font-size: 16px;
                     .lib-vendor-prefix-display();
                     justify-content: center;
                     cursor: pointer;
+                    margin-top: @indent__base - 5;
+                    transition: .1s all linear;
 
                     span, strong {
                         .lib-vendor-prefix-display();
                         .lib-vendor-prefix-flex-direction();
                         justify-content: center;
                         margin-right: @indent__xs;
+                    }
+
+                    span {
+                        .lib-font-size(15);
+                        margin-top: 2px;
+                    }
+
+                    strong {
+                        .lib-font-size(20);
+                    }
+
+                    &:hover {
+                        opacity: 0.9;
                     }
                 }
             }

@@ -24,19 +24,25 @@
                  data-toggle="dropdown"
                  data-trigger-keypress-button="true">
                 <strong class="language-<?= $block->escapeHtml($block->getCurrentCurrencyCode()) ?>">
-                    <?php $flagImage = 'images/'.$block->getCurrentCurrencyCode().'.png'; ?>
-                    <img src="<?= $this->getViewFileUrl($flagImage); ?>" alt="<?= $block->escapeHtml($currentCurrencyCode) ?>">
+                    <?php $flagImage = 'images/' . $block->getCurrentCurrencyCode() . '.png'; ?>
+                    <img src="<?= $this->getViewFileUrl($flagImage); ?>"
+                         alt="<?= $block->escapeHtml($currentCurrencyCode) ?>">
                     <span><?= $block->escapeHtml($currentCurrencyCode) ?></span>
                 </strong>
             </div>
             <ul class="dropdown switcher-dropdown" data-target="dropdown">
                 <?php foreach ($currencies as $_code => $_name) : ?>
                     <?php if ($_code != $currentCurrencyCode) : ?>
-                        <li class="currency-<?= $block->escapeHtmlAttr($_code) ?> switcher-option">
-                            <?php $flagImage = 'images/'.$_code.'.png'; ?>
-                            <img src="<?= $this->getViewFileUrl($flagImage); ?>">
-                            <a href="#" data-post='<?= /* @noEscape */ $block->getSwitchCurrencyPostData($_code) ?>'><?= $block->escapeHtml($_code) ?></a>
-                        </li>
+                    <li class="currency-<?= $block->escapeHtmlAttr($_code) ?> switcher-option">
+                        <?php $flagImage = 'images/' . $_code . '.png'; ?>
+                        <img src="<?= $this->getViewFileUrl($flagImage); ?>">
+                        <?php if ($_code === "GBP"): ?>
+                            <a href="https://skinsider.co.uk/"><?= $block->escapeHtml($_code) ?></a>
+                        <?php else: ?>
+                            <a href="#" data-post='<?= /* @noEscape */
+                            $block->getSwitchCurrencyPostData($_code) ?>'><?= $block->escapeHtml($_code) ?></a>
+                            </li>
+                        <?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </ul>

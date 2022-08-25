@@ -4,12 +4,6 @@
 //----------------------------------------
 & when (@media-common = true) {
 
-
-    .collapsible-container {
-        padding: @indent__m;
-        border-bottom: 2px solid #ebebeb;
-    }
-
     #block-customer-login-heading, .step-title {
         .lib-icon-font(
             @_icon-font-content: @icon-checkmark,
@@ -23,6 +17,13 @@
     .checkout-index-index {
         .action-close {
             display: none;
+        }
+
+        input {
+            &:focus {
+                border: 1px solid #4496f6;
+                box-shadow: 0px 0px 5px 1px rgba(68,150,246,1);
+            }
         }
 
         .column.main {
@@ -45,6 +46,7 @@
                     .form.form-login {
                         #customer-email-fieldset {
                             flex-wrap: wrap;
+                            margin: @indent__m 0 @indent__xs 0;
 
                             .hidden-fields.input {
                                 width: 49%;
@@ -80,6 +82,12 @@
                         }
                     }
 
+                    .step-title {
+                        margin: @indent__s 0;
+                        padding: @indent__s 0;
+                        border-bottom: 2px solid #000000;
+                    }
+
                     .checkout-billing-address {
                         .billing-address-details,
                         label span {
@@ -95,8 +103,30 @@
                                     padding: @indent__s @indent__m;
 
 
-                                    .checkout-billing-address, .billing-address-same-as-shipping-block, .billing-address-details {
-                                        display: none;
+                                    //.checkout-billing-address, .billing-address-same-as-shipping-block, .billing-address-details {
+                                    //    display: none;
+                                    //}
+
+                                    .billing-address-details {
+                                        margin-top: @indent__xs;
+                                    }
+
+                                    .billing-address-form {
+                                        .label {
+                                            .lib-font-size(15);
+                                        }
+
+                                        [name="billingAddresscheckmo.company"],
+                                        [name="billingAddresscheckmo.telephone"],
+                                        [name="billingAddressstripe_payments.company"],
+                                        [name="billingAddressstripe_payments.telephone"] {
+                                            width: 100%;
+                                        }
+                                    }
+
+                                    .field-select-billing {
+                                        margin-top: @indent__xl;
+                                        margin-bottom: @indent__s;
                                     }
 
                                     #payment_form_paypal_express {
@@ -130,6 +160,7 @@
 
                             .field.street {
                                 width: 100%;
+                                .lib-font-size(16);
 
                                 .control {
                                     .lib-vendor-prefix-display();
@@ -180,6 +211,7 @@
                                 .payment-method-note {
                                     display: none;
                                 }
+
                                 .actions-toolbar {
                                     margin-top: @indent__s;
 
@@ -274,15 +306,19 @@
                                 }
                             }
 
-                            .primary {
-                                width: 40%;
+                            .actions-toolbar {
+                                margin-top: 0 !important;
 
-                                .action.primary.checkout {
-                                    width: 100%;
-                                    padding: @indent__base - 5;
-                                    text-transform: uppercase;
-                                    letter-spacing: 1px;
-                                    font-family: 'Libre Baskerville', serif;
+                                .primary {
+                                    width: 40%;
+
+                                    .action.primary.checkout {
+                                        width: 100%;
+                                        padding: @indent__s @indent__base - 5;
+                                        text-transform: uppercase;
+                                        letter-spacing: 1px;
+                                        font-family: 'Libre Baskerville', serif;
+                                    }
                                 }
                             }
                         }
@@ -363,6 +399,10 @@
                                     }
                                 }
 
+                                [name="shippingAddress.company"] {
+                                    width: 100%;
+                                }
+
                                 fieldset {
                                     width: 100%;
 
@@ -416,8 +456,36 @@
                 .payment-method-title {
                     .lib-font-size(18);
 
+                    &.paypal-payment {
+                        .lib-vendor-prefix-display();
+                        align-items: center;
+
+                        .label {
+                            .lib-vendor-prefix-display();
+                            align-items: center;
+                            margin-left: @indent__xs;
+
+                            span {
+                                margin-left: @indent__xs
+                            }
+                        }
+                    }
+
+                }
+
+                .form-discount {
+                    .action-apply {
+                        width: 100%;
+                        padding: @indent__s @indent__base - 5;
+                        background: #000000;
+                        color: #ffffff;
+                        border-radius: 3px;
+                        font-family: 'Libre Baskerville', serif;
+                        letter-spacing: 1px;
+                    }
                 }
             }
+
 
             .opc-sidebar {
                 width: 35%;
@@ -517,6 +585,10 @@
                     .actions-toolbar {
                         .lib-vendor-prefix-display();
                         justify-content: center;
+                    }
+
+                    .col-price {
+                        vertical-align: inherit;
                     }
                 }
             }

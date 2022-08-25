@@ -15,16 +15,20 @@
                  alt="<?= $block->escapeHtmlAttr(__('Loading...')) ?>">
         </div>
     </div>
-    <?= /* @noEscape */ $secureRenderer->renderStyleAsTag("position: absolute;", "#checkout-loader img") ?>
+    <?= /* @noEscape */
+    $secureRenderer->renderStyleAsTag("position: absolute;", "#checkout-loader img") ?>
     <!-- ko template: getTemplate() --><!-- /ko -->
     <script type="text/x-magento-init">
         {
             "#checkout": {
-                "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+                "Magento_Ui/js/core/app": <?= /* @noEscape */
+        $block->getJsLayout() ?>
             }
         }
+
     </script>
-    <?php $serializedCheckoutConfig = /* @noEscape */ $block->getSerializedCheckoutConfig();
+    <?php $serializedCheckoutConfig = /* @noEscape */
+        $block->getSerializedCheckoutConfig();
     $scriptString = <<<script
         window.checkoutConfig = {$serializedCheckoutConfig};
         // Create aliases for customer.js model from customer module
@@ -32,7 +36,8 @@
         window.customerData = window.checkoutConfig.customerData;
 script;
     ?>
-    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+    <?= /* @noEscape */
+    $secureRenderer->renderTag('script', [], $scriptString, false) ?>
     <?php $scriptString = <<<script
         require([
             'mage/url',
@@ -43,16 +48,9 @@ script;
         })
 script;
     ?>
-    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+    <?= /* @noEscape */
+    $secureRenderer->renderTag('script', [], $scriptString, false) ?>
 </div>
 
 
-<script>
-    setTimeout(function () {
-        require([
-            'jquery',
-            'accordion'], function ($) {
-            $("#checkoutSteps").accordion();
-        });
-    }, 2000)
-</script>
+

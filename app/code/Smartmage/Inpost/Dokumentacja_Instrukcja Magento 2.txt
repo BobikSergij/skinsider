@@ -1,0 +1,7 @@
+Link do dokumentacji Magento 2:
+
+Wprowadzenie do wtyczki: 
+https://dokumentacja-inpost.atlassian.net/wiki/spaces/PL/pages/61702175/Magento+2.0
+
+Dokumentacja:
+https://docs.google.com/document/d/1M0TqlfVsGKIRFKWqwM8qRagWAZ0V-jIsO1rfucqB4mM/edit#heading=h.twcgk9pjd6dy

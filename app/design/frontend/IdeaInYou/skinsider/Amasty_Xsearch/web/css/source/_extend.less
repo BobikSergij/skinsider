@@ -1,15 +1,16 @@
 & when (@media-common = true) {
     .amsearch-search-page.page-products .columns {
-        .toolbar.toolbar-products:last-of-type{
+        .toolbar.toolbar-products:last-of-type {
             display: none;
         }
+
         .products-grid .product-item {
             padding: 0 7.5px;
             box-shadow: none;
             margin-right: 0;
 
             .product-item-photo {
-                img{
+                img {
                     max-width: 100%;
                 }
             }
@@ -341,5 +342,24 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .amsearch-result-section {
         max-height: unset;
+    }
+    .amsearch-search-page.page-products .columns {
+        .products-grid .product-item {
+            .product-item-photo {
+                max-width: 225px;
+                max-height: 225px;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .amsearch-search-page.page-products .columns {
+        .products-grid .product-item {
+            .product-item-photo {
+                max-height: 200px;
+            }
+        }
     }
 }

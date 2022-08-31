@@ -643,7 +643,58 @@
 
                     .form.subscribe {
                         .lib-vendor-prefix-display();
+                        .lib-vendor-prefix-flex-direction();
                         position: relative;
+
+                        .required {
+                            margin-top: 10px;
+
+                            div {
+                                .lib-vendor-prefix-display();
+                                .lib-vendor-box-align();
+
+                                input {
+                                    margin: 0 !important;
+                                }
+
+                                input[type="checkbox"]:checked + label::after {
+                                    content: '';
+                                    position: absolute;
+                                    width: 1.3ex;
+                                    height: 0.5ex;
+                                    .lib-css(background, @color-white);
+                                    top: 0.89ex;
+                                    left: 0.7ex;
+                                    border: 1px solid @color-checkbox-catalog;
+                                    border-top: none;
+                                    border-right: none;
+                                    transform: rotate(-45deg);
+                                }
+
+                                input[type="checkbox"] {
+                                    position: absolute;
+                                    left: -999em;
+                                }
+
+                                input[type="checkbox"] + label {
+                                    position: relative;
+                                    overflow: hidden;
+                                    cursor: pointer;
+                                }
+
+                                input[type="checkbox"] + label::before {
+                                    content: "";
+                                    display: inline-block;
+                                    vertical-align: -25%;
+                                    height: 2.5ex;
+                                    width: 2.5ex;
+                                    .lib-css(background, @color-white);
+                                    border: 1px solid @color-gray80;
+                                    border-radius: 2px;
+                                    margin-right: 0.5em;
+                                }
+                            }
+                        }
 
                         .field.newsletter {
                             width: 100%;
@@ -691,7 +742,7 @@
                         position: absolute;
                         right: 0;
                         display: block;
-                        bottom: 8px;
+                        top: 8px;
                         width: unset;
                     }
 

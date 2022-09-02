@@ -430,6 +430,44 @@
 
                     .checkout-shipping-method {
                         .step-content {
+
+                            .checkout-shipping-method {
+                                &.chosen {
+                                    .lib-css(background, @color-white-smoke)
+                                }
+                                .row {
+                                    .lib-vendor-prefix-display();
+                                    justify-content: space-between;
+                                    padding: @indent__base @indent__s;
+                                    border: 1px solid #dee5e7;
+                                    border-radius: 3px;
+
+                                    .col {
+                                        margin-right: @indent__s;
+                                        align-items: center;
+                                        .lib-font-size(16);
+                                        font-weight: @font-weight__bold;
+                                    }
+
+                                    > .col-method {
+                                        .lib-vendor-prefix-display();
+                                        justify-content: space-between;
+                                        min-width: 150px;
+
+                                        .radio {
+                                            width: 20px;
+                                            height: 20px;
+                                            margin: 0 @indent__base - 5 0 @indent__xs;
+                                        }
+                                    }
+
+                                    .col-price {
+                                        margin-right: @indent__xs;
+                                        order: 2;
+                                    }
+                                }
+                            }
+
                             .actions-toolbar {
                                 margin-top: @indent__m;
                                 display: block;

@@ -22,7 +22,7 @@
         input {
             &:focus {
                 border: 1px solid #4496f6;
-                box-shadow: 0px 0px 5px 1px rgba(68,150,246,1);
+                box-shadow: 0px 0px 5px 1px rgba(68, 150, 246, 1);
             }
         }
 
@@ -86,6 +86,10 @@
                         margin: @indent__s 0;
                         padding: @indent__s 0;
                         border-bottom: 2px solid #000000;
+
+                        &:before {
+                            display: none;
+                        }
                     }
 
                     .checkout-billing-address {

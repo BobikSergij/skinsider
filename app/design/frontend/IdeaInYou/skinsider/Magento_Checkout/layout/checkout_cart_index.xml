@@ -8,10 +8,8 @@
                 <argument translate="true" name="title" xsi:type="string">Your Cart</argument>
             </action>
         </referenceBlock>
-
-        <referenceBlock name="cart.discount" remove="true"/>
-
         <move element="checkout.cart.form" destination="checkout.cart.container" before="-" />
         <move element="cart.summary" destination="checkout.cart.items" after="checkout.cart.form" />
+        <move element="cart.discount" destination="cart.summary" before="checkout.cart.totals.container"/>
     </body>
 </page>

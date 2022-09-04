@@ -22,7 +22,7 @@
         input {
             &:focus {
                 border: 1px solid #4496f6;
-                box-shadow: 0px 0px 5px 1px rgba(68,150,246,1);
+                box-shadow: 0px 0px 5px 1px rgba(68, 150, 246, 1);
             }
         }
 
@@ -262,27 +262,7 @@
 
 
                         .discount-code {
-                            margin: @indent__m 0;
-
-                            #block-discount-heading {
-                                width: 100%;
-                                padding: 10px 15px;
-                                .lib-css(background, @color-black);
-                                .lib-css(color, @color-white);
-                                border-radius: 3px;
-                            }
-
-                            .payment-option-content {
-                                margin-top: @indent__base;
-
-                                .control {
-                                    margin-bottom: @indent__s;
-                                }
-                            }
-
-                            .primary {
-                                text-align: left;
-                            }
+                            display: none;
                         }
 
                         .field-tooltip.toggle, .action-update, .action-cancel {
@@ -492,8 +472,8 @@
 
 
             .opc-sidebar {
-                width: 35%;
-                float: right;
+                width: 38%;
+                margin-left: auto;
                 position: unset;
                 visibility: visible;
                 opacity: 1;
@@ -521,7 +501,9 @@
                     }
 
                     .opc-block-shipping-information {
-                        padding: @indent__s + 5;
+                        .shipping-information {
+                            padding: 0 15px 15px;
+                        }
 
                         .shipping-information-title {
                             display: none;
@@ -568,9 +550,90 @@
                 }
 
             }
+
+            .block.discount {
+                .lib-vendor-prefix-display();
+                .lib-vendor-prefix-flex-direction();
+                margin-top: 16px;
+
+                .content,
+                .label {
+                    display: none;
+
+                }
+
+                .title {
+                    .lib-vendor-prefix-display();
+                    cursor: pointer;
+
+                    strong {
+                        padding: 10px 15px;
+                        .lib-css(background, @color-black);
+                        .lib-css(color, @color-white);
+                        border-radius: 3px;
+                        margin: 0;
+                    }
+                }
+
+                &.active {
+                    .title {
+                        .lib-vendor-prefix-display();
+                        justify-content: space-between;
+                        .lib-vendor-box-align();
+
+                        &:after {
+                            content: 'Cancel';
+                            border-bottom: 1px dotted;
+                            line-height: 1.5;
+                        }
+                    }
+                }
+
+                .primary {
+                    button {
+                        width: 100%;
+                        padding: 10px 15px;
+                        .lib-css(background, @color-black);
+                        .lib-css(color, @color-white);
+                        border-radius: 3px;
+                        font-family: 'Libre Baskerville', serif;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
 
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .checkout-index-index {
+        .column.main {
+            .block.discount {
+                width: 38%;
+                float: right;
+                .title{
+                    margin-bottom: 20px;
+                }
+
+                .fieldset.coupon {
+                    .lib-vendor-prefix-display();
+                    .field{
+                        width: 100%;
+                    }
+                }
+
+                .primary {
+                    button {
+                        margin: 0 0 0 10px;
+                        padding: 14px 15px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 

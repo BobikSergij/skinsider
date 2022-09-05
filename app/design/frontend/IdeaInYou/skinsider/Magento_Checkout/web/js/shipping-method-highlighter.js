@@ -3,14 +3,11 @@ define([
 ], function ($) {
     $.widget("IdeaInYou.shippingMethodHighlighter", {
         _create: function () {
-            let self = this;
-            setTimeout(function () {
-                self._highlight();
-            }, 6000)
+            this._highlight();
         },
 
         _highlight: function () {
-            let input = $('#checkout-step-shipping_method').find('.row').find('.radio');
+            let input = $(this.element).find('.radio');
 
             if ($(input).prop('checked')) {
                 $(input).closest('.checkout-shipping-method').addClass('chosen')

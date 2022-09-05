@@ -515,6 +515,7 @@
                 justify-content: space-between;
                 .lib-vendor-box-align();
                 margin: 0;
+                cursor: pointer;
 
                 strong {
                     margin: 0;
@@ -524,6 +525,7 @@
                     content: 'Add Coupon';
                     border-bottom: 1px dotted;
                     line-height: 1.5;
+                    margin: 0;
                 }
             }
 
@@ -602,8 +604,11 @@
 
             .block.discount {
                 .primary {
+                    .lib-vendor-prefix-display();
+                    margin-left: 10px;
+                    text-align: center;
                     .action.apply.primary {
-                        margin: 0 0 0 10px;
+                        margin: 0;
                         padding: 14px 11px;
                     }
                 }

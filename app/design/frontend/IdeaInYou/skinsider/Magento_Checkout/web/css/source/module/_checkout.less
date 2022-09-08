@@ -645,6 +645,42 @@
                     }
                 }
             }
+            .payment-method{
+                .paypal-payment{
+                    .label{
+                        .lib-vendor-prefix-display();
+                        .lib-vendor-box-align();
+                        justify-content: space-between;
+                        width: 100%;
+                       &:before{
+                           content: '';
+                           display: block;
+                           width: 104px;
+                           height: 26px;
+                           background: url('../images/paypal_commerce_logo.svg') no-repeat;
+                       }
+                        .title{
+                            font-size: 0;
+                            .lib-vendor-prefix-display();
+                            &:before{
+                                content: '';
+                                display: block;
+                                width: 45px;
+                                height: 30px;
+                                background: url('../images/visa-paypal.svg') no-repeat;
+                            }
+                            &:after{
+                                content: '';
+                                display: block;
+                                width: 45px;
+                                height: 30px;
+                                background: url('../images/ms-paypal.svg') no-repeat;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

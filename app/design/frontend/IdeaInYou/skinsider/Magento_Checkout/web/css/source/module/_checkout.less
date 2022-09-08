@@ -419,6 +419,7 @@
                                 &.chosen {
                                     .lib-css(background, @color-white-smoke)
                                 }
+
                                 .row {
                                     .lib-vendor-prefix-display();
                                     justify-content: space-between;
@@ -645,37 +646,67 @@
                     }
                 }
             }
-            .payment-method{
-                .paypal-payment{
-                    .label{
+
+            .payment-method {
+                .payment-method-title {
+                    .lib-vendor-prefix-display();
+
+                    .label {
+                        margin-left: 10px;
+                    }
+                }
+
+                + .payment-method {
+                    .label {
                         .lib-vendor-prefix-display();
                         .lib-vendor-box-align();
                         justify-content: space-between;
                         width: 100%;
-                       &:before{
-                           content: '';
-                           display: block;
-                           width: 104px;
-                           height: 26px;
-                           background: url('../images/paypal_commerce_logo.svg') no-repeat;
-                       }
-                        .title{
+
+                        &:before {
+                            content: '';
+                            display: block;
+                            width: 104px;
+                            height: 26px;
+                            background: url('../images/paypal_commerce_logo.svg') no-repeat;
+                        }
+
+                        span {
                             font-size: 0;
                             .lib-vendor-prefix-display();
-                            &:before{
+
+                            &:before {
                                 content: '';
                                 display: block;
                                 width: 45px;
                                 height: 30px;
                                 background: url('../images/visa-paypal.svg') no-repeat;
                             }
-                            &:after{
+
+                            &:after {
                                 content: '';
                                 display: block;
                                 width: 45px;
                                 height: 30px;
                                 background: url('../images/ms-paypal.svg') no-repeat;
                                 margin-left: 5px;
+                            }
+                        }
+                    }
+
+                    + .payment-method {
+                        .label {
+                            &:before {
+                                display: none;
+                            }
+
+                            span {
+                                .lib-font-size(18px);
+
+                                &:before,
+                                &:after {
+                                    display: none;
+                                }
                             }
                         }
                     }
@@ -692,13 +723,15 @@
             .block.discount {
                 width: 38%;
                 float: right;
-                .title{
+
+                .title {
                     margin-bottom: 20px;
                 }
 
                 .fieldset.coupon {
                     .lib-vendor-prefix-display();
-                    .field{
+
+                    .field {
                         width: 100%;
                     }
                 }

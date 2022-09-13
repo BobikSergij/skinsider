@@ -525,7 +525,7 @@
                                 a {
                                     .lib-icon-font(
                                         @_icon-font: @icomoon-font-family,
-                                        @_icon-font-content: @_icon-long-arrow-right,
+                                        @_icon-font-content: @icon-long-arrow-right,
                                         @_icon-font-color: @theme__color__primary-alt,
                                         @_icon-font-margin: 0,
                                         @_icon-font-size: 16px,
@@ -539,7 +539,7 @@
                                 a {
                                     .lib-icon-font(
                                         @_icon-font: @icomoon-font-family,
-                                        @_icon-font-content: @_icon-long-arrow-left,
+                                        @_icon-font-content: @icon-long-arrow-left,
                                         @_icon-font-color: @theme__color__primary-alt,
                                         @_icon-font-margin: 0,
                                         @_icon-font-size: 16px,
@@ -595,7 +595,7 @@
                 .fotorama__arr__arr {
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
-                        @_icon-font-content: @_icon-long-arrow-right,
+                        @_icon-font-content: @icon-long-arrow-right,
                         @_icon-font-color: @color-black,
                         @_icon-font-margin: 0,
                         @_icon-font-size: 16px,
@@ -611,7 +611,7 @@
                 .fotorama__arr__arr {
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
-                        @_icon-font-content: @_icon-long-arrow-left,
+                        @_icon-font-content: @icon-long-arrow-left,
                         @_icon-font-color: @color-black,
                         @_icon-font-margin: 0,
                         @_icon-font-size: 16px,
@@ -900,6 +900,9 @@
 
         .page-main.popup {
             z-index: 6;
+            .alsoviewed-products{
+                opacity: 0;
+            }
         }
 
         .block.review-add.show {

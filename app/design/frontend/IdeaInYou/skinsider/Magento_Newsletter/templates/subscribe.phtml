@@ -4,18 +4,20 @@
  * See COPYING.txt for license details.
  */
 
-/** @var \Magento\Newsletter\Block\Subscribe $block */
+/** @var \Magento\Newsletter\Block\Subscribe $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
 ?>
 <div class="block newsletter">
-    <h2 class="module-heading">Don't miss out!</h2>
-    <p class="subscribe-description">Sign up for subscriber-only discounts, be first to hear about our latest curations & K-beauty skincare tips! Never miss out on exciting offers…</p>
+    <h2 class="module-heading"><?= $escaper->escapeHtml(__("Don't miss out!"))?></h2>
+    <p class="subscribe-description"><?= $escaper->escapeHtml(__("Sign up for subscriber-only discounts, be first to hear about our latest curations & K-beauty skincare tips! Never miss out on exciting offers…"))?></p>
     <div class="content">
         <form class="form subscribe"
-            novalidate
-            action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
-            method="post"
-            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
-            id="newsletter-validate-detail">
+              novalidate
+              action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+              method="post"
+              data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+              id="newsletter-validate-detail">
             <div class="field newsletter">
                 <div class="control">
                     <label for="newsletter">

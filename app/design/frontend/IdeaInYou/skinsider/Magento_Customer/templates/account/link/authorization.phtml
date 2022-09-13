@@ -37,11 +37,11 @@ if ($block->isLoggedIn()) {
     <?php if (!$block->isLoggedIn()): ?>
     <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
         <?= /* @noEscape */ $dataPostParam ?>>
-    <?php else: ?>
-    <a>
-    <?php endif; ?>
-        <span><?= $escaper->escapeHtml(' My Account') ?></span>
-    </a>
+        <?php else: ?>
+        <a>
+            <?php endif; ?>
+            <span><?= $escaper->escapeHtml(__('My Account')) ?></span>
+        </a>
 </li>
 
 <script type="text/x-magento-init">
@@ -66,4 +66,3 @@ if ($block->isLoggedIn()) {
     }
   }
 </script>
-

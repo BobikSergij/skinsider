@@ -1,9 +1,10 @@
 & when (@media-common = true) {
     .cms-index-index {
-        #maincontent{
+        #maincontent {
             padding: 0;
         }
-        .amsearch-overlay-block{
+
+        .amsearch-overlay-block {
             display: none;
         }
 
@@ -73,8 +74,17 @@
         }
 
         .banner {
-            .banner-desktop {
-                display: none;
+            .banner-desktop{
+                .banner-content-desktop.owl-carousel{
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    &.owl-loaded{
+                        opacity: 1;
+                        position: relative;
+                        top: unset;
+                    }
+                }
             }
 
             .owl-carousel.owl-drag .owl-item {
@@ -118,6 +128,7 @@
 
                     .item-title {
                         margin-top: 13px;
+                        text-align: center;
                         .lib-vendor-prefix-display();
                         flex-direction: column;
                         .lib-vendor-box-align();
@@ -210,7 +221,8 @@
                     text-align: center;
                     .lib-css(color, @theme__color__primary-alt);
                     .lib-css(font-weight, @font-weight__bold);
-                    max-width: 100px;
+                    max-width: min-content;
+                    white-space: nowrap;
                     margin: 0 auto;
                     line-height: 1.8;
 
@@ -276,7 +288,7 @@
                         display: inline-block;
                         border: 2px solid @theme__color__primary-alt;
                         .lib-css(color, @theme__color__primary-alt);
-                        padding: 7px 20px;
+                        padding: 7px 12px;
                         .lib-css(font-weight, @font-weight__light);
                         .lib-font-size(14px);
                         letter-spacing: .05em;
@@ -477,7 +489,7 @@
 
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
-                        @_icon-font-content: @_icon-instagram,
+                        @_icon-font-content: @icon-instagram,
                         @_icon-font-color: @color-black,
                         @_icon-font-margin: 0 10px 0 0,
                         @_icon-font-size: 18px,
@@ -533,7 +545,8 @@
             .category-extended {
                 text-align: center;
 
-                .slider-card-header {
+                .slider-card-header,
+                .card-header {
                     .lib-font-size(16px);
                     .lib-css(font-weight, @font-weight__heavier);
                     margin-top: 20px;
@@ -599,7 +612,7 @@
                 justify-content: center;
 
                 p {
-                    .lib-font-size(12px);
+                    .lib-font-size(11px);
                     line-height: 1.8333;
                     min-width: max-content;
                     margin-right: auto;
@@ -618,7 +631,7 @@
             }
 
             .banner-desktop {
-                display: block;
+                .lib-vendor-prefix-display();
                 position: relative;
 
                 .owl-dots,

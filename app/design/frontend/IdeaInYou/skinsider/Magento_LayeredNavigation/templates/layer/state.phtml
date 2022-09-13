@@ -20,12 +20,12 @@
         <strong class="block-subtitle no-filter"
                 role="heading"
                 aria-level="2"
-                data-role="title">No filters applied</strong>
+                data-role="title"><?= $block->escapeHtml(__('No filters applied'))?></strong>
     <?php endif; ?>
     <ol class="items">
         <?php foreach ($_filters as $_filter): ?>
             <li class="item">
-                <span class="filter-value"><?= $block->escapeHtml($block->stripTags($_filter->getLabel())) ?></span>
+                <span class="filter-value"><?= $block->escapeHtml(__($block->stripTags($_filter->getLabel()))) ?></span>
                 <?php
                 $clearLinkUrl = $_filter->getClearLinkUrl();
                 $currentFilterName = $block->escapeHtmlAttr(__($_filter->getName()) . " " . $block->stripTags($_filter->getLabel()));

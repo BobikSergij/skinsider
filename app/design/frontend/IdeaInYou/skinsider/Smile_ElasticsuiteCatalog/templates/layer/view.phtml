@@ -21,15 +21,15 @@
 
 <?php if ($block->canShowBlock()) : ?>
     <?php $activeFilters = $block->getActiveFilters(); ?>
-    <div class="filter-toggler">Filter</div>
+    <div class="filter-toggler"><?= $block->escapeHtml(__('Filter'))?></div>
     <div class="block filter" id="layered-filter-block"
          data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
         <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
         <div class="block-title filter-title" data-count="<?= /* @escapeNotVerified */
         $filtered ?>">
             <div data-role="title">
-                <span class="refine-by-block">Refine by</span>
-                <span class="show-hide-toggle">Show Filters</span>
+                <span class="refine-by-block"><?= $block->escapeHtml(__('Refine by'))?></span>
+                <span class="show-hide-toggle"><?= $block->escapeHtml(__('Show Filters'))?></span>
             </div>
         </div>
 

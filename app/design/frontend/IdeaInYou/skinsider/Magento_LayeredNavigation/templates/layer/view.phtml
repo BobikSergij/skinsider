@@ -36,7 +36,7 @@
                     </a>
                 </div>
             <?php else : ?>
-            <div class="no-filters"><span>No filters applied</span></div>
+                <div class="no-filters"><span><?= $block->escapeHtml(__('No filters applied'))?></span></div>
             <?php endif; ?>
             <?php $wrapOptions = false; ?>
             <?php foreach ($block->getFilters() as $filter): ?>

@@ -652,7 +652,7 @@
                     .lib-vendor-prefix-display();
 
                     .label {
-                        margin-left: 10px;
+                        margin-left: 5px;
 
                         .payment-icon {
                             display: none;
@@ -706,11 +706,44 @@
 
                             span {
                                 .lib-font-size(18px);
+                            }
+                        }
+                    }
+                }
 
-                                &:before,
-                                &:after {
-                                    display: none;
-                                }
+                &.stripe-payments {
+                    .lib-vendor-prefix-display();
+                    .lib-vendor-prefix-flex-direction();
+
+                    .label {
+                        &:after {
+                            content: '';
+                            display: block;
+                            width: 45px;
+                            min-width: 45px;
+                            height: 30px;
+                            background: url('../images/ms-paypal.svg') no-repeat;
+                            margin-left: 5px;
+                        }
+
+                        span {
+                            width: 100%;
+                            &:before {
+                                content: '';
+                                display: block;
+                                width: 45px;
+                                height: 30px;
+                                order: 4;
+                                margin-left: 5px;
+                                background: url('../images/amex-gpay.svg') no-repeat;
+                            }
+                            &:after {
+                                content: '';
+                                display: block;
+                                width: 45px;
+                                height: 30px;
+                                margin-left: auto;
+                                background: url('../images/visa-paypal.svg') no-repeat;
                             }
                         }
                     }

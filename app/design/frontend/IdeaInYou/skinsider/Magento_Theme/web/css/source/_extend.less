@@ -637,6 +637,31 @@
             .new-footer-container {
                 .lib-vendor-prefix-display();
 
+                .footer-info {
+                    .footer-column-heading {
+                        margin-top: 0;
+                        margin-bottom: 14px;
+                        .lib-css(color, @theme__color__primary-alt);
+                        .lib-font-size(20px);
+                    }
+
+                    .footer-column {
+                        margin-bottom: 20px;
+
+                        li {
+                            padding: 3px 0;
+                            line-height: 1.8333;
+
+                            a {
+                                .lib-font-size(15px);
+                                text-transform: none;
+                                .lib-css(color, @links-color);
+                            }
+                        }
+
+                    }
+                }
+
                 .newsletter {
                     float: unset;
                     margin-bottom: 40px;
@@ -729,6 +754,7 @@
                     .module-heading {
                         .lib-font-size(25px);
                         margin-bottom: 14px;
+                        margin-top: 0;
                         text-transform: uppercase;
                         .lib-css(font-weight, @font-weight__semibold);
                     }
@@ -1101,6 +1127,18 @@
                 .lib-vendor-prefix-flex-direction(column);
                 .lib-vendor-box-align();
 
+                .footer-info {
+                    .lib-vendor-prefix-display();
+
+                    .footer-column {
+                        width: 100%;
+
+                        ul {
+                            padding-right: 0;
+                        }
+                    }
+                }
+
                 .newsletter {
 
                     .form.subscribe {
@@ -1139,10 +1177,6 @@
 
                 .newsletter {
                     max-width: 35%;
-
-                    .module-heading {
-                        margin-top: 0;
-                    }
                 }
 
                 div[data-appearance='contained'] {
@@ -1163,6 +1197,19 @@
 
             .trustpilot-widget iframe {
                 height: 20px !important;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .page-wrapper {
+        .footer.content {
+            .new-footer-container {
+                .newsletter {
+                    width: 40%;
+                    margin-right: 5%;
+                }
             }
         }
     }

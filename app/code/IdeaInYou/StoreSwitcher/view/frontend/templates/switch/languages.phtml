@@ -1,0 +1,36 @@
+<?php
+/** @var \Magento\Store\Block\Switcher $block */
+$viewModel = $block->getData('view_model');
+$websites = $viewModel->getWebsites();
+$websiteid = $viewModel->getWebsite()->getWebsiteId();
+?>
+
+<div class="switcher store switcher-store" id="switcher-store">
+    <strong class="label switcher-label"><span><?php echo __('Select Store') ?></span></strong>
+    <?php $block->getStores() ?>
+    <div class="actions dropdown options switcher-options">
+        <?php foreach ($websites as $website): ?>
+            <?php if ($websiteid == $website->getId()): ?>
+                <div class="action toggle switcher-trigger"
+                     role="button"
+                     tabindex="0"
+                     data-mage-init='{"dropdown":{}}'
+                     data-toggle="dropdown"
+                     data-trigger-keypress-button="true"
+                     id="switcher-store-trigger">
+                    <strong>
+                        <span><?php echo explode(' ', $block->escapeHtml($website->getName()))[1] ?></span>
+                    </strong>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <ul class="dropdown switcher-dropdown" data-target="dropdown">
+            <li class="switcher-option view uk"><a href='https://skinsider.co.uk/'><img
+                        src="<?php echo $block->getViewFileUrl('images/GBP.png'); ?>">GBP</a></li>
+            <li class="switcher-option view uk"><a href='<?php echo $viewModel->getMyUrl() . 'eu' ?>'><img
+                        src="<?php echo $block->getViewFileUrl('images/EUR.png'); ?>">EUR</a></li>
+            <li class="switcher-option view uk"><a href='<?php echo $viewModel->getMyUrl() . 'pl' ?>'><img
+                        src="<?php echo $block->getViewFileUrl('images/PLN.png'); ?>">PLN</a></li>
+        </ul>
+    </div>
+</div>

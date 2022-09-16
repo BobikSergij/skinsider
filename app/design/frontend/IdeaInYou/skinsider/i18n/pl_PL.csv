@@ -1,3 +1,6 @@
+"Your cart is empty","Twój koszyk jest pusty",module,Magento_Checkout
+"View Cart","Wózek",module,Magento_Checkout
+"Check Out","Kasy",module,Magento_Checkout
 "Brand","Marka",module,Magento_Catalog
 "Refine by:","Doprecyzuj według:",module,Magento_Catalog
 "No filters applied","Brak zastosowanych filtrów",module,Magento_Catalog

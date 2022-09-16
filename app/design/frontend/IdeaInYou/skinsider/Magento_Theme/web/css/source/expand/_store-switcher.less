@@ -1,13 +1,20 @@
 & when (@media-common = true) {
-    .panel.header {
-        .switcher-options {
-            .switcher-dropdown {
-                a {
-                    .lib-vendor-prefix-display();
-                    justify-content: flex-start;
+    .page-header {
+        .panel.wrapper {
+            .panel.header {
+                .switcher-options {
+                    .switcher-dropdown {
 
-                    img {
-                        margin-right: @indent__xs;
+                        .switcher-option {
+                           > a {
+                                .lib-vendor-prefix-display();
+                                justify-content: flex-start;
+
+                                img {
+                                    margin-right: @indent__xs;
+                                }
+                            }
+                        }
                     }
                 }
             }

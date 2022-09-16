@@ -15,12 +15,13 @@
         min-height: 370px;
 
         &:hover {
-            .product-item-info{
+            .product-item-info {
                 box-shadow: none;
                 border: none;
                 margin: 0;
                 padding: 0;
             }
+
             .product-item-photo {
                 .button-container {
                     z-index: 1;
@@ -38,10 +39,12 @@
                     top: 0;
                     width: 100%;
                 }
-                .button-container-unavailable{
+
+                .button-container-unavailable {
                     bottom: 10px;
                     transition: all .3s ease 0s;
-                    button{
+
+                    button {
                         .lib-css(background, @theme__color__primary-alt);
                     }
                 }
@@ -56,6 +59,7 @@
                 opacity: 0;
                 position: absolute;
             }
+
             .button-container-unavailable,
             .button-container {
                 z-index: 2;
@@ -79,9 +83,11 @@
                     letter-spacing: .05em;
                 }
             }
-            .button-container-unavailable{
+
+            .button-container-unavailable {
                 bottom: 0;
-                button{
+
+                button {
                     border: none;
                     .lib-css(background, @color-out-stock);
                     padding: 12px 0 10px;
@@ -127,45 +133,61 @@
                     text-decoration: line-through;
                 }
             }
-            .price{
-                .lib-font-size(14px);
+
+            .price {
+                .lib-font-size(11px);
+            }
+
+            .special-price {
+                .price-excluding-tax {
+                    margin-left: -65px;
+                    text-align: left;
+                }
             }
         }
 
         .product-item-actions,
         .reviews-actions .text-empty,
-        .rating-write{
+        .rating-write {
             display: none;
         }
-        .product-reviews-summary.no-rating{
-            .reviews-actions{
+
+        .product-reviews-summary.no-rating {
+            .reviews-actions {
                 display: none;
             }
         }
-        .product-reviews-summary{
+
+        .product-reviews-summary {
             .lib-vendor-prefix-display();
             justify-content: center;
-            .rating-summary{
+
+            .rating-summary {
                 margin: 0;
             }
         }
-        .rating-summary{
-            .rating-result{
+
+        .rating-summary {
+            .rating-result {
                 width: 78px;
+
                 &:before,
-                span:before{
+                span:before {
                     .lib-font-size(13px);
                     height: 27px;
                     letter-spacing: 3px;
                 }
-                &:before{
-                .lib-css(color, @color-gray80);
-            }
-                span:before{
+
+                &:before {
+                    .lib-css(color, @color-gray80);
+                }
+
+                span:before {
                     .lib-css(color, @color-starts-active);
                 }
             }
         }
+
         .rating-empty {
             .lib-vendor-prefix-display();
             .lib-vendor-box-align();
@@ -175,7 +197,8 @@
         .rating-empty {
             .icon-rating-empty {
                 max-width: 80px;
-                &:before{
+
+                &:before {
                     content: '\e605' '\e605' '\e605' '\e605' '\e605';
                     position: relative;
                     z-index: 2;
@@ -280,6 +303,10 @@
         .price-box {
             .lib-vendor-prefix-flex-direction(row);
             justify-content: center;
+
+            .price {
+                .lib-font-size(14px);
+            }
         }
     }
     .owl-nav .nav-btn {
@@ -293,7 +320,7 @@
     }
     .product-item {
         .product-item-photo {
-            img{
+            img {
                 max-width: 277px;
                 max-height: 225px;
             }
@@ -306,6 +333,13 @@
                 img {
                     max-width: 234px;
                     margin: 0 auto;
+                }
+            }
+        }
+        .price-box{
+            .special-price{
+                .price-excluding-tax{
+                    margin-left: -76px;
                 }
             }
         }

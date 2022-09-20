@@ -12,11 +12,19 @@
             .product-item-photo {
                 img {
                     max-width: 100%;
+                    margin: 0 auto;
+                    display: block;
                 }
             }
 
             &:hover {
                 .product-item-photo {
+                    img {
+                        max-width: 100%;
+                        min-height: 160px;
+                        max-height: 164px;
+                    }
+
                     .img-2 {
                         left: 0;
                     }
@@ -346,9 +354,19 @@
     .amsearch-search-page.page-products .columns {
         .products-grid .product-item {
             .product-item-photo {
-                max-width: 225px;
-                max-height: 225px;
-                margin: 0 auto;
+                img {
+                    min-height: 228px;
+                    max-height: 228px;
+                }
+            }
+
+            &:hover {
+                .product-item-photo {
+                    img {
+                        min-height: 229px;
+                        max-height: 229px;
+                    }
+                }
             }
         }
     }
@@ -358,7 +376,19 @@
     .amsearch-search-page.page-products .columns {
         .products-grid .product-item {
             .product-item-photo {
-                max-height: 199px;
+                img {
+                    min-height: 217px;
+                    max-height: 217px;
+                }
+            }
+
+            &:hover {
+                .product-item-photo {
+                    img {
+                        min-height: 217px;
+                        max-height: 217px;
+                    }
+                }
             }
         }
     }

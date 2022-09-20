@@ -10379,6 +10379,7 @@ target=""_blank"">DevDocs' Release Information</a>.,module,Magento_ReleaseNotifi
 "Back","Powrót",module,Magento_Review
 "My Recent Reviews","Moje ostatnie opinie",module,Magento_Review
 "View All","Zobacz wszystkie",module,Magento_Review
+"View All","Zobacz wszystkie",module,Amasty_Xsearch
 "Average Customer Rating:","Średnia ocena klientów:",module,Magento_Review
 "Your Review","Twoja ocena",module,Magento_Review
 "Submitted on %1","Przekazywane na %1",module,Magento_Review

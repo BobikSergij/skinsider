@@ -42,6 +42,14 @@
                             display: none;
                         }
                     }
+                    .payment-group{
+                        display: none;
+                    }
+                    .opc-payment{
+                        .payment-group{
+                            display: block;
+                        }
+                    }
 
                     .form.form-login {
                         #customer-email-fieldset {
@@ -387,6 +395,7 @@
                                     }
                                 }
 
+                                [name="shippingAddress.custom_attributes.kl_email_consent"],
                                 [name="shippingAddress.company"] {
                                     width: 100%;
                                 }
@@ -607,6 +616,8 @@
 
                 .title {
                     .lib-vendor-prefix-display();
+                    justify-content: space-between;
+                    .lib-vendor-box-align();
                     cursor: pointer;
 
                     strong {
@@ -616,18 +627,27 @@
                         border-radius: 3px;
                         margin: 0;
                     }
+
+                    .add,
+                    .close {
+                        border-bottom: 1px dotted;
+                        line-height: 1.5;
+                    }
+
+                    .close {
+                        display: none;
+                    }
                 }
 
                 &.active {
                     .title {
-                        .lib-vendor-prefix-display();
-                        justify-content: space-between;
-                        .lib-vendor-box-align();
 
-                        &:after {
-                            content: 'Cancel';
-                            border-bottom: 1px dotted;
-                            line-height: 1.5;
+                        .add {
+                            display: none;
+                        }
+
+                        .close {
+                            display: block;
                         }
                     }
                 }
@@ -659,9 +679,7 @@
                         }
                     }
                 }
-
-                + .payment-method {
-                    .label {
+                        .label {
                         .lib-vendor-prefix-display();
                         .lib-vendor-box-align();
                         justify-content: space-between;
@@ -709,7 +727,7 @@
                             }
                         }
                     }
-                }
+
 
                 &.stripe-payments {
                     .lib-vendor-prefix-display();
@@ -728,6 +746,7 @@
 
                         span {
                             width: 100%;
+
                             &:before {
                                 content: '';
                                 display: block;
@@ -737,6 +756,7 @@
                                 margin-left: 5px;
                                 background: url('../images/amex-gpay.svg') no-repeat;
                             }
+
                             &:after {
                                 content: '';
                                 display: block;

@@ -314,6 +314,8 @@
 
                     .actions-toolbar {
                         display: inline-block;
+                        padding-bottom: 0;
+                        margin-left: 10px;
 
                         .towishlist {
                             display: none;
@@ -327,6 +329,7 @@
                             .lib-css(background, @color-border-header);
                             border-radius: 50%;
                             justify-content: center;
+                            margin-left: auto;
 
 
                             .lib-icon-font(
@@ -372,7 +375,7 @@
                     }
 
                     input {
-                        width: 30%;
+                        width: 100%;
                         text-align: center;
                     }
                 }
@@ -406,9 +409,8 @@
         .actions-toolbar {
             &:extend(.abs-add-clearfix all);
             min-height: 20px;
-            padding-bottom: 15px;
+            padding-bottom: 0;
             position: relative;
-            top: 3px;
         }
 
         .action {
@@ -521,11 +523,14 @@
                     margin: 0;
                 }
 
-                &:after {
-                    content: 'Add Coupon';
+                .add, .close {
                     border-bottom: 1px dotted;
                     line-height: 1.5;
                     margin: 0;
+                }
+
+                .close {
+                    display: none;
                 }
             }
 
@@ -546,8 +551,12 @@
 
             &.active {
                 .title {
-                    &:after {
-                        content: 'Cancel';
+                    .close {
+                        display: block;
+                    }
+
+                    .add {
+                        display: none;
                     }
                 }
             }
@@ -579,8 +588,61 @@
         .col.msrp {
             text-align: center;
         }
+
+        .col.subtotal {
+            div {
+                width: unset;
+                .lib-vendor-prefix-display();
+                .lib-vendor-box-align();
+                justify-content: end;
+                padding-bottom: 10px;
+
+                .gift-options-cart-item {
+                    display: none;
+                }
+            }
+        }
+
+        .cart.item .item-info > td {
+            .lib-vendor-box-align();
+        }
+
+        .col.qty {
+            .control.qty {
+                .lib-vendor-prefix-display();
+                justify-content: space-around;
+            }
+        }
     }
 }
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cart.table-wrapper{
+        .cart.item{
+            .col.subtotal{
+                .actions-toolbar{
+                    margin-left: 15px;
+                }
+            }
+            .col.qty{
+                input{
+                    width: 40%;
+                }
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .cart.table-wrapper{
+        .cart.item{
+            .col.subtotal{
+                .actions-toolbar{
+                    margin-left: 30px;
+                }
+            }
+        }
+    }
+}
+
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .cart-summary {
@@ -607,6 +669,7 @@
                     .lib-vendor-prefix-display();
                     margin-left: 10px;
                     text-align: center;
+
                     .action.apply.primary {
                         margin: 0;
                         padding: 14px 11px;
@@ -642,12 +705,6 @@
         .cart.item {
             .item-info {
 
-                .col.subtotal {
-                    div {
-                        width: 40%;
-                    }
-                }
-
                 .col.item {
                     .product-item-name {
                         .lib-font-size(10);
@@ -668,11 +725,6 @@
                     &:extend(.abs-col-no-prefix all);
                 }
 
-                .col.subtotal {
-                    div {
-                        .lib-vendor-prefix-display();
-                    }
-                }
 
                 .col.qty {
                     text-align: center;
@@ -840,19 +892,6 @@
 
                     }
 
-                }
-
-                .col.subtotal {
-                    div {
-                        .lib-vendor-prefix-display();
-                        justify-content: flex-end;
-                        width: 30%;
-
-                        .actions-toolbar {
-                            width: 25%;
-                            top: 0;
-                        }
-                    }
                 }
 
                 > td {

@@ -1,3 +1,6 @@
+"Add Coupon","Dodaj kupon",module,Magento_Checkout
+"Cancel","Anuluj",module,Magento_Checkout
+"Enter your coupon code","Wpisz swój kod kuponu",module,Magento_Checkout
 "Your cart is empty","Twój koszyk jest pusty",module,Magento_Checkout
 "View Cart","Wózek",module,Magento_Checkout
 "Check Out","Kasy",module,Magento_Checkout

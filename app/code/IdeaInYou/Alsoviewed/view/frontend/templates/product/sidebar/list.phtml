@@ -34,9 +34,9 @@
                         <?php
                         $productImage = $block->getImage($_product, $imageDisplayArea);
 
-                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                        $product = $objectManager->create('Magento\Catalog\Model\Product')->load($_product->getId());
-                        $images = $product->getMediaGalleryImages();
+                        $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
+                        $_helperGallery->addGallery($_product);
+                        $images = $_helperGallery->getGalleryImages($_product);
                         $i = 1;
                         ?>
                         <?php if (!empty($images)) { ?>

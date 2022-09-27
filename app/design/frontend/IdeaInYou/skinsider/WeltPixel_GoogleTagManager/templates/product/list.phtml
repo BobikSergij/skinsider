@@ -3,6 +3,7 @@ use Magento\Framework\App\Action\Action;
 use Magento\Catalog\Helper\Data;
 use Magento\Catalog\Helper\Image;
 use Magento\Framework\App\ObjectManager;
+use Magento\Catalog\Model\Product;
 // @codingStandardsIgnoreFile
 
 ?>
@@ -17,9 +18,9 @@ use Magento\Framework\App\ObjectManager;
 <?php
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
-$objectManager = ObjectManager::getInstance();
 /** WeltPixel_GoogleTagManager  */
 $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
+$_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
 ?>
 <?php if (!$_productCollection->count()): ?>
     <div class="message info empty"><div><?php /* @escapeNotVerified */ echo __('We can\'t find products matching the selection.') ?></div></div>
@@ -62,8 +63,8 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
                     <?php // Product Image?>
                     <div class="product-item-photo">
                         <?php
-                        $product = $objectManager->create('Magento\Catalog\Model\Product')->load($_product->getId());
-                        $images = $product->getMediaGalleryImages();
+                        $_helperGallery->addGallery($_product);
+                        $images = $_helperGallery->getGalleryImages($_product);
                         $i = 1;
                         ?>
                         <?php if (!empty($images)) { ?>

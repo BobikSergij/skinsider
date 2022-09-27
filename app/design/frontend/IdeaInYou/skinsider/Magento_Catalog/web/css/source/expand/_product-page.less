@@ -281,10 +281,10 @@
             padding: 10px 0;
             margin-bottom: 25px;
 
-            .content {
                 .item {
                     .lib-vendor-prefix-display();
                     .lib-vendor-prefix-flex-wrap(wrap);
+                    flex-direction: unset!important;
                     min-height: 35px;
                     .lib-vendor-box-align();
 
@@ -308,15 +308,15 @@
                             .lib-font-size(11px);
                             margin-bottom: 0;
 
-                            .smile-link {
-                                .lib-css(color, @color-header-dark-blue);
+                            a {
+                                .lib-css(color, @color-header-dark-blue)!important;
                                 text-transform: unset;
                                 .lib-font-size(11px);
                             }
                         }
                     }
                 }
-            }
+
         }
 
         .product.info.detailed {
@@ -1010,7 +1010,7 @@
         }
 
         .product-sale-block {
-            .content {
+            .item {
                 .lib-vendor-prefix-display();
                 .lib-vendor-prefix-flex-wrap(wrap);
             }

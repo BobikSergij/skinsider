@@ -571,6 +571,7 @@
 
             & > .social-wrap {
                 border-bottom: 1px solid #eaeaea;
+                margin-bottom: 30px;
 
                 .col-12 {
                     .lib-vendor-prefix-display();
@@ -641,10 +642,12 @@
 
                 .footer-info {
                     .footer-column-heading {
-                        margin-top: 0;
-                        margin-bottom: 14px;
-                        .lib-css(color, @theme__color__primary-alt);
-                        .lib-font-size(20px);
+                        h5 {
+                            margin-top: 0;
+                            margin-bottom: 14px;
+                            .lib-css(color, @theme__color__primary-alt);
+                            .lib-font-size(20px);
+                        }
                     }
 
                     .footer-column {
@@ -805,10 +808,12 @@
                     }
 
                     .footer-column-heading {
-                        .lib-css(color, @theme__color__primary-alt);
-                        .lib-font-size(20px);
-                        margin: 0 0 1rem;
-                        .lib-line-height(12px);
+                        h5 {
+                            .lib-css(color, @theme__color__primary-alt);
+                            .lib-font-size(20px);
+                            margin: 0 0 1rem;
+                            .lib-line-height(12px);
+                        }
                     }
 
                     .footer-column-list {
@@ -1107,7 +1112,6 @@
 
         .footer.content {
             & > .social-wrap {
-                margin-bottom: 30px;
                 padding: 0 15px 15px;
 
                 .col-12 {
@@ -1152,8 +1156,10 @@
                     width: 100%;
 
                     .footer-column-heading {
-                        .lib-line-height(20px);
-                        .lib-font-size(18px);
+                        h5 {
+                            .lib-line-height(20px);
+                            .lib-font-size(18px);
+                        }
                     }
 
                     .footer-column {

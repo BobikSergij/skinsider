@@ -5,8 +5,13 @@ define([
 
 
         _create: function () {
-            $(this.element).on('click', function (){
-                $(this).parent().toggleClass('show');
+            this.clickButton();
+        },
+        clickButton: function () {
+            const self = $(this.element),
+                showContent = $('.about-content');
+            self.on('click', function () {
+                showContent.toggleClass('show');
             });
         }
     });

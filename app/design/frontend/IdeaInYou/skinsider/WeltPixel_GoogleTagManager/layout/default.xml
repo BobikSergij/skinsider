@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.products.list" >
+            <action method="setTemplate" ifconfig="weltpixel_googletagmanager/general/product_click_tracking">
+                <argument name='template' xsi:type='string'>WeltPixel_GoogleTagManager::product/list.phtml</argument>
+                <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

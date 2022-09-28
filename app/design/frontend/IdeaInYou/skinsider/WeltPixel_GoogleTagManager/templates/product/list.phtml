@@ -20,7 +20,6 @@ $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 /** WeltPixel_GoogleTagManager  */
 $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
-$_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
 ?>
 <?php if (!$_productCollection->count()): ?>
     <div class="message info empty"><div><?php /* @escapeNotVerified */ echo __('We can\'t find products matching the selection.') ?></div></div>
@@ -63,8 +62,9 @@ $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
                     <?php // Product Image?>
                     <div class="product-item-photo">
                         <?php
-                        $_helperGallery->addGallery($_product);
-                        $images = $_helperGallery->getGalleryImages($_product);
+                        $viewModel = $block->getData('view_model');
+                        $viewModel->addGallery($_product);
+                        $images = $viewModel->getGalleryImages($_product);
                         $i = 1;
                         ?>
                         <?php if (!empty($images)) { ?>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MiraklSeller\Sales\Helper\Order\Import">
+        <plugin name="ImportMiraklOrderPlugin"
+                type="IdeaInYou\BigCommerce\Plugin\ImportMiraklOrderPlugin"/>
+    </type>
+    <type name="MiraklSeller\Sales\Model\Synchronize\Shipments">
+        <plugin name="UpdateMiraklOrderPlugin"
+                type="IdeaInYou\BigCommerce\Plugin\UpdateMiraklOrderPlugin"/>
+    </type>
+</config>

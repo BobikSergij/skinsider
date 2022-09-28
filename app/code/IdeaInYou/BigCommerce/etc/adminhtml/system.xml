@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bigCommerce_tab" translate="label" sortOrder="5">
+            <label>bigCommerce API integration</label>
+        </tab>
+
+        <section id="bigCommerce" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10" translate="label">
+            <label>API configuration</label>
+            <tab>bigCommerce_tab</tab>
+            <resource>IdeaInYou_BigCommerce::api</resource>
+
+            <group id="api_group" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Module Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <label>API variables</label>
+
+                <field id="bigCommerce_api_path" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" type="text">
+                    <label>bigCommerce Api path</label>
+                    <validate>required-entry no-whitespace</validate>
+                </field>
+
+                <field id="bigCommerce_access_token" translate="label" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" type="text">
+                    <label>bigCommerce access token</label>
+                    <validate>required-entry no-whitespace</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+

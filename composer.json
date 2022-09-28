@@ -34,6 +34,7 @@
         "magento/product-community-edition": "2.4.4",
         "mageplaza/magento-2-polish-language-pack": "dev-master",
         "mageplaza/module-lookbook": "^4.0",
+        "mirakl/magento2-seller-connector": "^1.6",
         "smile/elasticsuite": "~2.10.0",
         "sparsh/magento-2-gdpr-extension": "^1.3",
         "stripe/stripe-payments": "^3.2",

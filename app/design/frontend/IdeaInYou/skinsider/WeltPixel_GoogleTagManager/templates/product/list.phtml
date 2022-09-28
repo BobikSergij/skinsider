@@ -1,40 +1,68 @@
 <?php
+use Magento\Framework\App\Action\Action;
+use Magento\Catalog\Helper\Data;
+use Magento\Catalog\Helper\Image;
+use Magento\Framework\App\ObjectManager;
+use Magento\Catalog\Model\Product;
+// @codingStandardsIgnoreFile
+
+?>
+<?php
 /**
- * @var \IdeaInYou\Alsoviewed\Block\Widget\ListProduct $block
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
  *  * @var \Magento\Framework\Escaper $escaper
  */
 ?>
-<?php if (($_products = $block->getLoadedProductCollection()) && $_products->getSize()): ?>
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+/** WeltPixel_GoogleTagManager  */
+$gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
+$_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
+?>
+<?php if (!$_productCollection->count()): ?>
+    <div class="message info empty"><div><?php /* @escapeNotVerified */ echo __('We can\'t find products matching the selection.') ?></div></div>
+<?php else: ?>
+    <?php echo $block->getToolbarHtml() ?>
+    <?php echo $block->getAdditionalHtml() ?>
     <?php
-    if ($block->getMode() === 'grid') {
+    if ($block->getMode() == 'grid') {
         $viewMode = 'grid';
-        $hoverimg = 'hover';
-        $imageDisplayArea = 'category_page_grid';
+        $image = 'category_page_grid';
         $showDescription = false;
         $showCart = true;
         $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
-    }
-    if ($block->getMode() === 'list') {
+    } else {
         $viewMode = 'list';
-        $hoverimg = 'hover';
-        $imageDisplayArea = 'category_page_list';
+        $image = 'category_page_list';
         $showDescription = true;
         $showCart = true;
         $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
     }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned() ?? '';
     ?>
-    <ol class="product-items<?= ($block->getMode() === 'list') ? '' : ' product-items-images' ?> also-viewed owl-carousel">
-        <?php foreach ($_products->getItems() as $_product): ?>
-            <li class="product-item">
-
-                <div class="product-item-info">
-
-                    <?php // Product Image ?>
+    <div class="products wrapper <?php /* @escapeNotVerified */ echo $viewMode; ?> products-<?php /* @escapeNotVerified */ echo $viewMode; ?>">
+        <?php $iterator = 1; ?>
+        <ol class="products list items product-items">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+                <?php /* @escapeNotVerified */ echo($iterator++ == 1) ? '<li class="item product product-item">' : '</li><li class="item product product-item">' ?>
+                <div class="product-item-info" data-container="product-grid">
+                    <?php
+                    $productImage = $block->getImage($_product, $image);
+                    if ($pos != null) {
+                        $position = ' style="left:' . $productImage->getWidth() . 'px;'
+                            . 'top:' . $productImage->getHeight() . 'px;"';
+                    }
+                    ?>
+                    <?php // Product Image?>
                     <div class="product-item-photo">
                         <?php
-                        $productImage = $block->getImage($_product, $imageDisplayArea);
-
-                        $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
                         $_helperGallery->addGallery($_product);
                         $images = $_helperGallery->getGalleryImages($_product);
                         $i = 1;
@@ -54,11 +82,6 @@
                                 <?php echo $productImage->toHtml(); ?>
                             </a>
                         <?php } ?>
-                        <?php if (!($_product->isSaleable())): ?>
-                            <div class="button-container-unavailable">
-                                <button><span><?= $block->escapeHtml(__('Out of stock')) ?></span></button>
-                            </div>
-                        <?php endif; ?>
                         <?php if ($showCart): ?>
                             <?php if ($_product->isSaleable()): ?>
                                 <div class="button-container">
@@ -76,17 +99,23 @@
                                                 $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
                                                 $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_product), ['product' => $_product->getEntityId()])
                                                 ?>
-                                                <button class="action tocart primary" data-post='<?= /* @noEscape */
-                                                $postData ?>' type="button"
+                                                <button class="action tocart primary"
+                                                        data-post='<?= /* @noEscape */
+                                                        $postData ?>' type="button"
                                                         title="<?= $block->escapeHtml(__('Add to Cart')) ?>">
                                                     <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
                                                 </button>
                                             <?php else: ?>
                                                 <div class="stock unavailable">
-                                                    <span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                    <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+                                                </div>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
+                                </div>
+                            <?php else: ?>
+                                <div class="button-container-unavailable">
+                                    <button><span><?= $block->escapeHtml(__('Out of stock')) ?></span></button>
                                 </div>
                             <?php endif; ?>
                         <?php endif; ?>
@@ -94,10 +123,11 @@
                     <div class="product details product-item-details">
                         <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
                         <strong class="product name product-item-name">
-                            <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
-                               title="<?= $block->escapeHtmlAttr($block->stripTags($_product->getName(), null, true)) ?>"
-                               class="product-item-link"
-                            ><?= $block->escapeHtml($this->helper('Magento\Catalog\Helper\Output')->productAttribute($_product, $_product->getName(), 'name')) ?></a>
+                            <a class="product-item-link"
+                               href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <?= /* @noEscape */
+                                $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                            </a>
                         </strong>
                         <?= /* @noEscape */
                         $block->getProductPrice($_product) ?>
@@ -107,43 +137,21 @@
                         <?= $block->getProductDetailsHtml($_product) ?>
 
                     </div>
-
-            </li>
-        <?php endforeach; ?>
-    </ol>
-<?php endif; ?>
-<script type="text/x-magento-init">
-            {
-                ".also-viewed.owl-carousel": {
-                    "owlCarousel": {
-                        "center": false,
-                        "items": 4,
-                        "margin":16,
-                        "loop": false,
-                        "nav": true,
-                        "dots": false,
-                        "responsiveClass": true,
-                        "navText": ["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
-                        "responsive": {
-                            "0": {
-                                "items": 2,
-                                "margin":16
-                            },
-                            "360": {
-                                "items": 2,
-                                "margin":16
-                            },
-                             "768": {
-                                "items": 3,
-                                "margin":30
-                            },
-                             "880": {
-                                "items": 4,
-                                "margin":30
-                            }
-                        }
-                    }
+                </div>
+                <?php echo($iterator == count($_productCollection)+1) ? '</li>' : '' ?>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <?php if (!$block->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                 "catalogAddToCart": {
+                    "product_sku": "<?= $block->escapeJs($_product->getSku()) ?>"
                 }
             }
-
-</script>
+        }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

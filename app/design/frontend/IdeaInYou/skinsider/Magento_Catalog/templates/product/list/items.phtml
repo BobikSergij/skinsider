@@ -215,9 +215,9 @@ $_item = null;
                                 <?php // Product Image ?>
                                 <div class="product-item-photo">
                                     <?php
-                                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                                    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($_item->getId());
-                                    $images = $product->getMediaGalleryImages();
+                                    $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
+                                    $_helperGallery->addGallery($_item);
+                                    $images = $_helperGallery->getGalleryImages($_item);
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>

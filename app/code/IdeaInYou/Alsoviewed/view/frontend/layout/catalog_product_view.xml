@@ -7,6 +7,9 @@
                    name="alsoviewed.products.tab"
                    template="IdeaInYou_Alsoviewed::product/sidebar/list.phtml"
                    after="catalog.product.related">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
+                </arguments>
             </block>
         </referenceContainer>
         <referenceBlock name="before.body.end">

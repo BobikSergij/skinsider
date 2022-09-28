@@ -5,7 +5,7 @@
     </head>
     <body>
         <referenceContainer name="main">
-        <block name="main.banner.info" as="main.banner.info" before="-" template="Magento_Cms::main-banner.phtml"/>
+            <block name="main.banner.info" as="main.banner.info" before="-" template="Magento_Cms::main-banner.phtml"/>
             <block class="Magento\Framework\View\Element\Template" name="about.info" as="about_us_info" template="Magento_Cms::about-us.phtml" after="-">
                 <block class="Magento\Cms\Block\Block" name="about-skinsider-block">
                     <arguments>

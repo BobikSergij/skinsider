@@ -108,9 +108,9 @@ $categoryObject = $catalogHelperData->getCategory();
                                 <?php // Product Image?>
                                 <div class="product-item-photo">
                                     <?php
-                                    $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
-                                    $_helperGallery->addGallery($_product);
-                                    $images = $_helperGallery->getGalleryImages($_product);
+                                    $viewModel = $block->getData('view_model');
+                                    $viewModel->addGallery($_product);
+                                    $images = $viewModel->getGalleryImages($_product);
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>
@@ -225,9 +225,9 @@ $categoryObject = $catalogHelperData->getCategory();
                                 <?php // Product Image?>
                                 <div class="product-item-photo">
                                     <?php
-                                    $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
-                                    $_helperGallery->addGallery($_product);
-                                    $images = $_helperGallery->getGalleryImages($_product);
+                                    $viewModel = $block->getData('view_model');
+                                    $viewModel->addGallery($_product);
+                                    $images = $viewModel->getGalleryImages($_product);
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>
@@ -397,9 +397,9 @@ $categoryObject = $catalogHelperData->getCategory();
                             <?php // Product Image?>
                             <div class="product-item-photo">
                                 <?php
-                                $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
-                                $_helperGallery->addGallery($_product);
-                                $images = $_helperGallery->getGalleryImages($_product);
+                                $viewModel = $block->getData('view_model');
+                                $viewModel->addGallery($_product);
+                                $images = $viewModel->getGalleryImages($_product);
                                 $i = 1;
                                 ?>
                                 <?php if (!empty($images)) { ?>

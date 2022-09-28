@@ -215,9 +215,9 @@ $_item = null;
                                 <?php // Product Image ?>
                                 <div class="product-item-photo">
                                     <?php
-                                    $_helperGallery = $this->helper('IdeaInYou\GalleryImages\Helper\Data');
-                                    $_helperGallery->addGallery($_item);
-                                    $images = $_helperGallery->getGalleryImages($_item);
+                                    $viewModel = $block->getData('view_model');
+                                    $viewModel->addGallery($_item);
+                                    $images = $viewModel->getGalleryImages($_item);
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>

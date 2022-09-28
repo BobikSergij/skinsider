@@ -40,5 +40,10 @@
                 </arguments>
             </referenceBlock>
         </referenceContainer>
+        <referenceBlock name="catalog.product.related">
+            <arguments>
+                <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>

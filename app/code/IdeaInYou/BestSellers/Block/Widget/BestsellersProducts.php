@@ -20,6 +20,7 @@
  */
 
 namespace IdeaInYou\BestSellers\Block\Widget;
+use Magento\Catalog\Model\Product\Gallery\ReadHandler as GalleryReadHandler;
 
 class BestsellersProducts extends \Magento\Catalog\Block\Product\AbstractProduct implements \Magento\Widget\Block\BlockInterface
 {
@@ -43,6 +44,14 @@ class BestsellersProducts extends \Magento\Catalog\Block\Product\AbstractProduct
      */
     protected $_template = 'IdeaInYou_BestSellers::widget/bestsellers-products.phtml';
 
+    protected $galleryReadHandler;
+    /**
+     * Catalog Image Helper
+     *
+     * @var \Magento\Catalog\Helper\Image
+     */
+    protected $imageHelper;
+
     /**
      * NewWidget constructor.
      *
@@ -57,14 +66,52 @@ class BestsellersProducts extends \Magento\Catalog\Block\Product\AbstractProduct
         \IdeaInYou\BestSellers\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Catalog\Model\Product\Attribute\Source\Status $catalogProductStatus,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
+        GalleryReadHandler $galleryReadHandler,
+        \Magento\Catalog\Helper\Image $imageHelper,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->productCollectionFactory = $productCollectionFactory;
         $this->catalogProductStatus = $catalogProductStatus;
         $this->catalogProductVisibility = $catalogProductVisibility;
+        $this->imageHelper = $imageHelper;
+        $this->galleryReadHandler = $galleryReadHandler;
     }
 
+    /** Add image gallery to $product */
+    public function addGallery($product) {
+        $this->galleryReadHandler->execute($product);
+    }
+
+    public function getGalleryImages(\Magento\Catalog\Api\Data\ProductInterface $product) {
+        $images = $product->getMediaGalleryImages();
+        if ($images instanceof \Magento\Framework\Data\Collection) {
+            foreach ($images as $image) {
+                /** @var $image \Magento\Catalog\Model\Product\Image */
+                $image->setData(
+                    'small_image_url',
+                    $this->imageHelper->init($product, 'product_page_image_small')
+                        ->setImageFile($image->getFile())
+                        ->getUrl()
+                );
+                $image->setData(
+                    'medium_image_url',
+                    $this->imageHelper->init($product, 'product_page_image_medium')
+                        ->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)
+                        ->setImageFile($image->getFile())
+                        ->getUrl()
+                );
+                $image->setData(
+                    'large_image_url',
+                    $this->imageHelper->init($product, 'product_page_image_large')
+                        ->constrainOnly(true)->keepAspectRatio(true)->keepFrame(false)
+                        ->setImageFile($image->getFile())
+                        ->getUrl()
+                );
+            }
+        }
+        return $images;
+    }
     /**
      * @return \IdeaInYou\BestSellers\Model\ResourceModel\Product\Collection
      */

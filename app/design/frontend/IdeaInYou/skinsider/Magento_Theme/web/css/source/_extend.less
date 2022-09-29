@@ -3,6 +3,32 @@
 @import "expand/_store-switcher.less";
 
 & when (@media-common = true) {
+    .message.global.cookie {
+        padding: 20px;
+        max-width: unset;
+        .lib-css(background, @color-white);
+        border-color: @color-gray_light;
+
+        .title {
+            h3 {
+                margin-top: 0;
+            }
+        }
+
+        .main-text {
+            p {
+                .lib-font-size(14px);
+                line-height: 1.2;
+            }
+        }
+
+        .actions {
+            .action.allow.primary {
+                width: 100%;
+            }
+        }
+    }
+
     .breadcrumbs {
         display: block;
         margin: 0 20px 20px;
@@ -45,7 +71,7 @@
                 top: 0;
                 z-index: 3;
                 width: 100%;
-                background: #fff;
+                .lib-css(background, @color-white);
             }
         }
 
@@ -973,6 +999,21 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .message.global.cookie {
+        .content {
+            .lib-vendor-prefix-display();
+            .lib-vendor-box-align(end);
+
+            .title {
+                margin-right: -25%;
+            }
+
+            .actions {
+                width: 50%;
+                margin: 0 0 0 20px;
+            }
+        }
+    }
     .breadcrumbs {
         margin: 0 auto;
 
@@ -1177,6 +1218,21 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .message.global.cookie {
+        .content {
+            .main-text {
+                p {
+                    .lib-font-size(16px);
+                }
+            }
+        }
+
+        .actions {
+            .action.allow.primary {
+                .lib-font-size(16px);
+            }
+        }
+    }
     .page-wrapper {
         .footer.content {
             .new-footer-container {
@@ -1211,6 +1267,16 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .message.global.cookie {
+        .content {
+            .title{
+                margin-left: -25%;
+            }
+            .actions{
+                width: 30%;
+            }
+        }
+    }
     .page-wrapper {
         .footer.content {
             .new-footer-container {

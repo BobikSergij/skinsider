@@ -143,9 +143,8 @@ class BigCommerceApiService
     public function collectShippingData(Order $order, array $payload = []){
         $addresses = $order->getAddressesCollection();
         $addressesItems = $addresses->getItems();
-        foreach ( $addressesItems as $addressesItem ) {
+        foreach ( $addressesItems as $key => $addressesItem ) {
             if ( $addressesItem->getAddressType() == 'shipping') {
-                $key = key($addressesItem);
                 $payload['shipping_addresses'][$key]['first_name'] = $addressesItem->getFirstname();
                 $payload['shipping_addresses'][$key]['last_name'] = $addressesItem->getLastname();
                 $payload['shipping_addresses'][$key]['street_1'] = implode( ", ", $addressesItem->getStreet());

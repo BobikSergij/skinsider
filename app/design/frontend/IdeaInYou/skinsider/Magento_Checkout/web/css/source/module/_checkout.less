@@ -15,6 +15,22 @@
 
 
     .checkout-index-index {
+        .field {
+            .control {
+                .select {
+                    overflow: hidden;
+                }
+            }
+        }
+        .page-wrapper {
+            .header.content {
+                .logo {
+                    margin-right: 15px;
+
+                }
+            }
+        }
+
         .action-close {
             display: none;
         }
@@ -42,11 +58,9 @@
                             display: none;
                         }
                     }
-                    .payment-group{
-                        display: none;
-                    }
-                    .opc-payment{
-                        .payment-group{
+
+                    .opc-payment {
+                        .payment-group {
                             display: block;
                         }
                     }
@@ -172,6 +186,7 @@
 
                             .field {
                                 width: 49%;
+
                             }
 
                             .field.street {
@@ -677,9 +692,15 @@
                         .payment-icon {
                             display: none;
                         }
+
+                        span {
+                            .lib-font-size(18px);
+                        }
                     }
                 }
-                        .label {
+
+                .paypal-payment {
+                    .label {
                         .lib-vendor-prefix-display();
                         .lib-vendor-box-align();
                         justify-content: space-between;
@@ -715,18 +736,7 @@
                             }
                         }
                     }
-
-                    + .payment-method {
-                        .label {
-                            &:before {
-                                display: none;
-                            }
-
-                            span {
-                                .lib-font-size(18px);
-                            }
-                        }
-                    }
+                }
 
 
                 &.stripe-payments {

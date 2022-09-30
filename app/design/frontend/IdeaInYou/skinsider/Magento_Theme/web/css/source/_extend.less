@@ -157,6 +157,7 @@
             .minicart-wrapper {
                 .lib-vendor-prefix-display();
                 .lib-vendor-box-align();
+                width: 55%;
             }
 
             .minicart-wrapper {
@@ -938,6 +939,13 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
 
     .page-wrapper {
+        .header.content {
+            .header.links,
+            .minicart-wrapper {
+                width: unset;
+            }
+        }
+
         .logo {
             width: 22%;
         }

@@ -186,14 +186,17 @@
 
             .item {
                 margin-bottom: 16px;
+                .paypal-buttons{
+                    z-index: 0;
+                }
 
                 &:last-child {
                     margin-bottom: 0;
-                    display: none;
                 }
 
                 .payment-request-button.cart {
                     width: unset !important;
+                    margin-bottom: 16px;
                 }
 
                 button {
@@ -1001,10 +1004,6 @@
 
         .checkout-methods-items {
             padding: 0;
-
-            .item:last-child {
-                display: none;
-            }
         }
     }
 

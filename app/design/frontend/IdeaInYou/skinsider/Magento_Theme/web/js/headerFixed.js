@@ -10,10 +10,11 @@ define([
         headerFix: function () {
             let $headerClass = $(this.element);
             $(window).scroll(function(){
-                if ($(window).scrollTop() >= 80) {
+                const $scroll = $(window).scrollTop();
+                if ($scroll >= 300) {
                     $headerClass.addClass('fixed');
                 }
-                else {
+                else if($scroll <= 300) {
                     $headerClass.removeClass('fixed');
                 }
             });

@@ -203,13 +203,15 @@
                     );
                 }
 
-                .show-hide-toggle.filter-open {
-                    .lib-icon-font(
-                        @icon-up,
-                        @_icon-font-size: 8px,
-                        @_icon-font-position: after,
-                        @_icon-font-margin: 2px 0 0 1px
-                    );
+                .filter-open{
+                    .show-hide-toggle{
+                        .lib-icon-font(
+                            @icon-up,
+                            @_icon-font-size: 8px,
+                            @_icon-font-position: after,
+                            @_icon-font-margin: 2px 0 0 5px
+                        );
+                    }
                 }
             }
         }
@@ -253,14 +255,15 @@
                             @_icon-font-margin: 2px 0 0 5px
                         );
                     }
-
-                    .show-hide-toggle.filter-open {
-                        .lib-icon-font(
-                            @icon-up,
-                            @_icon-font-size: 8px,
-                            @_icon-font-position: after,
-                            @_icon-font-margin: 2px 0 0 5px
-                        );
+                    .filter-open{
+                        .show-hide-toggle{
+                            .lib-icon-font(
+                                @icon-up,
+                                @_icon-font-size: 8px,
+                                @_icon-font-position: after,
+                                @_icon-font-margin: 2px 0 0 5px
+                            );
+                        }
                     }
                 }
 
@@ -302,6 +305,11 @@
 
             .filter-options {
                 margin-top: 0;
+            }
+            .filter-open{
+                .filter-options {
+                    display: block;
+                }
             }
         }
 

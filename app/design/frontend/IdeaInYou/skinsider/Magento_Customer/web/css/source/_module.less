@@ -21,12 +21,18 @@
 & when (@media-common = true) {
 
     .account {
-        .sidebar-additional {
-            display: none;   // sidebar hidden
+        a.action.edit,
+        .action.change-password {
+            .lib-css(font-weight, @font-weight__bold);
         }
-        .block-collapsible-nav{
-            .item{
-                a{
+
+        .sidebar-additional {
+            display: none; // sidebar hidden
+        }
+
+        .block-collapsible-nav {
+            .item {
+                a {
                     text-transform: none;
                 }
             }
@@ -178,6 +184,7 @@
         padding: @indent__base;
         box-shadow: 0 0 3px rgba(red(@baseColor), green(@baseColor), blue(@baseColor), 1);
         box-sizing: border-box;
+
         .fieldset-fullname {
             .fields {
                 .field {

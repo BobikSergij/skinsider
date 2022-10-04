@@ -142,6 +142,13 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
             <?php endforeach; ?>
         </ol>
     </div>
+    <script type="text/x-magento-init">
+    {
+        ".read-more": {
+            "Magento_Catalog/js/toggle-category-description": {}
+        }
+    }
+    </script>
     <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
     <?php if (!$block->isRedirectToCartEnabled()) : ?>
         <script type="text/x-magento-init">
@@ -155,3 +162,10 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
         </script>
     <?php endif; ?>
 <?php endif; ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "toggleCategoryFilter": {}
+    }
+}
+</script>

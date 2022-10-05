@@ -71,10 +71,10 @@
         }
 
         &.fixed {
-            transition: position .5s;
+            transition: position 1.5s;
 
             .panel.wrapper {
-                display: none;
+                min-height: 160px;
             }
 
             .header.content {
@@ -1043,6 +1043,13 @@
 
             .item:not(:last-child):after {
                 margin: 0 14px;
+            }
+        }
+    }
+    .page-header{
+        &.fixed{
+            .panel.wrapper{
+                min-height: 100px;
             }
         }
     }

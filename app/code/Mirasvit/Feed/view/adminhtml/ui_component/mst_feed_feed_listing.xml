@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mst_feed_feed_listing.mst_feed_feed_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/edit"/>
+                <class>primary</class>
+                <label translate="true">Add Feed</label>
+            </button>
+        </buttons>
+        <spinner>columns</spinner>
+        <deps>
+            <dep>mst_feed_feed_listing.mst_feed_feed_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="mst_feed_feed_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">feed_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+
+        <dataProvider class="Mirasvit\Feed\Ui\Feed\Listing\DataProvider" name="mst_feed_feed_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>feed_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters"/>
+        <filterSearch name="fulltext"/>
+        <columnsControls name="columns_controls"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">mst_feed_feed_listing.mst_feed_feed_listing.columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+
+        <column name="feed_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+
+        <column name="name" sortOrder="12">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+
+        <column name="type" sortOrder="14" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Mirasvit\Feed\Model\Config\Source\Type"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Type</label>
+            </settings>
+        </column>
+
+        <column name="file" sortOrder="16">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">File</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+
+        <column name="generated_at" sortOrder="20" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <dateFormat>MMM d, YYYY hh:mm:ss</dateFormat>
+                <label translate="true">Last Generated At</label>
+            </settings>
+        </column>
+
+        <column name="generated_time" sortOrder="22">
+            <settings>
+                <label translate="true">Generation Time</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="generated_cnt" sortOrder="24">
+            <settings>
+                <label translate="true">Generated Count</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="cron" sortOrder="26" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Scheduled</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="ftp" sortOrder="28" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">FTP Delivery</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="feed_status" sortOrder="30">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Status</label>
+                <fieldClass>
+                    <class name="mst_feed-status">true</class>
+                </fieldClass>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+
+        <column name="statistics" sortOrder="32">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Statistics (last 14 days)</label>
+                <fieldClass>
+                    <class name="mst_feed-stats_col">true</class>
+                </fieldClass>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="clicks" sortOrder="34">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Clicks</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="orders" sortOrder="36">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Orders</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="revenue" sortOrder="38">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Revenue</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="revenue_per_click" sortOrder="40">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Revenue per Click</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="created_at" sortOrder="50" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <dateFormat>MMM d, YYYY hh:mm:ss</dateFormat>
+                <label translate="true">Created At</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <column name="updated_at" sortOrder="52" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <dateFormat>MMM d, YYYY hh:mm:ss</dateFormat>
+                <label translate="true">Updated At</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" sortOrder="100" class="Mirasvit\Feed\Ui\Feed\Listing\Column\ActionsColumn">
+            <settings>
+                <indexField>feed_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

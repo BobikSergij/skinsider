@@ -155,6 +155,9 @@ class BigCommerceApiService
                 $payload['shipping_addresses'][$key]['country_iso2'] = $addressesItem->getCountryId();
                 $payload['shipping_addresses'][$key]['phone'] = $addressesItem->getTelephone();
                 $payload['shipping_addresses'][$key]['email'] = $addressesItem->getEmail();
+                if($order->getShippingMethod() !== 'yodel'){
+                    $order->setShippingMethod('yodel');
+                }
                 $payload['shipping_addresses'][$key]['shipping_method'] = $order->getShippingMethod();
             }
             $payload['shipping_cost_ex_tax'] = $order->getShippingAmount() ?? 0;
@@ -220,7 +223,7 @@ class BigCommerceApiService
      * @param string $requestMethod
      * @return ResponseInterface|Response
      */
-    protected function doRequest(string $uriEndpoint, array $payload = [], string $requestMethod = Request::HTTP_METHOD_GET)
+    public function doRequest(string $uriEndpoint, array $payload = [], string $requestMethod = Request::HTTP_METHOD_GET)
     {
         $config = $this->scopeConfig;
         $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path');

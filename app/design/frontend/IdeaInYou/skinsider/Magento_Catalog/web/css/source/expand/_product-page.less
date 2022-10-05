@@ -23,11 +23,13 @@
         .fotorama__nav.fotorama__shadows--right:after {
             background-image: unset;
         }
+
         .fotorama__arr,
-        .fotorama__thumb__arr{
+        .fotorama__thumb__arr {
             background-color: rgba(255, 255, 255, 0.8);
         }
-        .fotorama__nav--thumbs{
+
+        .fotorama__nav--thumbs {
             .lib-vendor-prefix-display();
             justify-content: center;
         }
@@ -737,6 +739,7 @@
                             display: block;
                             margin: auto;
                             max-height: 350px;
+                            max-width: 150px;
                         }
 
                         .name {
@@ -933,8 +936,15 @@
                 .review-form {
                     max-width: unset;
                 }
-                .review-block-content{
+
+                .review-block-content {
                     max-height: 500px;
+
+                    .review-add-img {
+                        img {
+                            max-width: unset;
+                        }
+                    }
                 }
             }
         }

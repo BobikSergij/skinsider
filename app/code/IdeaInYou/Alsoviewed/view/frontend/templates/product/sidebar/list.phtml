@@ -35,8 +35,10 @@
                         $productImage = $block->getImage($_product, $imageDisplayArea);
 
                         $viewModel = $block->getData('view_model');
-                        $viewModel->addGallery($_product);
-                        $images = $viewModel->getGalleryImages($_product);
+                        if(!empty($viewModel)){
+                            $viewModel->addGallery($_product);
+                            $images = $viewModel->getGalleryImages($_product);
+                        }
                         $i = 1;
                         ?>
                         <?php if (!empty($images)) { ?>

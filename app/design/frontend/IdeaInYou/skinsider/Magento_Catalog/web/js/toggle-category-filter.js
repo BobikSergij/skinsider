@@ -15,10 +15,10 @@ define([
             $(window).width() < 768 ? refineByBlock.text('Browse by Brand, Product Types & more') : showHideToggler.css({display: 'none'});
 
 
-            opener.on('click', function () {
+            showHideToggler.on('click', function () {
                 if ($(window).width() < 768) {
-                    showHideToggler.toggleClass('filter-open');
-                    showHideToggler.hasClass('filter-open') ? showHideToggler.text('Hide Filters') : showHideToggler.text('Show Filters');
+                    opener.toggleClass('filter-open');
+                    opener.hasClass('filter-open') ? showHideToggler.text('Hide Filters') : showHideToggler.text('Show Filters');
                 }
             })
         }

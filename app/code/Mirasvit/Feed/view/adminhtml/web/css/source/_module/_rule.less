@@ -1,0 +1,40 @@
+body.mst_feed-rule-edit {
+    #rule_conditions_fieldset {
+        margin-left: ~"calc(100% * 0.25 + 8px)";
+        margin-top:  -3rem;
+
+        legend {
+            margin-left:   -14rem;
+            border-bottom: none;
+
+            span {
+                font-size:      1.4rem;
+                padding-bottom: 0;
+            }
+        }
+
+        .rule-tree-wrapper {
+            ul {
+                padding-left: 3rem;
+            }
+        }
+    }
+
+    button.mst-feed_rule_preview-button {
+        margin-left: ~"calc(100% * 0.25 + 8px)";
+        text-shadow: none;
+        margin-top:  1rem;
+        width:       155px;
+        text-align:  center;
+
+        &:hover,
+        &:active,
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .mst-feed_rule_conditions fieldset>.admin__data-grid-loading-mask {
+        display:none!important;
+    }
+}

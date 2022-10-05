@@ -63,8 +63,10 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
                     <div class="product-item-photo">
                         <?php
                         $viewModel = $block->getData('view_model');
-                        $viewModel->addGallery($_product);
-                        $images = $viewModel->getGalleryImages($_product);
+                        if(!empty($viewModel)){
+                            $viewModel->addGallery($_product);
+                            $images = $viewModel->getGalleryImages($_product);
+                        }
                         $i = 1;
                         ?>
                         <?php if (!empty($images)) { ?>
@@ -155,3 +157,17 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
         </script>
     <?php endif; ?>
 <?php endif; ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Catalog/js/toggle-category-filter": {}
+    }
+}
+</script>
+<script type="text/x-magento-init">
+    {
+        ".read-more": {
+            "Magento_Catalog/js/toggle-category-description": {}
+        }
+    }
+    </script>

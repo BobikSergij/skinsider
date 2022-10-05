@@ -1,0 +1,81 @@
+.mst_feed-status {
+    width:      150px;
+    text-align: center;
+
+    .status {
+        display:        inline-block;
+        white-space:    nowrap;
+        font-size:      11px;
+        border-radius:  2px;
+        padding:        3px 10px;
+        color:          #ffffff;
+        font-weight:    bold;
+        text-transform: capitalize;
+        min-width:      15rem;
+
+        &.notice {
+            background: #53d056;
+        }
+
+        &.minor {
+            background: #d6d6d6;
+        }
+
+        &.critical {
+            background: #ff0101;
+        }
+    }
+}
+
+.mst_feed-stats_col {
+    padding: 9px 6px 0px 6px !important;
+    width:   262px !important;
+}
+
+.mst_feed-stats {
+    height:    90px;
+    display:   flex;
+    flex-wrap: wrap;
+    max-width: 250px;
+
+    ._row {
+        display: flex;
+        flex:    1 1 auto;
+    }
+
+    .mst_feed-stats__data {
+        font-size:       1.4rem;
+        justify-content: space-around;
+        width:           100%;
+
+        .title {
+            color:       #888888;
+            font-weight: 600;
+            font-size:   12px;
+        }
+    }
+
+    .mst_feed-stats__chart {
+        width:       100%;
+        align-items: end;
+        min-height:  70px;
+
+        .mst_feed-stats__chart-column {
+            background:    #4f8fff;
+            width:         16px;
+            margin-right:  2px;
+            border-radius: 1px 1px 0 0;
+            opacity: .5;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+tr:hover {
+    .mst_feed-stats__chart-column {
+        opacity: 1 !important;
+    }
+}

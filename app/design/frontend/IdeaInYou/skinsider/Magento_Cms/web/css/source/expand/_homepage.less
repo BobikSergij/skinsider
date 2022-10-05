@@ -401,7 +401,7 @@
                 text-transform: uppercase;
                 letter-spacing: .05em;
                 .lib-css(font-weight, @font-weight__bold);
-                .lib-font-size(14px);
+                .lib-font-size(12px);
                 border: 2px solid @color-black;
 
                 &:hover {
@@ -435,27 +435,26 @@
                     line-height: 1.2;
                 }
             }
-
             .main-content {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                .lib-vendor-prefix-display();
                 margin: 0 -10px;
+                overflow-x: scroll;
+                width: 100%;
 
                 .item {
                     .mplookbook-lookbook {
                         margin-bottom: 20px;
                         cursor: pointer;
+                        min-width: 97px;
                     }
 
                     padding: 0 10px;
 
                     &.content-1 {
-                        width: initial;
-                        grid-column: span 2;
-                        grid-row: span 2;
-
+                        width: 100%;
+                        min-width: 216px;
                         img {
-                            min-height: 233px;
+                            min-height: 220px;
                         }
                     }
 
@@ -483,15 +482,20 @@
                 margin-top: 30px;
 
                 a {
+                    white-space: nowrap;
+
                     &:before {
                         height: 18px;
+                        width: 100%;
+                        max-width: 18px;
+                        overflow: unset !important;
                     }
 
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
                         @_icon-font-content: @_icon-instagram,
                         @_icon-font-color: @color-black,
-                        @_icon-font-margin: 0 10px 0 0,
+                        @_icon-font-margin: 1px 10px 0 0,
                         @_icon-font-size: 18px,
                         @_icon-font-color-hover: @color-white,
                         @_icon-font-color-active: @color-white
@@ -598,6 +602,13 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
     .cms-index-index {
+        .button-all-blog,
+        .inst-button {
+            a {
+                .lib-font-size(14px);
+            }
+        }
+
         .page-main {
             padding: 0;
         }
@@ -608,7 +619,7 @@
             }
 
             .desktop-content {
-                .lib-vendor-prefix-display()!important;
+                .lib-vendor-prefix-display() !important;
                 flex-direction: unset !important;
                 flex-wrap: wrap;
                 padding-top: 10px;
@@ -816,18 +827,18 @@
 
         .look-book {
             .main-content {
+                display: grid;
                 grid-template-columns: repeat(5, 1fr);
+                overflow-x: unset;
 
                 .item {
                     &.content-1 {
+                        width: initial;
+                        grid-column: span 2;
+                        grid-row: span 2;
                         img {
                             min-height: 285px;
                         }
-                    }
-
-                    &.content-3,
-                    &.content-4 {
-                        display: block;
                     }
                 }
             }

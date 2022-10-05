@@ -1,0 +1,36 @@
+<?php
+declare(strict_types=1);
+
+/** @var $block \Mirasvit\Feed\Block\Adminhtml\Feed\Listing\Statistics */
+
+$hasStats = $block->prepareStats();
+
+if (!$hasStats) {
+    return '';
+}
+
+?>
+
+<div class="mst_feed-stats">
+    <div class="mst_feed-stats__data _row">
+        <div class="mst_feed-stats__data-info">
+            <span class="title">Clicks:</span>
+            <span><?= $block->getClicks() ?></span>
+        </div>
+        <div class="mst_feed-stats__data-info">
+            <span class="title">Orders:</span>
+            <span><?= $block->getOrdersCnt() . ' / ' . $block->getRevenue() ?></span>
+        </div>
+    </div>
+    <div class="mst_feed-stats__chart _row">
+        <?php foreach ($block->getChartData() as $data): ?>
+        <?php
+            $height = $block->getMaxClicks() ? round(65 / $block->getMaxClicks() * $data) : 3;
+            if ($height < 3) {
+                $height = 3;
+            }
+            ?>
+            <div class="mst_feed-stats__chart-column" style="height: <?= $height ?>px"></div>
+        <?php endforeach; ?>
+    </div>
+</div>

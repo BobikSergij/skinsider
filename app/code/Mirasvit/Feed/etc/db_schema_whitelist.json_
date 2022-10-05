@@ -1,0 +1,235 @@
+{
+    "mst_feed_custom_attribute": {
+        "column": {
+            "attribute_id": true,
+            "name": true,
+            "code": true,
+            "conditions_serialized": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_feed_feed": {
+        "column": {
+            "feed_id": true,
+            "name": true,
+            "store_id": true,
+            "filename": true,
+            "type": true,
+            "format_serialized": true,
+            "is_active": true,
+            "generated_at": true,
+            "generated_cnt": true,
+            "generated_time": true,
+            "cron": true,
+            "cron_day": true,
+            "cron_time": true,
+            "ftp": true,
+            "ftp_protocol": true,
+            "ftp_host": true,
+            "ftp_user": true,
+            "ftp_password": true,
+            "ftp_path": true,
+            "ftp_passive_mode": true,
+            "uploaded_at": true,
+            "created_at": true,
+            "updated_at": true,
+            "ga_source": true,
+            "ga_medium": true,
+            "ga_name": true,
+            "ga_term": true,
+            "ga_content": true,
+            "notification_emails": true,
+            "notification_events": true,
+            "export_only_new": true,
+            "report_enabled": true,
+            "allowed_chars": true,
+            "ignored_chars": true,
+            "archivation": true,
+            "fb_metadata_enabled": true,
+            "filter_fastmode_enabled": true
+        },
+        "index": {
+            "MST_FEED_FEED_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_FEED_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mst_feed_feed_history": {
+        "column": {
+            "history_id": true,
+            "feed_id": true,
+            "type": true,
+            "title": true,
+            "message": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MST_FEED_FEED_HISTORY_FEED_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_FEED_HISTORY_FEED_ID_MST_FEED_FEED_FEED_ID": true
+        }
+    },
+    "mst_feed_feed_product": {
+        "column": {
+            "id": true,
+            "feed_id": true,
+            "product_id": true,
+            "is_new": true
+        },
+        "index": {
+            "MST_FEED_FEED_PRODUCT_PRODUCT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_FEED_PRODUCT_FEED_ID_MST_FEED_FEED_FEED_ID": true,
+            "MST_FEED_FEED_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true,
+            "MST_FEED_FEED_PRODUCT_FEED_ID_PRODUCT_ID": true
+        }
+    },
+    "mst_feed_mapping_category": {
+        "column": {
+            "mapping_id": true,
+            "name": true,
+            "type": true,
+            "mapping_serialized": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_feed_rule": {
+        "column": {
+            "rule_id": true,
+            "name": true,
+            "type": true,
+            "conditions_serialized": true,
+            "actions_serialized": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_feed_rule_feed": {
+        "column": {
+            "id": true,
+            "rule_id": true,
+            "feed_id": true
+        },
+        "index": {
+            "MST_FEED_RULE_FEED_FEED_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_RULE_FEED_FEED_ID_MST_FEED_FEED_FEED_ID": true,
+            "MST_FEED_RULE_FEED_RULE_ID_MST_FEED_RULE_RULE_ID": true,
+            "MST_FEED_RULE_FEED_RULE_ID_FEED_ID": true
+        }
+    },
+    "mst_feed_rule_product": {
+        "column": {
+            "id": true,
+            "rule_id": true,
+            "product_id": true,
+            "store_id": true
+        },
+        "index": {
+            "MST_FEED_RULE_PRODUCT_STORE_ID": true,
+            "MST_FEED_RULE_PRODUCT_PRODUCT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_RULE_PRODUCT_RULE_ID_MST_FEED_RULE_RULE_ID": true,
+            "MST_FEED_RULE_PRODUCT_STORE_ID_STORE_STORE_ID": true,
+            "MST_FEED_RULE_PRODUCT_RULE_ID_PRODUCT_ID_STORE_ID": true
+        }
+    },
+    "mst_feed_template": {
+        "column": {
+            "template_id": true,
+            "name": true,
+            "type": true,
+            "format_serialized": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_feed_report": {
+        "column": {
+            "row_id": true,
+            "session": true,
+            "feed_id": true,
+            "product_id": true,
+            "order_id": true,
+            "is_click": true,
+            "subtotal": true,
+            "store_id": true,
+            "created_at": true
+        },
+        "index": {
+            "MST_FEED_REPORT_PRODUCT_ID": true,
+            "MST_FEED_REPORT_FEED_ID": true,
+            "MST_FEED_REPORT_SESSION": true,
+            "MST_FEED_REPORT_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_REPORT_FEED_ID_MST_FEED_FEED_FEED_ID": true
+        }
+    },
+    "mst_feed_dynamic_attribute": {
+        "column": {
+            "attribute_id": true,
+            "name": true,
+            "code": true,
+            "conditions_serialized": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_feed_dynamic_variable": {
+        "column": {
+            "variable_id": true,
+            "name": true,
+            "code": true,
+            "php_code": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_feed_validation": {
+        "column": {
+            "validation_id": true,
+            "feed_id": true,
+            "line_num": true,
+            "entity_id": true,
+            "validator": true,
+            "attribute": true,
+            "value": true
+        },
+        "index": {
+            "MST_FEED_VALIDATION_LINE_NUM": true,
+            "MST_FEED_VALIDATION_ENTITY_ID": true,
+            "MST_FEED_VALIDATION_ATTRIBUTE": true,
+            "MST_FEED_VALIDATION_VALIDATOR": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_FEED_VALIDATION_FEED_ID_MST_FEED_FEED_FEED_ID": true
+        }
+    }
+}

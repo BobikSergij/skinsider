@@ -1,0 +1,23 @@
+{
+    "name": "mirasvit/module-feed",
+    "description": "Advanced Product Feeds",
+    "require": {
+        "magento/framework": "102.0.*|103.0.*",
+        "mirasvit/module-core": "dev-master|>=1.2.46",
+        "mirasvit/module-report": "dev-master|~1.4.1",
+        "zf1/zend-reflection": "*"
+    },
+    "type": "magento2-module",
+    "version": "1.2.8",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "src/Feed/registration.php"
+        ],
+        "psr-4": {
+            "Mirasvit\\Feed\\": "src/Feed"
+        }
+    }
+}

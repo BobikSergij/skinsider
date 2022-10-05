@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mst_feed_custom_attribute" resource="default" engine="innodb" comment="mst_feed_custom_attribute">
+    <column xsi:type="int" name="attribute_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Attribute Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+    <column xsi:type="text" name="conditions_serialized" nullable="false" comment="Conditions Serialized"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="attribute_id"/>
+    </constraint>
+  </table>
+  <table name="mst_feed_feed" resource="default" engine="innodb" comment="mst_feed_feed">
+    <column xsi:type="int" name="feed_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Feed Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Store Id"/>
+    <column xsi:type="varchar" name="filename" nullable="false" length="255" comment="Filename"/>
+    <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+    <column xsi:type="text" name="format_serialized" nullable="true" comment="Format"/>
+    <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+    <column xsi:type="datetime" name="generated_at" on_update="false" nullable="true" comment="Generated At"/>
+    <column xsi:type="int" name="generated_cnt" padding="11" unsigned="false" nullable="true" identity="false" comment="Generated Cnt"/>
+    <column xsi:type="int" name="generated_time" padding="11" unsigned="false" nullable="true" identity="false" comment="Generated Time"/>
+    <column xsi:type="int" name="cron" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Cron"/>
+    <column xsi:type="varchar" name="cron_day" nullable="true" length="255" comment="Cron Day"/>
+    <column xsi:type="varchar" name="cron_time" nullable="true" length="255" comment="Cron Time"/>
+    <column xsi:type="int" name="ftp" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Ftp"/>
+    <column xsi:type="varchar" name="ftp_protocol" nullable="true" length="255" comment="Ftp Protocol"/>
+    <column xsi:type="varchar" name="ftp_host" nullable="true" length="255" comment="Ftp Host"/>
+    <column xsi:type="varchar" name="ftp_user" nullable="true" length="255" comment="Ftp User"/>
+    <column xsi:type="varchar" name="ftp_password" nullable="true" length="255" comment="Ftp Password"/>
+    <column xsi:type="varchar" name="ftp_path" nullable="true" length="255" comment="Ftp Path"/>
+    <column xsi:type="int" name="ftp_passive_mode" padding="11" unsigned="false" nullable="true" identity="false" comment="Ftp Passive Mode"/>
+    <column xsi:type="datetime" name="uploaded_at" on_update="false" nullable="true" comment="Uploaded At"/>
+    <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" comment="Created At"/>
+    <column xsi:type="datetime" name="updated_at" on_update="false" nullable="false" comment="Updated At"/>
+    <column xsi:type="varchar" name="ga_source" nullable="true" length="255" comment="Ga Source"/>
+    <column xsi:type="varchar" name="ga_medium" nullable="true" length="255" comment="Ga Medium"/>
+    <column xsi:type="varchar" name="ga_name" nullable="true" length="255" comment="Ga Name"/>
+    <column xsi:type="varchar" name="ga_term" nullable="true" length="255" comment="Ga Term"/>
+    <column xsi:type="varchar" name="ga_content" nullable="true" length="255" comment="Ga Content"/>
+    <column xsi:type="varchar" name="notification_emails" nullable="true" length="255" comment="Notification Emails"/>
+    <column xsi:type="varchar" name="notification_events" nullable="true" length="255" comment="Notifications Events"/>
+    <column xsi:type="int" name="export_only_new" padding="11" unsigned="false" nullable="true" identity="false" comment="Export only new"/>
+    <column xsi:type="int" name="report_enabled" padding="11" unsigned="false" nullable="true" identity="false" comment="Report Enabled?"/>
+    <column xsi:type="varchar" name="allowed_chars" nullable="true" length="255" comment="Allowed Chars"/>
+    <column xsi:type="varchar" name="ignored_chars" nullable="true" length="255" comment="Ignored Chars"/>
+    <column xsi:type="varchar" name="archivation" nullable="true" length="255" comment="Archivation"/>
+    <column xsi:type="boolean" name="fb_metadata_enabled" nullable="true" default="true" comment="Enable FB Metadata"/>
+    <column xsi:type="boolean" name="filter_fastmode_enabled" nullable="true" default="true" comment="Enable fast filtering mode"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="feed_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_FEED_STORE_ID_STORE_STORE_ID" table="mst_feed_feed" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    <index referenceId="MST_FEED_FEED_STORE_ID" indexType="btree">
+      <column name="store_id"/>
+    </index>
+  </table>
+  <table name="mst_feed_feed_history" resource="default" engine="innodb" comment="mst_feed_feed_history">
+    <column xsi:type="int" name="history_id" padding="11" unsigned="false" nullable="false" identity="true" comment="History Id"/>
+    <column xsi:type="int" name="feed_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Feed Id"/>
+    <column xsi:type="varchar" name="type" nullable="true" length="255" comment="Type"/>
+    <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+    <column xsi:type="text" name="message" nullable="true" comment="Message"/>
+    <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" comment="Created At"/>
+    <column xsi:type="datetime" name="updated_at" on_update="false" nullable="false" comment="Updated At"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="history_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_FEED_HISTORY_FEED_ID_MST_FEED_FEED_FEED_ID" table="mst_feed_feed_history" column="feed_id" referenceTable="mst_feed_feed" referenceColumn="feed_id" onDelete="CASCADE"/>
+    <index referenceId="MST_FEED_FEED_HISTORY_FEED_ID" indexType="btree">
+      <column name="feed_id"/>
+    </index>
+  </table>
+  <table name="mst_feed_feed_product" resource="default" engine="innodb" comment="mst_feed_feed_product">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="int" name="feed_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Feed Id"/>
+    <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Product Id"/>
+    <column xsi:type="int" name="is_new" padding="10" unsigned="true" nullable="false" identity="false" comment="Is New"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_FEED_PRODUCT_FEED_ID_MST_FEED_FEED_FEED_ID" table="mst_feed_feed_product" column="feed_id" referenceTable="mst_feed_feed" referenceColumn="feed_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_FEED_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID" table="mst_feed_feed_product" column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    <constraint xsi:type="unique" referenceId="MST_FEED_FEED_PRODUCT_FEED_ID_PRODUCT_ID">
+      <column name="feed_id"/>
+      <column name="product_id"/>
+    </constraint>
+    <index referenceId="MST_FEED_FEED_PRODUCT_PRODUCT_ID" indexType="btree">
+      <column name="product_id"/>
+    </index>
+  </table>
+  <table name="mst_feed_mapping_category" resource="default" engine="innodb" comment="mst_feed_mapping_category">
+    <column xsi:type="int" name="mapping_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Mapping Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+    <column xsi:type="longtext" name="mapping_serialized" nullable="false" onCreate="migrateDataFrom(mapping_serialized)"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="mapping_id"/>
+    </constraint>
+  </table>
+  <table name="mst_feed_rule" resource="default" engine="innodb" comment="mst_feed_rule">
+    <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Rule Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="type" nullable="true" length="255" comment="Type" disabled="true"/>
+    <column xsi:type="text" name="conditions_serialized" nullable="false" comment="Conditions Serialized"/>
+    <column xsi:type="text" name="actions_serialized" nullable="true" comment="Actions Serialized" disabled="true"/>
+    <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+    <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" comment="Created At" disabled="true"/>
+    <column xsi:type="datetime" name="updated_at" on_update="false" nullable="false" comment="Updated At" disabled="true"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="rule_id"/>
+    </constraint>
+  </table>
+  <table name="mst_feed_rule_feed" resource="default" engine="innodb" comment="mst_feed_rule_feed">
+    <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Rule Id"/>
+    <column xsi:type="int" name="feed_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Feed Id"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_RULE_FEED_FEED_ID_MST_FEED_FEED_FEED_ID" table="mst_feed_rule_feed" column="feed_id" referenceTable="mst_feed_feed" referenceColumn="feed_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_RULE_FEED_RULE_ID_MST_FEED_RULE_RULE_ID" table="mst_feed_rule_feed" column="rule_id" referenceTable="mst_feed_rule" referenceColumn="rule_id" onDelete="CASCADE"/>
+    <constraint xsi:type="unique" referenceId="MST_FEED_RULE_FEED_RULE_ID_FEED_ID">
+      <column name="rule_id"/>
+      <column name="feed_id"/>
+    </constraint>
+    <index referenceId="MST_FEED_RULE_FEED_FEED_ID" indexType="btree">
+      <column name="feed_id"/>
+    </index>
+  </table>
+  <table name="mst_feed_rule_product" resource="default" engine="innodb" comment="mst_feed_rule_product">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Rule Id"/>
+    <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Product Id"/>
+    <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" default="0" comment="Store Id"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_RULE_PRODUCT_RULE_ID_MST_FEED_RULE_RULE_ID" table="mst_feed_rule_product" column="rule_id" referenceTable="mst_feed_rule" referenceColumn="rule_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_RULE_PRODUCT_STORE_ID_STORE_STORE_ID" table="mst_feed_rule_product" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    <constraint xsi:type="unique" referenceId="MST_FEED_RULE_PRODUCT_RULE_ID_PRODUCT_ID_STORE_ID">
+      <column name="rule_id"/>
+      <column name="product_id"/>
+      <column name="store_id"/>
+    </constraint>
+    <index referenceId="MST_FEED_RULE_PRODUCT_STORE_ID" indexType="btree">
+      <column name="store_id"/>
+    </index>
+    <index referenceId="MST_FEED_RULE_PRODUCT_PRODUCT_ID" indexType="btree">
+      <column name="product_id"/>
+    </index>
+  </table>
+  <table name="mst_feed_template" resource="default" engine="innodb" comment="mst_feed_template">
+    <column xsi:type="int" name="template_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Template Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+    <column xsi:type="text" name="format_serialized" nullable="true" comment="Format"/>
+    <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" comment="Created At"/>
+    <column xsi:type="datetime" name="updated_at" on_update="false" nullable="false" comment="Updated At"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="template_id"/>
+    </constraint>
+  </table>
+  <table name="mst_feed_report" resource="default" engine="innodb" comment="Feed Report">
+    <column xsi:type="int" name="row_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Row Id"/>
+    <column xsi:type="varchar" name="session" nullable="false" length="255" comment="Session"/>
+    <column xsi:type="int" name="feed_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Feed Id"/>
+    <column xsi:type="int" name="product_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Product Id"/>
+    <column xsi:type="int" name="order_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Order Id"/>
+    <column xsi:type="int" name="is_click" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Click?"/>
+    <column xsi:type="decimal" name="subtotal" scale="4" precision="12" unsigned="false" nullable="true" comment="Order subtotal (for product)"/>
+    <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Store Id"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="row_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_REPORT_FEED_ID_MST_FEED_FEED_FEED_ID" table="mst_feed_report" column="feed_id" referenceTable="mst_feed_feed" referenceColumn="feed_id" onDelete="CASCADE"/>
+    <index referenceId="MST_FEED_REPORT_PRODUCT_ID" indexType="btree">
+      <column name="product_id"/>
+    </index>
+    <index referenceId="MST_FEED_REPORT_FEED_ID" indexType="btree">
+      <column name="feed_id"/>
+    </index>
+    <index referenceId="MST_FEED_REPORT_SESSION" indexType="btree">
+      <column name="session"/>
+    </index>
+    <index referenceId="MST_FEED_REPORT_STORE_ID" indexType="btree">
+      <column name="store_id"/>
+    </index>
+  </table>
+  <table name="mst_feed_dynamic_attribute" resource="default" engine="innodb" comment="Dynamic Attributes">
+    <column xsi:type="int" name="attribute_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Attribute Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+    <column xsi:type="text" name="conditions_serialized" nullable="true" comment="Conditions"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="attribute_id"/>
+    </constraint>
+  </table>
+  <table name="mst_feed_dynamic_variable" resource="default" engine="innodb" comment="Dynamic Variables">
+    <column xsi:type="int" name="variable_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Variable Id"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+    <column xsi:type="longtext" name="php_code" nullable="true" onCreate="migrateDataFrom(php_code)"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="variable_id"/>
+    </constraint>
+  </table>
+  <table name="mst_feed_validation" resource="default" engine="innodb" comment="mst_feed_validation">
+    <column xsi:type="int" name="validation_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Validation Id"/>
+    <column xsi:type="int" name="feed_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Feed ID"/>
+    <column xsi:type="int" name="line_num" padding="11" unsigned="false" nullable="false" identity="false" comment="Line Number"/>
+    <column xsi:type="varchar" name="entity_id" nullable="true" length="255" comment="Entity ID"/>
+    <column xsi:type="varchar" name="validator" nullable="false" length="255" comment="Validator"/>
+    <column xsi:type="varchar" name="attribute" nullable="false" length="255" comment="Attribute"/>
+    <column xsi:type="text" name="value" nullable="true" comment="Value"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="validation_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="MST_FEED_VALIDATION_FEED_ID_MST_FEED_FEED_FEED_ID" table="mst_feed_validation" column="feed_id" referenceTable="mst_feed_feed" referenceColumn="feed_id" onDelete="CASCADE"/>
+    <index referenceId="MST_FEED_VALIDATION_LINE_NUM" indexType="btree">
+      <column name="line_num"/>
+    </index>
+    <index referenceId="MST_FEED_VALIDATION_ENTITY_ID" indexType="btree">
+      <column name="entity_id"/>
+    </index>
+    <index referenceId="MST_FEED_VALIDATION_ATTRIBUTE" indexType="btree">
+      <column name="attribute"/>
+    </index>
+    <index referenceId="MST_FEED_VALIDATION_VALIDATOR" indexType="btree">
+      <column name="validator"/>
+    </index>
+  </table>
+</schema>

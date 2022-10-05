@@ -109,8 +109,10 @@ $categoryObject = $catalogHelperData->getCategory();
                                 <div class="product-item-photo">
                                     <?php
                                     $viewModel = $block->getData('view_model');
-                                    $viewModel->addGallery($_product);
-                                    $images = $viewModel->getGalleryImages($_product);
+                                    if(!empty($viewModel)){
+                                        $viewModel->addGallery($_product);
+                                        $images = $viewModel->getGalleryImages($_product);
+                                    }
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>
@@ -226,8 +228,10 @@ $categoryObject = $catalogHelperData->getCategory();
                                 <div class="product-item-photo">
                                     <?php
                                     $viewModel = $block->getData('view_model');
-                                    $viewModel->addGallery($_product);
-                                    $images = $viewModel->getGalleryImages($_product);
+                                    if(!empty($viewModel)){
+                                        $viewModel->addGallery($_product);
+                                        $images = $viewModel->getGalleryImages($_product);
+                                    }
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>
@@ -341,14 +345,6 @@ $categoryObject = $catalogHelperData->getCategory();
         <?php endif; ?>
     <?php endif; ?>
 
-    <script type="text/x-magento-init">
-    {
-        ".read-more": {
-            "toggleCategoryDescription": {}
-        }
-    }
-    </script>
-
 <?php else: ?>
     <?php if (!$_productCollection->count()): ?>
         <div class="message info empty">
@@ -398,8 +394,10 @@ $categoryObject = $catalogHelperData->getCategory();
                             <div class="product-item-photo">
                                 <?php
                                 $viewModel = $block->getData('view_model');
-                                $viewModel->addGallery($_product);
-                                $images = $viewModel->getGalleryImages($_product);
+                                if(!empty($viewModel)){
+                                    $viewModel->addGallery($_product);
+                                    $images = $viewModel->getGalleryImages($_product);
+                                }
                                 $i = 1;
                                 ?>
                                 <?php if (!empty($images)) { ?>
@@ -496,3 +494,17 @@ $categoryObject = $catalogHelperData->getCategory();
         </script>
     <?php endif; ?>
 <?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        ".read-more": {
+            "toggleCategoryDescription": {}
+        }
+    }
+    </script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "toggleCategoryFilter": {}
+    }
+}
+</script>

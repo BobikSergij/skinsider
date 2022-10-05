@@ -216,8 +216,10 @@ $_item = null;
                                 <div class="product-item-photo">
                                     <?php
                                     $viewModel = $block->getData('view_model');
-                                    $viewModel->addGallery($_item);
-                                    $images = $viewModel->getGalleryImages($_item);
+                                    if(!empty($viewModel)){
+                                        $viewModel->addGallery($_item);
+                                        $images = $viewModel->getGalleryImages($_item);
+                                    }
                                     $i = 1;
                                     ?>
                                     <?php if (!empty($images)) { ?>

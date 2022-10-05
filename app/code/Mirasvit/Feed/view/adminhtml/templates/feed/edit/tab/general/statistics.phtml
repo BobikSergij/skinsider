@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+use Mirasvit\Feed\Service\Feed\StatisticsService;
+
+/** @var $block \Mirasvit\Feed\Block\Adminhtml\Feed\Edit\Tab\General\Statistics */
+
+$intervals = [7, 14, 30, 50*365];
+?>
+
+<div class="mst-feed_statistics">
+    <table class="admin__table-secondary">
+        <thead>
+            <tr>
+                <th class="text"><?= __('Period') ?></th>
+                <th class="number"><?= __('Clicks') ?></th>
+                <th class="number"><?= __('Orders') ?></th>
+                <th class="number"><?= __('Revenue') ?></th>
+                <th class="number"><?= __('Revenue per Click') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($intervals as $days): ?>
+            <?php $stats = $block->getStistics($days); ?>
+                <tr>
+                    <td class="text"><?= $days == 50*365 ? __('Lifetime') : __(sprintf('Last %s days', $days)) ?></td>
+                    <td class="number"><?= $stats->getData(StatisticsService::CLICKS) ?></td>
+                    <td class="number"><?= $stats->getData(StatisticsService::ORDERS) ?></td>
+                    <td class="number money"><?= $block->formatCurrency($stats->getData(StatisticsService::REVENUE)) ?></td>
+                    <td class="number money"><?= $block->formatCurrency($stats->getData(StatisticsService::REVENUE_PER_CLICK)) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

@@ -21,25 +21,16 @@
             <action method="setTemplate" >
                 <argument name='template' xsi:type='string'>Magento_Catalog::product/list/items.phtml</argument>
             </action>
-            <arguments>
-                <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
-            </arguments>
         </referenceBlock>
         <referenceBlock name="product.info.upsell" >
             <action method="setTemplate">
                 <argument name='template' xsi:type='string'>Magento_Catalog::product/list/items.phtml</argument>
             </action>
-            <arguments>
-                <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
-            </arguments>
         </referenceBlock>
         <referenceBlock name="catalog.product.related" >
             <action method="setTemplate">
                 <argument name='template' xsi:type='string'>Magento_Catalog::product/list/items.phtml</argument>
             </action>
-            <arguments>
-                <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
-            </arguments>
         </referenceBlock>
     </body>
 </page>

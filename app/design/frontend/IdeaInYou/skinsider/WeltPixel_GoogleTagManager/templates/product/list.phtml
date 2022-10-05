@@ -63,8 +63,10 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
                     <div class="product-item-photo">
                         <?php
                         $viewModel = $block->getData('view_model');
-                        $viewModel->addGallery($_product);
-                        $images = $viewModel->getGalleryImages($_product);
+                        if(!empty($viewModel)){
+                            $viewModel->addGallery($_product);
+                            $images = $viewModel->getGalleryImages($_product);
+                        }
                         $i = 1;
                         ?>
                         <?php if (!empty($images)) { ?>

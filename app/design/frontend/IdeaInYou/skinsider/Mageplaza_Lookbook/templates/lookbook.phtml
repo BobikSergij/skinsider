@@ -101,6 +101,7 @@ if ($lookbook && $lookbook->getStatus() === '1'): ?>
                                 callbacks: {
                                     close: function () {
                                         $('.mfp-preloader').css('display', 'none');
+                                        location.reload();
                                     }
                                 }
                             });

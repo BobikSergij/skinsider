@@ -106,6 +106,7 @@ $categoryObject = $catalogHelperData->getCategory();
                                 }
                                 ?>
                                 <?php // Product Image?>
+                                <div class="main-back"></div>
                                 <div class="product-item-photo">
                                     <?php
                                     $viewModel = $block->getData('view_model');
@@ -126,7 +127,7 @@ $categoryObject = $catalogHelperData->getCategory();
                                         <?php } ?>
                                     <?php } else { ?>
                                         <a href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>"
-                                           class="product-item-photo">
+                                           class="img-<?=$i?>">
                                             <?php echo $productImage->toHtml(); ?>
                                         </a>
                                     <?php } ?>
@@ -245,7 +246,7 @@ $categoryObject = $catalogHelperData->getCategory();
                                         <?php } ?>
                                     <?php } else { ?>
                                         <a href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>"
-                                           class="product-item-photo">
+                                           class="img-<?=$i?>">
                                             <?php echo $productImage->toHtml(); ?>
                                         </a>
                                     <?php } ?>
@@ -411,7 +412,7 @@ $categoryObject = $catalogHelperData->getCategory();
                                     <?php } ?>
                                 <?php } else { ?>
                                     <a href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>"
-                                       class="product-item-photo">
+                                       class="img-<?=$i?>">
                                         <?php echo $productImage->toHtml(); ?>
                                     </a>
                                 <?php } ?>
@@ -508,3 +509,10 @@ $categoryObject = $catalogHelperData->getCategory();
     }
 }
 </script>
+<script type="text/x-magento-init">
+    {
+        ".main-back": {
+            "imageHover": {}
+        }
+    }
+    </script>

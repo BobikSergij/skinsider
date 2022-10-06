@@ -30,6 +30,7 @@
                 <div class="product-item-info">
 
                     <?php // Product Image ?>
+                    <div class="main-back"></div>
                     <div class="product-item-photo">
                         <?php
                         $productImage = $block->getImage($_product, $imageDisplayArea);
@@ -52,7 +53,7 @@
                             <?php } ?>
                         <?php } else { ?>
                             <a href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>"
-                               class="product-item-photo">
+                               class="img-<?=$i?>">
                                 <?php echo $productImage->toHtml(); ?>
                             </a>
                         <?php } ?>
@@ -114,6 +115,13 @@
         <?php endforeach; ?>
     </ol>
 <?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        ".main-back": {
+            "imageHover": {}
+        }
+    }
+    </script>
 <script type="text/x-magento-init">
             {
                 ".also-viewed.owl-carousel": {

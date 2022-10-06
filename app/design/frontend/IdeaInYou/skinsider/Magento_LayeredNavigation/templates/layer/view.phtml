@@ -10,7 +10,7 @@
 <?php if ($block->canShowBlock()) : ?>
     <?php $activeFilters = $block->getActiveFilters(); ?>
     <div class="filter-toggler"><?= $block->escapeHtml(__('Filter'))?></div>
-    <div class="block filter" id="layered-filter-block"
+    <div class="block filter start" id="layered-filter-block"
          data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
         <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
         <div class="block-title filter-title" data-count="<?= /* @escapeNotVerified */
@@ -62,6 +62,9 @@
             </script>
             <?php endif; ?>
         </div>
+    </div>
+    <div class="widget block block-sort-by">
+        <?=  $block->getChildHtml('toolbar_toggle');?>
     </div>
 
 <?php endif; ?>

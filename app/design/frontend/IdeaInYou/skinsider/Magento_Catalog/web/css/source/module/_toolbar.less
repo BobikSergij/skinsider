@@ -202,6 +202,11 @@
 
         .toolbar-sorter {
             position: unset;
+            .lib-vendor-prefix-display();
+            .lib-vendor-box-align();
+            .sorter-label{
+                margin-right: 5px;
+            }
         }
 
         .modes {
@@ -271,7 +276,7 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
 
     .toolbar-sorter {
-        max-width: 60%;
+        max-width: 63%;
 
         .sorter-options {
             max-width: 65%;

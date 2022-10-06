@@ -64,7 +64,14 @@
         </div>
     </div>
     <div class="widget block block-sort-by">
-        <?=  $block->getChildHtml('toolbar_toggle');?>
+        <div class="toolbar-trigger"><?= $block->escapeHtml(__('Sort By'))?></div>
     </div>
 
 <?php endif; ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "toggleCategoryToolbar": {}
+    }
+}
+</script>

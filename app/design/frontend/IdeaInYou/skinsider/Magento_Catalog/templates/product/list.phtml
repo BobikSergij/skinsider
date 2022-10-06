@@ -61,7 +61,7 @@ $categoryObject = $catalogHelperData->getCategory();
         $pos = $block->getPositioned();
         ?>
 
-        <?php if ($categoryName === 'Brands'): ?>
+        <?php if ($categoryName === 'Brands' || $categoryName === 'Marki'): ?>
             <div class="brands-wrapper">
 
                 <?php foreach ($subcats as $subcat): ?>

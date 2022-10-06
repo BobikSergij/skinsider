@@ -233,7 +233,7 @@ $_item = null;
                                         <?php } ?>
                                     <?php } else { ?>
                                         <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
-                                           class="product-item-photo">
+                                           class="img-<?=$i?>">
                                             <?= $block->getImage($_item, $image)->toHtml() ?>
                                         </a>
                                     <?php } ?>

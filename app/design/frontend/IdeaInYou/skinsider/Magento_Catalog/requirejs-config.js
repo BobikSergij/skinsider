@@ -6,6 +6,7 @@ var config = {
             toggleCategoryFilter: 'Magento_Catalog/js/toggle-category-filter',
             plusMinus: 'Magento_Catalog/js/plusMinus',
             popupReview: "Magento_Catalog/js/popupReview",
+            imageHover: "Magento_Catalog/js/imageHover",
         }
     }
 }

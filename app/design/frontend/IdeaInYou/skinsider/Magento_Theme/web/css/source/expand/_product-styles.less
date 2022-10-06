@@ -14,6 +14,19 @@
         margin-right: 16px;
         min-height: 370px;
 
+        .main-back {
+            display: block;
+            opacity: 0;
+            min-height: 160px;
+            position: absolute;
+            min-width: 100%;
+            z-index: 99;
+
+            &.index {
+                z-index: 0;
+            }
+        }
+
         &:hover {
             .product-item-info {
                 box-shadow: none;
@@ -319,6 +332,10 @@
         width: 100%;
     }
     .product-item {
+        .main-back {
+            display: none;
+        }
+
         .product-item-photo {
             img {
                 max-width: 277px;
@@ -336,9 +353,10 @@
                 }
             }
         }
-        .price-box{
-            .special-price{
-                .price-excluding-tax{
+
+        .price-box {
+            .special-price {
+                .price-excluding-tax {
                     margin-left: -76px;
                 }
             }

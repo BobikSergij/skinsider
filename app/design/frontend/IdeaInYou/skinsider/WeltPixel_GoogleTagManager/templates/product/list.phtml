@@ -60,6 +60,7 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
                     }
                     ?>
                     <?php // Product Image?>
+                    <div class="main-back"></div>
                     <div class="product-item-photo">
                         <?php
                         $viewModel = $block->getData('view_model');
@@ -80,7 +81,7 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
                             <?php } ?>
                         <?php } else { ?>
                             <a href="<?= $block->escapeUrl($block->getProductUrl($_product)) ?>"
-                               class="product-item-photo">
+                               class="img-<?=$i?>">
                                 <?php echo $productImage->toHtml(); ?>
                             </a>
                         <?php } ?>
@@ -170,4 +171,11 @@ $gtmHelper = $this->helper('WeltPixel\GoogleTagManager\Helper\Data');
             "Magento_Catalog/js/toggle-category-description": {}
         }
     }
-    </script>
+</script>
+<script type="text/x-magento-init">
+    {
+        ".main-back": {
+            "imageHover": {}
+        }
+    }
+</script>

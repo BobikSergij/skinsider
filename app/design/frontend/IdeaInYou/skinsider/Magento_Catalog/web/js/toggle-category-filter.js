@@ -1,6 +1,5 @@
 define([
-    "jquery",
-    "toggleCategoryFilter"
+    "jquery"
 ], function ($) {
     $.widget("IdeaInYou.toggleCategoryFilter", {
         _create: function () {

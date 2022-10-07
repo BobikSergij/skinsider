@@ -1,6 +1,5 @@
 define([
-    "jquery",
-    "toggleCategoryToolbar"
+    "jquery"
 ], function ($) {
     $.widget("IdeaInYou.toggleCategoryToolbar", {
         _create: function () {
@@ -8,8 +7,8 @@ define([
         },
         _toggleTools: function () {
             let trigger = $('.toolbar-trigger'),
-             toolTrigger = trigger.closest('.widget.block'),
-             filtertrigger = $('.filter-toggler'),
+             toolTrigger = trigger.closest('.widget.block.block-sort-by'),
+             filterTrigger = $('.filter-toggler'),
              toolbar = $('.toolbar-products'),
              filter = $('#layered-filter-block');
 
@@ -17,13 +16,13 @@ define([
                 toolbar.css({display: 'block'})
                 filter.css({display: 'none'})
                 toolTrigger.addClass('clicked');
-                filtertrigger.removeClass('clicked');
+                filterTrigger.removeClass('clicked');
             })
 
-            filtertrigger.on('click', function () {
+            filterTrigger.on('click', function () {
                 filter.css({display: 'block'})
                 toolbar.css({display: 'none'})
-                filtertrigger.addClass('clicked');
+                filterTrigger.addClass('clicked');
                 toolTrigger.removeClass('clicked');
             })
 

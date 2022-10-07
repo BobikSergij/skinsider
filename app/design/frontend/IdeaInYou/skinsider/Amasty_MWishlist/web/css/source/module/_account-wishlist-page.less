@@ -3,6 +3,13 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+    .amwishlist-wishlist-index{
+        .column.main{
+            .lib-vendor-prefix-display();
+            .lib-vendor-prefix-flex-direction();
+
+        }
+    }
     .account.amwishlist-wishlist-index.mwishlist-index-index {
 
         .modals-overlay {
@@ -154,6 +161,7 @@
 
                             .action-edit {
                                 margin-right: @indent__s;
+                                cursor: pointer;
 
                                 a {
                                     .lib-icon-font(
@@ -165,6 +173,7 @@
                             }
 
                             .amwishlist-item.-error {
+                                cursor: pointer;
                                 a {
                                     .lib-icon-font(
                                         @_icon-font-content: @icon-remove,
@@ -180,6 +189,7 @@
             }
 
             .amwishlist-newlist-block {
+                order: 1;
 
                 margin: @indent__base 0 0 0;
 

@@ -223,10 +223,14 @@ class BigCommerceApiService
      * @param string $requestMethod
      * @return ResponseInterface|Response
      */
-    public function doRequest(string $uriEndpoint, array $payload = [], string $requestMethod = Request::HTTP_METHOD_GET)
+    public function doRequest(string $uriEndpoint, array $payload = [], string $requestMethod = Request::HTTP_METHOD_GET, $offset = null)
     {
         $config = $this->scopeConfig;
-        $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path');
+        if ($uriEndpoint = 'orders') {
+            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path');
+        } else {
+            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path_v3');
+        }
         $accessToken = $config->getValue('bigCommerce/api_group/bigCommerce_access_token');
         $client = $this->clientFactory->create(['config' => [
             'base_uri' => $baseUrl
@@ -239,6 +243,9 @@ class BigCommerceApiService
         $params['headers']['X-Auth-Token'] = $accessToken;
         $params['headers']['Content-Type'] = 'application/json';
         $params['headers']['Accept'] = 'application/json';
+        if($offset !== null) {
+            $params['query']['page'] = $offset;
+        }
 
         try {
             $response = $client->request(

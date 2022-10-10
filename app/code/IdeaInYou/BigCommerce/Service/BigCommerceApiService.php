@@ -226,7 +226,7 @@ class BigCommerceApiService
     public function doRequest(string $uriEndpoint, array $payload = [], string $requestMethod = Request::HTTP_METHOD_GET, $offset = null)
     {
         $config = $this->scopeConfig;
-        if ($uriEndpoint = 'orders') {
+        if ($uriEndpoint == 'orders') {
             $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path');
         } else {
             $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path_v3');

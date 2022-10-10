@@ -85,6 +85,8 @@ class BigCommerceApiService
             $payload['discount_amount'] = $order->getDiscountAmount() ?? 0;
             $payload = $this->collectShippingData($order, $payload);
             $payload = $this->collectProductsData($order, $payload);
+            $payload["external_id"] = $order->getMiraklOrderId();
+            $payload["payment_method"] = "Cash";
 
             $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT, $payload,'POST');
             $decoded_json = json_decode($response->getBody()->getContents(), true);
@@ -107,7 +109,6 @@ class BigCommerceApiService
         $bigCommerceId = $order->getData('big_commerce_id');
 
         if ( $bigCommerceId ) {
-
             $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
             $payload = $this->collectBillingData($order, $payload);
             $payload = $this->collectShippingData($order, $payload);
@@ -222,10 +223,15 @@ class BigCommerceApiService
      * @param string $uriEndpoint
      * @param array $payload
      * @param string $requestMethod
-     * @return ResponseInterface|Response
+     * @param $offset
+     * @return Response|ResponseInterface
      */
-    public function doRequest(string $uriEndpoint, array $payload = [], string $requestMethod = Request::HTTP_METHOD_GET, $offset = null)
-    {
+    public function doRequest(
+        string $uriEndpoint,
+        array $payload = [],
+        string $requestMethod = Request::HTTP_METHOD_GET,
+        $queryParams = []
+    ) {
         $config = $this->scopeConfig;
         if (str_contains($uriEndpoint, 'orders')) {
             $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path').'/v2';

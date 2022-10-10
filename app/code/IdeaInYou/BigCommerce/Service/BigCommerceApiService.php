@@ -174,8 +174,7 @@ class BigCommerceApiService
     public function collectProductsData(Order $order, array $payload = []){
         $items = $order->getItems();
 
-        foreach ( $items as $item ) {
-            $key = key($items);
+        foreach ( $items as $key => $item ) {
             $payload['products'][$key]['name'] = $items[$key]->getName();
             $payload['products'][$key]['quantity'] = $items[$key]->getQtyOrdered();
             $payload['products'][$key]['price_inc_tax'] = $items[$key]->getPriceInclTax();

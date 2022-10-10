@@ -186,12 +186,7 @@ $categoryObject = $catalogHelperData->getCategory();
             </li>
             <?php endforeach; ?>
         </ol>
-    </div>
-    <?php endif; ?>
-
-    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
-    <?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
-    <script type="text/x-magento-init">
+        <script type="text/x-magento-init">
     {
         "[data-role=tocart-form], .form.map.checkout": {
             "catalogAddToCart": {
@@ -200,6 +195,11 @@ $categoryObject = $catalogHelperData->getCategory();
         }
     }
     </script>
+    </div>
+    <?php endif; ?>
+
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
 <?php endif; ?>
 <script type="text/x-magento-init">
     {

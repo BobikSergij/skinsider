@@ -186,38 +186,6 @@
 
 }
 
-//
-//  Mobile
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-    body {
-        .columns {
-            .sidebar-main {
-                show-hide-toggle {
-                    .lib-icon-font(
-                        @icon-down,
-                        @_icon-font-size: 8px,
-                        @_icon-font-position: after,
-                        @_icon-font-margin: 2px 0 0 1px
-                    );
-                }
-
-                .filter-open{
-                    .show-hide-toggle{
-                        .lib-icon-font(
-                            @icon-up,
-                            @_icon-font-size: 8px,
-                            @_icon-font-position: after,
-                            @_icon-font-margin: 2px 0 0 5px
-                        );
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     body {
@@ -237,6 +205,14 @@
                 border: #ecf0f1 solid 1px;
                 margin: @indent__base 0;
 
+                .filter-options-content {
+                    padding: 5px 14px;
+                }
+
+                .filter-current {
+                    padding: 0 14px;
+                }
+
                 .filter-title {
                     padding-bottom: 0;
 
@@ -255,8 +231,11 @@
                             @_icon-font-margin: 2px 0 0 5px
                         );
                     }
-                    .filter-open{
-                        .show-hide-toggle{
+                }
+
+                &.filter-open {
+                    .filter-title {
+                        .show-hide-toggle {
                             .lib-icon-font(
                                 @icon-up,
                                 @_icon-font-size: 8px,
@@ -301,15 +280,21 @@
             .widget.block {
                 margin: @indent__s;
                 margin-right: 0;
-                &.block-static-block{
+
+                &.block-static-block {
                     display: none;
                 }
             }
 
             .filter-options {
                 margin-top: 0;
+
+                .filter-options-title {
+                    padding: 10px 40px 0 14px;
+                }
             }
-            .filter-open{
+
+            .filter-open {
                 .filter-options {
                     display: block;
                 }
@@ -373,10 +358,12 @@
 
     .filter .filter-current {
         border-width: 1px 0;
-        display: none;
+        padding: 0 14px;
 
         .items {
-            display: none;
+            .filter-label {
+                display: none;
+            }
         }
 
         &-subtitle {
@@ -430,7 +417,7 @@
         }
 
         & + .block-actions {
-            display: none;
+            margin: 0 0 10px 0;
         }
     }
 
@@ -465,7 +452,6 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
 
-
     .widget.block {
         .toolbar-trigger {
             display: none;
@@ -475,6 +461,16 @@
     .sidebar-main {
         .filter-toggler {
             display: none;
+        }
+    }
+    .sidebar {
+        .filter-content {
+            .block-actions.filter-actions {
+                padding: 0;
+            }
+            .filter-label{
+                display: none;
+            }
         }
     }
 

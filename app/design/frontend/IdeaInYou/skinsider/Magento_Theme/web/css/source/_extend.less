@@ -263,7 +263,7 @@
                     border: 1px solid @color-gray80;
                     right: 0;
                     top: 100%;
-                    width: 320px;
+                    width: 360px;
                     position: absolute;
                     z-index: 5;
                     .lib-css(background, @color-white);
@@ -274,6 +274,9 @@
                     button.close,
                     .block-title,
                     .subtitle {
+                        display: none;
+                    }
+                    .items-total{
                         display: none;
                     }
 
@@ -1012,6 +1015,7 @@
             .minicart-wrapper.active {
                 .block-minicart {
                     right: 0;
+                    width: 400px;
                 }
             }
         }

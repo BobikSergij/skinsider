@@ -124,11 +124,11 @@ $categoryObject = $catalogHelperData->getCategory();
                         <?php } ?>
                         <div class="button-container">
                         <div class="actions-primary">
-                            <?php if ($_product->isSaleable()):?>
+                            <?php if ($_product->getIsSalable()):?>
                                 <?php $postParams = $block->getAddToCartPostParams($_product); ?>
                                 <form data-role="tocart-form"
                                       data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
-                                      action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                      action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>"
                                       method="post">
                                     <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
                                     <?php foreach ($options as $optionItem): ?>
@@ -221,4 +221,11 @@ $categoryObject = $catalogHelperData->getCategory();
             "imageHover": {}
         }
     }
+</script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "toggleCategoryToolbar": {}
+    }
+}
 </script>

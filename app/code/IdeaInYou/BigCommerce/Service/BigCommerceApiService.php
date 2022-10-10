@@ -91,6 +91,8 @@ class BigCommerceApiService
             $bigCommerceId = $decoded_json['id'];
 
             $orderInterface = $this->orderRepositoryInterface->get($order->getId());
+
+            //todo Create big_commerce_id attribute
             $orderInterface->setData('big_commerce_id', $bigCommerceId);
             $this->orderRepositoryInterface->save($orderInterface);
             return $response;
@@ -226,9 +228,9 @@ class BigCommerceApiService
     {
         $config = $this->scopeConfig;
         if (str_contains($uriEndpoint, 'orders')) {
-            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path');
+            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path').'/v2';
         } else {
-            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path_v3');
+            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path').'/v3';
         }
         $accessToken = $config->getValue('bigCommerce/api_group/bigCommerce_access_token');
         $client = $this->clientFactory->create(['config' => [
@@ -242,9 +244,9 @@ class BigCommerceApiService
         $params['headers']['X-Auth-Token'] = $accessToken;
         $params['headers']['Content-Type'] = 'application/json';
         $params['headers']['Accept'] = 'application/json';
-        if($offset !== null) {
-            $params['query']['page'] = $offset;
-        }
+
+        //$params['query']['page'] = $queryParams["page"];
+        $params['query'] = $queryParams;
 
         try {
             $response = $client->request(

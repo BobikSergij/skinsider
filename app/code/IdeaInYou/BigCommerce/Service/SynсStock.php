@@ -11,7 +11,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Webapi\Rest\Request;
 
-class SinсStock
+class SynсStock
 {
     const ENDPOINT = "catalog/products";
     const PRODUCT_GET_ENDPOINT = 'offers';
@@ -183,7 +183,7 @@ class SinсStock
                     self::ENDPOINT,
                     [],
                     "GET",
-                    $i
+                    ["page" => $i]
                 );
                 $decoded_json = json_decode($response->getBody()->getContents(), true);
                 $productsBigCommerce[] = $decoded_json['data'];

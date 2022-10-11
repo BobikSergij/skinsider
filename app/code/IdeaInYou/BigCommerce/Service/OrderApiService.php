@@ -38,9 +38,9 @@ class OrderApiService extends AbstractApiService
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getOrder($id)
+    public function getOrder($id, $params = [])
     {
-        $result = $this->get("/$id");
+        $result = $this->get("/$id", $params);
         return $result;
     }
 
@@ -62,9 +62,22 @@ class OrderApiService extends AbstractApiService
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getOrderCount()
+    public function getOrderCount($params = [])
     {
-        $result = $this->get('/count');
+        $result = $this->get('/count', $params);
+        return $result;
+    }
+
+    /**
+     *
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    public function getOrderShipment($orderId, $params = [])
+    {
+        // {{baseUrl}}/{{store_hash}}/v2/orders/:order_id/shipments
+
+        $result = $this->get("/$orderId/shipments",$params);
         return $result;
     }
 }

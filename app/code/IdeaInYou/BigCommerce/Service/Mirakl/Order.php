@@ -21,7 +21,6 @@ class Order
         $this->connection = $this->connectionCollectionFactory->create()->getFirstItem();
     }
 
-
     // in case if there is only ONE CONNECTION registered!!!
 
     /**
@@ -35,6 +34,7 @@ class Order
 
         return $this->apiOrderHelper->getAllOrders($this->connection, $params);
     }
+
     /**
      * @throws Exception
      */
@@ -45,6 +45,19 @@ class Order
         }
 
         $this->apiOrderHelper->shipOrder($this->connection, $orderId);
+        return true;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function updateOrderTrackingInfo($orderId, $code = '', $name = '', $number = '', $link = '')
+    {
+        if (!$this->connection->getId()) {
+            throw new Exception(__("No Mirakl connection registered!"));
+        }
+
+        $this->apiOrderHelper->updateOrderTrackingInfo($this->connection, $orderId, $code, $name, $number, $link);
         return true;
     }
 }

@@ -2,13 +2,14 @@
 
 namespace IdeaInYou\BigCommerce\Service;
 
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use IdeaInYou\BigCommerce\Service\Mirakl\Order as MiraklOrderApiService;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class SyncOrder
 {
-    const SYNC_TIMEFRAME = 45; // in minutes
+    const SYNC_TIMEFRAME = 150; // in minutes
     /**
      * @var OrderApiService
      */
@@ -39,16 +40,16 @@ class SyncOrder
 
     /**
      * @return void
+     * @throws Exception
      */
     public function resolve()
     {
-        $bigCommerceProductsArray = $this->getBigCommerceOrders();
         $this->logic();
     }
 
     /**
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function logic()
     {
@@ -68,10 +69,12 @@ class SyncOrder
             }
             $miraklOrder = $miraklOrders[$miraklOrderId];
 
-            if ($miraklOrder->getId() == $miraklOrderId && strtolower($miraklOrder->getStatus()->getState()) !== "shipped") {
+            if ($bcOrder->id == 368708 || $miraklOrder->getId() == $miraklOrderId && strtolower($miraklOrder->getStatus()->getState()) !== "shipped") {
                 try {
+                    $bcOrderShipment = $this->getBigCommerceFirstShipmentData($bcOrder->id);
+                    $this->updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment);
                     $this->miraklOrderApiService->shipOrder($miraklOrder->getId());
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     // track error
                 }
             }
@@ -99,7 +102,7 @@ class SyncOrder
     /**
      * @param $miraklOrderIds
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getMiraklOrders($miraklOrderIds)
     {
@@ -127,17 +130,49 @@ class SyncOrder
             "min_date_modified" => $lastTime,
             "max_date_modified" => $currentTime,
         ];
-        $accessToken = $this->scopeConfig->getValue('bigCommerce/api_group/bigCommerce_access_token');
 
         try {
-            $qparams['headers']['X-Auth-Token'] = $accessToken;
-            $qparams['headers']['Content-Type'] = 'application/json';
-            $qparams['headers']['Accept'] = 'application/json';
             $response = $this->orderApiService->getAllOrder($qparams);
             $result = json_decode($response->getBody()->getContents());
         } catch (GuzzleException $e) {
         }
 
         return $result ?? [];
+    }
+
+    public function getBigCommerceFirstShipmentData($bcOrderId)
+    {
+        $shipments = $this->getBigCommerceOrderShipments($bcOrderId);
+        return count($shipments) ? $shipments[0] : null;
+    }
+    /**
+     * @param $bcOrderId
+     * @return array
+     */
+    public function getBigCommerceOrderShipments($bcOrderId): array
+    {
+        try {
+            $response = $this->orderApiService->getOrderShipment($bcOrderId);
+            $result = json_decode($response->getBody()->getContents());
+        } catch (GuzzleException $e) {
+        }
+
+        return $result ?? [];
+    }
+
+    public function updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment)
+    {
+        if (!$bcOrderShipment || !$bcOrderShipment->id)
+            return null;
+
+        $this->miraklOrderApiService->updateOrderTrackingInfo(
+            $miraklOrderId,
+            'yodel',
+            BigCommerceApiService::YODEL_SHIPMENT_METHOD_BC,
+            $bcOrderShipment->tracking_number,
+            $bcOrderShipment->tracking_link
+        );
+
+        return true;
     }
 }

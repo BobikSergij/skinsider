@@ -9,4 +9,8 @@
         <plugin name="UpdateMiraklOrderPlugin"
                 type="IdeaInYou\BigCommerce\Plugin\UpdateMiraklOrderPlugin"/>
     </type>
+    <type name="MiraklSeller\Sales\Model\Create\Quote">
+        <plugin name="EmailMirakl"
+                type="IdeaInYou\BigCommerce\Plugin\UpdateMiraklEmailPlugin"/>
+    </type>
 </config>

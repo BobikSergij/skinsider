@@ -28,8 +28,7 @@ class ImportMiraklOrderPlugin
     public function __construct(
         BigCommerceApiService $apiService,
         ScopeConfigInterface $scopeConfig
-    )
-    {
+    ) {
         $this->apiService = $apiService;
         $this->scopeConfig = $scopeConfig;
     }

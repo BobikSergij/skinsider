@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace IdeaInYou\BigCommerce\Service;
 
-use _PHPStan_c862bb974\Nette\Utils\Json;
+use Exception;
 use GuzzleHttp\ClientFactory;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\ResponseFactory;
 use Magento\Directory\Api\CountryInformationAcquirerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Webapi\Rest\Request;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\ResponseFactory;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
-use phpDocumentor\Reflection\Types\Void_;
 use Psr\Http\Message\ResponseInterface;
 
 class BigCommerceApiService
@@ -23,6 +22,10 @@ class BigCommerceApiService
     const API_PATH_VARIABLE = "bigCommerce/api_group/bigCommerce_api_path";
     const ACCESS_TOKEN_VARIABLE = 'bigCommerce/api_group/bigCommerce_access_token';
     const ORDER_CREATION_ENDPOINT = 'orders';
+    const YODEL_SHIPMENT_METHOD_BC = 'Yodel (1-2 working days)';
+    const DEFAULT_PAYMENT_METHOD = 'Feelunique';
+    const DEFAULT_PAYMENT_TYPE = 'paid';
+
 
     /**
      * @var ScopeConfigInterface
@@ -50,25 +53,32 @@ class BigCommerceApiService
     private $orderRepositoryInterface;
 
     /**
+     * @var ProductApiService
+     */
+    private $productApiService;
+
+    /**
      * @param ScopeConfigInterface $scopeConfig
      * @param ClientFactory $clientFactory
      * @param ResponseFactory $responseFactory
      * @param CountryInformationAcquirerInterface $countryInformationAcquirerInterface
      * @param OrderRepositoryInterface $orderRepositoryInterface
+     * @param ProductApiService $productApiService
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ClientFactory $clientFactory,
         ResponseFactory $responseFactory,
         CountryInformationAcquirerInterface $countryInformationAcquirerInterface,
-        OrderRepositoryInterface $orderRepositoryInterface
-    )
-    {
+        OrderRepositoryInterface $orderRepositoryInterface,
+        ProductApiService $productApiService
+    ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
         $this->responseFactory = $responseFactory;
         $this->countryInformationAcquirerInterface = $countryInformationAcquirerInterface;
         $this->orderRepositoryInterface = $orderRepositoryInterface;
+        $this->productApiService =  $productApiService;
     }
 
     /**
@@ -77,27 +87,31 @@ class BigCommerceApiService
      */
     public function createOrder(Order $order)
     {
-        if ( !$order->getData('big_commerce_id')) {
+        if (!$order->getData('big_commerce_id')) {
+            try {
+                $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
+                $payload = $this->collectBillingData($order, $payload);
+                $payload['default_currency_code'] = $order->getOrderCurrencyCode();
+                $payload['discount_amount'] = $order->getDiscountAmount() ?? 0;
+                $payload = $this->collectShippingData($order, $payload);
+                $payload = $this->collectProductsData($order, $payload);
+                $payload["external_id"] = $order->getMiraklOrderId();
+                $payload["payment_method"] = self::DEFAULT_PAYMENT_METHOD;
+                $payload["status_id"] = OrderApiService::BC_ORDER_STATUSES["awaiting_fulfillment"];
 
-            $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
-            $payload = $this->collectBillingData($order, $payload);
-            $payload['default_currency_code'] = $order->getOrderCurrencyCode();
-            $payload['discount_amount'] = $order->getDiscountAmount() ?? 0;
-            $payload = $this->collectShippingData($order, $payload);
-            $payload = $this->collectProductsData($order, $payload);
-            $payload["external_id"] = $order->getMiraklOrderId();
-            $payload["payment_method"] = "Cash";
+                $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT, $payload, 'POST');
+                $decoded_json = json_decode($response->getBody()->getContents(), true);
+                $bigCommerceId = $decoded_json['id'];
 
-            $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT, $payload,'POST');
-            $decoded_json = json_decode($response->getBody()->getContents(), true);
-            $bigCommerceId = $decoded_json['id'];
+                $orderInterface = $this->orderRepositoryInterface->get($order->getId());
 
-            $orderInterface = $this->orderRepositoryInterface->get($order->getId());
-
-            //todo Create big_commerce_id attribute
-            $orderInterface->setData('big_commerce_id', $bigCommerceId);
-            $this->orderRepositoryInterface->save($orderInterface);
-            return $response;
+                //ToDo Create big_commerce_id attribute
+                $orderInterface->setData('big_commerce_id', $bigCommerceId);
+                $this->orderRepositoryInterface->save($orderInterface);
+                return $response;
+            } catch (Exception $exception) {
+                //ToDo Add loggger!!!!
+            }
         }
     }
 
@@ -105,16 +119,17 @@ class BigCommerceApiService
      * @param Order $order
      * @return Response|ResponseInterface
      */
-    public function updateOrder( Order $order ) {
+    public function updateOrder(Order $order)
+    {
         $bigCommerceId = $order->getData('big_commerce_id');
 
-        if ( $bigCommerceId ) {
+        if ($bigCommerceId) {
             $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
             $payload = $this->collectBillingData($order, $payload);
             $payload = $this->collectShippingData($order, $payload);
             $payload = $this->collectProductsData($order, $payload);
 
-            $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT . '/' . $bigCommerceId, $payload,'PUT');
+            $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT . '/' . $bigCommerceId, $payload, 'PUT');
             return $response;
         }
     }
@@ -124,10 +139,11 @@ class BigCommerceApiService
      * @param array $payload
      * @return array
      */
-    public function collectBillingData(Order $order, array $payload = []){
+    public function collectBillingData(Order $order, array $payload = [])
+    {
         $payload['billing_address']['first_name'] = $order->getBillingAddress()->getFirstname();
         $payload['billing_address']['last_name'] = $order->getBillingAddress()->getLastname();
-        $payload['billing_address']['street_1'] = implode( ", ", $order->getBillingAddress()->getStreet());
+        $payload['billing_address']['street_1'] = implode(", ", $order->getBillingAddress()->getStreet());
         $payload['billing_address']['city'] = $order->getBillingAddress()->getCity();
         $payload['billing_address']['state'] = $order->getBillingAddress()->getRegion();
         $payload['billing_address']['zip'] = $order->getBillingAddress()->getPostcode();
@@ -143,14 +159,15 @@ class BigCommerceApiService
      * @param array $payload
      * @return array
      */
-    public function collectShippingData(Order $order, array $payload = []){
+    public function collectShippingData(Order $order, array $payload = [])
+    {
         $addresses = $order->getAddressesCollection();
         $addressesItems = $addresses->getItems();
-        foreach ( $addressesItems as $key => $addressesItem ) {
-            if ( $addressesItem->getAddressType() == 'shipping') {
+        foreach ($addressesItems as $key => $addressesItem) {
+            if ($addressesItem->getAddressType() == 'shipping') {
                 $payload['shipping_addresses'][$key]['first_name'] = $addressesItem->getFirstname();
                 $payload['shipping_addresses'][$key]['last_name'] = $addressesItem->getLastname();
-                $payload['shipping_addresses'][$key]['street_1'] = implode( ", ", $addressesItem->getStreet());
+                $payload['shipping_addresses'][$key]['street_1'] = implode(", ", $addressesItem->getStreet());
                 $payload['shipping_addresses'][$key]['city'] = $addressesItem->getCity();
                 $payload['shipping_addresses'][$key]['state'] = $addressesItem->getRegion() ?? '';
                 $payload['shipping_addresses'][$key]['zip'] = $addressesItem->getPostcode();
@@ -158,8 +175,8 @@ class BigCommerceApiService
                 $payload['shipping_addresses'][$key]['country_iso2'] = $addressesItem->getCountryId();
                 $payload['shipping_addresses'][$key]['phone'] = $addressesItem->getTelephone();
                 $payload['shipping_addresses'][$key]['email'] = $addressesItem->getEmail();
-                if($order->getShippingMethod() !== 'yodel'){
-                    $order->setShippingMethod('yodel');
+                if ($order->getShippingethod() !== self::YODEL_SHIPMENT_METHOD_BC) {
+                    $order->setShippingMethod(self::YODEL_SHIPMENT_METHOD_BC);
                 }
                 $payload['shipping_addresses'][$key]['shipping_method'] = $order->getShippingMethod();
             }
@@ -174,14 +191,24 @@ class BigCommerceApiService
      * @param array $payload
      * @return array
      */
-    public function collectProductsData(Order $order, array $payload = []){
+    public function collectProductsData(Order $order, array $payload = [])
+    {
         $items = $order->getItems();
 
-        foreach ( $items as $key => $item ) {
+        foreach ($items as $key => $item) {
             $payload['products'][$key]['name'] = $items[$key]->getName();
             $payload['products'][$key]['quantity'] = $items[$key]->getQtyOrdered();
+            $payload['products'][$key]['sku'] = $items[$key]->getSku();
             $payload['products'][$key]['price_inc_tax'] = $items[$key]->getPriceInclTax();
             $payload['products'][$key]['price_ex_tax'] = $items[$key]->getPrice();
+
+            try {
+                if ($bcProduct = $this->getBcProduct($items[$key]->getSku())) {
+                    $payload['products'][$key]['product_id'] = $bcProduct->id;
+                }
+            } catch (Exception $exception) {
+                // ToDo add logger
+            }
         }
         return $payload;
     }
@@ -193,12 +220,14 @@ class BigCommerceApiService
      *
      * @return null|string
      * */
-    protected function getCountryName(string $countryCode, string $type="local"){
+    protected function getCountryName(string $countryCode, string $type="local")
+    {
         $countryName = null;
         try {
             $data = $this->countryInformationAcquirerInterface->getCountryInfo($countryCode);
             $countryName = $data->getFullNameLocale();
-        } catch (NoSuchEntityException $e) {}
+        } catch (NoSuchEntityException $e) {
+        }
         return $countryName;
     }
 
@@ -206,9 +235,10 @@ class BigCommerceApiService
      * @param $status
      * @return int
      */
-    protected function getBigCommerceOrderStatusId($status){
+    protected function getBigCommerceOrderStatusId($status)
+    {
         $result = 1;
-        switch ($status){
+        switch ($status) {
             case 'complete':
                 $result = 10;
                 break;
@@ -223,7 +253,7 @@ class BigCommerceApiService
      * @param string $uriEndpoint
      * @param array $payload
      * @param string $requestMethod
-     * @param $offset
+     * @param array $queryParams
      * @return Response|ResponseInterface
      */
     public function doRequest(
@@ -234,9 +264,9 @@ class BigCommerceApiService
     ) {
         $config = $this->scopeConfig;
         if (str_contains($uriEndpoint, 'orders')) {
-            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path').'v2';
+            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path') . 'v2';
         } else {
-            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path').'v3';
+            $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path') . 'v3';
         }
         $accessToken = $config->getValue('bigCommerce/api_group/bigCommerce_access_token');
         $client = $this->clientFactory->create(['config' => [
@@ -252,7 +282,7 @@ class BigCommerceApiService
         $params['headers']['Accept'] = 'application/json';
         //$params['query']['page'] = $queryParams["page"];
         $params['query'] = $queryParams;
-        $uriEndpoint = $baseUrl."/".$uriEndpoint;
+        $uriEndpoint = $baseUrl . "/" . $uriEndpoint;
         try {
             $response = $client->request(
                 $requestMethod,
@@ -267,5 +297,23 @@ class BigCommerceApiService
         }
 
         return $response;
+    }
+
+    public function getBcProduct($sku)
+    {
+        //todo Get BC product as a batch (grab all the skus), not as one by one
+        $params = [
+            "query" => [
+                "sku" => $sku
+            ]
+        ];
+        $response = $this->productApiService->getAllProducts($params);
+        $products = json_decode($response->getBody()->getContents());
+        if (isset($products->data) && count($products->data)) {
+            $product = $products->data[0];
+            return $product;
+        }
+
+        return null;
     }
 }

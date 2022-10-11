@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace IdeaInYou\BigCommerce\Service;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientFactory;
 use GuzzleHttp\Exception\GuzzleException;
@@ -13,6 +14,7 @@ use Magento\Framework\Webapi\Rest\Request;
 abstract class AbstractApiService
 {
     const BASE_URL_CONFIG_PATH = "bigCommerce/api_group/bigCommerce_api_path";
+    const API_ACCESS_TOKEN_PATH = "bigCommerce/api_group/bigCommerce_access_token";
 
     /**
      * @var ScopeConfigInterface
@@ -62,13 +64,36 @@ abstract class AbstractApiService
     }
 
     /**
+     * @throws Exception
+     */
+    private function getDefaultHeaders(): array
+    {
+        $token = $this->scopeConfig->getValue(self::API_ACCESS_TOKEN_PATH);
+        if (empty($token)) {
+            throw new Exception(__("BigCommerce store token is not provided!"));
+        }
+
+        return [
+                'X-Auth-Token' => $token, //'rgvd5oaesgb407npycmcwfavxhy24ux',
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ];
+    }
+
+    /**
      * @throws GuzzleException
+     * @throws Exception
      */
     private function request(string $method, $uri = '', array $options = []): \Psr\Http\Message\ResponseInterface
     {
         // https://api.bigcommerce.com/stores/{token}/{version}/{scope}
         $baseUrl = $this->getBaseUrl($this->getApiVersion()) . $this->getScope();
         $uri = $baseUrl . $uri;
+
+        $options["headers"] = isset($options["headers"]) && count($options["header"])
+                                ? array_merge($options["header"], $this->getDefaultHeaders())
+                                : $this->getDefaultHeaders();
+
         return $this->getClient()->request(
             $method,
             $uri,

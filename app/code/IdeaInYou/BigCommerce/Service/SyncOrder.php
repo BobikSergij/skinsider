@@ -8,9 +8,14 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class SyncOrder
 {
-    const SYNC_TIMEFRAME = 10; // in minutes
-
+    const SYNC_TIMEFRAME = 45; // in minutes
+    /**
+     * @var OrderApiService
+     */
     protected $orderApiService;
+    /**
+     * @var MiraklOrderApiService
+     */
     protected $miraklOrderApiService;
     /**
      * @var ScopeConfigInterface
@@ -37,10 +42,14 @@ class SyncOrder
      */
     public function resolve()
     {
-//        $bigCommerceProductsArray = $this->getBigCommerceOrders();
+        $bigCommerceProductsArray = $this->getBigCommerceOrders();
         $this->logic();
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function logic()
     {
         $bcOrders = $this->getBigCommerceOrders();
@@ -69,6 +78,10 @@ class SyncOrder
         }
     }
 
+    /**
+     * @param $bcOrders
+     * @return array
+     */
     public function normalizeBcOrderData($bcOrders = [])
     {
         $miraklOrderIds = [];
@@ -83,6 +96,11 @@ class SyncOrder
         return $miraklOrderIds;
     }
 
+    /**
+     * @param $miraklOrderIds
+     * @return array
+     * @throws \Exception
+     */
     public function getMiraklOrders($miraklOrderIds)
     {
         $params = [
@@ -96,6 +114,9 @@ class SyncOrder
         return $result;
     }
 
+    /**
+     * @return array
+     */
     public function getBigCommerceOrders(): array
     {
         date_default_timezone_set("Europe/Kyiv");

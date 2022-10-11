@@ -15,11 +15,17 @@ class OrderApiService extends AbstractApiService
         "shipped" => 2
     ];
 
+    /**
+     * @return string
+     */
     protected function getScope(): string
     {
         return self::ORDER_API_SCOPE;
     }
 
+    /**
+     * @return string
+     */
     protected function getApiVersion(): string
     {
         return self::API_VERSION;

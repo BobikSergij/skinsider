@@ -10,6 +10,7 @@
  * Product view template
  *
  * @var $block \Magento\Catalog\Block\Product\View
+ *  * @var \Magento\Framework\Escaper $escaper
  */
 ?>
 <?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
@@ -30,11 +31,23 @@
         <?php else :?>
             <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') :?>
                 <?= $block->getChildChildHtml('options_container') ?>
+            <?php else:?>
+                <?php if ($_product->isAvailable()):?>
+                <?php else:?>
+                    <div class="stock unavailable">
+                        <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                <?php endif; ?>
             <?php endif;?>
         <?php endif; ?>
 
         <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') :?>
             <?= $block->getChildChildHtml('options_container') ?>
+        <?php else:?>
+            <?php if ($_product->isAvailable()):?>
+            <?php else:?>
+                <div class="stock unavailable">
+                    <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+            <?php endif; ?>
         <?php endif;?>
         <?= $block->getChildHtml('form_bottom') ?>
     </form>

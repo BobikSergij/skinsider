@@ -196,6 +196,29 @@
 
         .product-add-form {
             padding-top: 0;
+            .stock{
+                &.unavailable,
+                &.available{
+                    border: 1px solid @color-black;
+                    padding: 12px 20px;
+                    .lib-css(background, @color-white);
+                    .lib-css(color, @color-black);
+                    max-width: max-content;
+                    .lib-vendor-prefix-display();
+
+                    &:hover {
+                        .lib-css(color, @color-white);
+                        .lib-css(background, @color-black);
+                    }
+
+                    &:active {
+                        .lib-css(background, @color-active-nav);
+                        .lib-css(color, @color-white);
+                        @_shadow: 0 0 0 0.25rem rgba(0, 0, 0, .25);
+                        .lib-css(box-shadow, @_shadow, 1);
+                    }
+                }
+            }
 
             .fieldset {
                 .lib-vendor-prefix-display();
@@ -841,6 +864,9 @@
         }
 
         .alsoviewed-products, .related {
+            .product-item-photo{
+                max-height: 158px;
+            }
             .block-title {
                 text-align: center;
 
@@ -852,6 +878,9 @@
                     margin-bottom: 10px;
                 }
             }
+            .product-items{
+                margin: 0;
+            }
 
             .product-item {
                 min-height: 348px;
@@ -860,7 +889,7 @@
                 .product-item-name a {
                     .lib-vendor-prefix-display();
                     line-height: 1.2;
-                    max-height: 51px;
+                    max-height: 43px;
                 }
 
                 .product-item-photo {
@@ -905,12 +934,17 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .main-product-info{
+        .lib-vendor-prefix-display();
+        justify-content: space-between;
+    }
     .catalog-product-view {
         .alsoviewed-products, .related {
             .product-item {
                 .product-item-photo {
+                    max-height: 226px;
                     img {
-                        min-height: 226px;
+                        max-height: 226px;
                     }
                 }
             }

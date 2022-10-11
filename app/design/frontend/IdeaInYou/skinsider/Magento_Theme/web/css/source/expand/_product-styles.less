@@ -333,6 +333,7 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
     .page-layout-1column .block.widget .products-grid .product-item {
         width: 100%;
+        max-width: 225px;
     }
     .product-item {
         .main-back {
@@ -341,7 +342,7 @@
 
         .product-item-photo {
             img {
-                max-width: 277px;
+                max-width: 225px;
                 max-height: 225px;
             }
         }

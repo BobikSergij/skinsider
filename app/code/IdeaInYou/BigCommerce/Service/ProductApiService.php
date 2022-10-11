@@ -9,11 +9,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class OrderApiService extends AbstractApiService
 {
-    const API_SCOPE = "/orders";
+    const ORDER_API_SCOPE = "/orders";
     const API_VERSION = "2";
     const BC_ORDER_STATUSES = [
-        "shipped" => 2,
-        "awaiting_fulfillment" => 11
+        "shipped" => 2
     ];
 
     /**
@@ -21,7 +20,7 @@ class OrderApiService extends AbstractApiService
      */
     protected function getScope(): string
     {
-        return self::API_SCOPE;
+        return self::ORDER_API_SCOPE;
     }
 
     /**

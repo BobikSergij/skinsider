@@ -119,8 +119,6 @@ class SyncOrder
      */
     public function getBigCommerceOrders(): array
     {
-        date_default_timezone_set("Europe/Kyiv");
-
         $currentTime = date('c');
         $second = (strtotime($currentTime) - (60 * self::SYNC_TIMEFRAME));
         $lastTime = date('c', $second);

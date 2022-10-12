@@ -26,6 +26,10 @@ abstract class AbstractApiService
      */
     private $clientFactory;
 
+    /**
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ClientFactory $clientFactory
+     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ClientFactory        $clientFactory
@@ -81,8 +85,11 @@ abstract class AbstractApiService
     }
 
     /**
+     * @param string $method
+     * @param $uri
+     * @param array $options
+     * @return \Psr\Http\Message\ResponseInterface
      * @throws GuzzleException
-     * @throws Exception
      */
     private function request(string $method, $uri = '', array $options = []): \Psr\Http\Message\ResponseInterface
     {

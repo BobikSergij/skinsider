@@ -8,10 +8,23 @@ use MiraklSeller\Api\Model\ResourceModel\Connection\CollectionFactory as Connect
 
 class Order
 {
+    /**
+     * @var MiraklApiOrderHelper
+     */
     protected $apiOrderHelper;
+    /**
+     * @var ConnectionCollectionFactory
+     */
     protected $connectionCollectionFactory;
+    /**
+     * @var \MiraklSeller\Api\Model\Connection
+     */
     protected $connection;
 
+    /**
+     * @param MiraklApiOrderHelper $apiOrderHelper
+     * @param ConnectionCollectionFactory $connectionCollectionFactory
+     */
     public function __construct(
         MiraklApiOrderHelper $apiOrderHelper,
         ConnectionCollectionFactory $connectionCollectionFactory
@@ -24,6 +37,8 @@ class Order
     // in case if there is only ONE CONNECTION registered!!!
 
     /**
+     * @param $params
+     * @return \Mirakl\MMP\Shop\Domain\Collection\Order\ShopOrderCollection
      * @throws Exception
      */
     public function getAllOrders($params)
@@ -36,6 +51,8 @@ class Order
     }
 
     /**
+     * @param $orderId
+     * @return bool
      * @throws Exception
      */
     public function shipOrder($orderId)
@@ -49,6 +66,12 @@ class Order
     }
 
     /**
+     * @param $orderId
+     * @param $code
+     * @param $name
+     * @param $number
+     * @param $link
+     * @return bool
      * @throws Exception
      */
     public function updateOrderTrackingInfo($orderId, $code = '', $name = '', $number = '', $link = '')

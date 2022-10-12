@@ -69,6 +69,18 @@ class OrderApiService extends AbstractApiService
     }
 
     /**
+     * https://developer.bigcommerce.com/api-reference/69382bdc67723-get-a-count-of-orders
+     *
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    public function updateOrder($orderId, $params = [])
+    {
+        $result = $this->put("/$orderId", $params);
+        return $result;
+    }
+
+    /**
      *
      * @return ResponseInterface
      * @throws GuzzleException

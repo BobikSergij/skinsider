@@ -6,10 +6,11 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use IdeaInYou\BigCommerce\Service\Mirakl\Order as MiraklOrderApiService;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use IdeaInYou\BigCommerce\Helper\Logger;
 
 class SyncOrder
 {
-    const SYNC_TIMEFRAME = 150; // in minutes
+    const SYNC_TIMEFRAME = 45; // in minutes
     /**
      * @var OrderApiService
      */
@@ -21,21 +22,28 @@ class SyncOrder
     /**
      * @var ScopeConfigInterface
      */
-    private $scopeConfig;
+    protected $scopeConfig;
+    /**
+     * @var Logger
+     */
+    protected Logger $logger;
 
     /**
      * @param OrderApiService $orderApiService
      * @param MiraklOrderApiService $miraklOrderApiService
      * @param ScopeConfigInterface $scopeConfig
+     * @param Logger $logger
      */
     public function __construct(
         OrderApiService $orderApiService,
         MiraklOrderApiService $miraklOrderApiService,
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        Logger $logger
     ) {
         $this->orderApiService = $orderApiService;
         $this->miraklOrderApiService = $miraklOrderApiService;
         $this->scopeConfig = $scopeConfig;
+        $this->logger = $logger;
     }
 
     /**
@@ -69,13 +77,14 @@ class SyncOrder
             }
             $miraklOrder = $miraklOrders[$miraklOrderId];
 
-            if ($bcOrder->id == 368708 || $miraklOrder->getId() == $miraklOrderId && strtolower($miraklOrder->getStatus()->getState()) !== "shipped") {
+            // $bcOrder->id == 368708 ||
+            if ($miraklOrder->getId() == $miraklOrderId && strtolower($miraklOrder->getStatus()->getState()) !== "shipped") {
                 try {
                     $bcOrderShipment = $this->getBigCommerceFirstShipmentData($bcOrder->id);
                     $this->updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment);
                     $this->miraklOrderApiService->shipOrder($miraklOrder->getId());
                 } catch (Exception $e) {
-                    // track error
+                    $this->logger->error('Exception :: '. $e->getMessage());
                 }
             }
         }
@@ -135,11 +144,16 @@ class SyncOrder
             $response = $this->orderApiService->getAllOrder($qparams);
             $result = json_decode($response->getBody()->getContents());
         } catch (GuzzleException $e) {
+            $this->logger->error('Exception :: '. $e->getMessage());
         }
 
         return $result ?? [];
     }
 
+    /**
+     * @param $bcOrderId
+     * @return mixed|null
+     */
     public function getBigCommerceFirstShipmentData($bcOrderId)
     {
         $shipments = $this->getBigCommerceOrderShipments($bcOrderId);
@@ -155,11 +169,18 @@ class SyncOrder
             $response = $this->orderApiService->getOrderShipment($bcOrderId);
             $result = json_decode($response->getBody()->getContents());
         } catch (GuzzleException $e) {
+            $this->logger->error('Exception :: '. $e->getMessage());
         }
 
         return $result ?? [];
     }
 
+    /**
+     * @param $miraklOrderId
+     * @param $bcOrderShipment
+     * @return bool|null
+     * @throws Exception
+     */
     public function updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment)
     {
         if (!$bcOrderShipment || !$bcOrderShipment->id)

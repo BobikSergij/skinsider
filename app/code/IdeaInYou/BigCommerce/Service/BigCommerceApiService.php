@@ -9,6 +9,7 @@ use GuzzleHttp\ClientFactory;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ResponseFactory;
+use IdeaInYou\BigCommerce\Helper\Logger;
 use Magento\Directory\Api\CountryInformationAcquirerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -16,6 +17,7 @@ use Magento\Framework\Webapi\Rest\Request;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 class BigCommerceApiService
 {
@@ -25,7 +27,6 @@ class BigCommerceApiService
     const YODEL_SHIPMENT_METHOD_BC = 'Yodel (1-2 working days)';
     const DEFAULT_PAYMENT_METHOD = 'Feelunique';
     const DEFAULT_PAYMENT_TYPE = 'paid';
-
 
     /**
      * @var ScopeConfigInterface
@@ -56,6 +57,7 @@ class BigCommerceApiService
      * @var ProductApiService
      */
     private $productApiService;
+    private Logger $logger;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -64,21 +66,24 @@ class BigCommerceApiService
      * @param CountryInformationAcquirerInterface $countryInformationAcquirerInterface
      * @param OrderRepositoryInterface $orderRepositoryInterface
      * @param ProductApiService $productApiService
+     * @param Logger $logger
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        ClientFactory $clientFactory,
-        ResponseFactory $responseFactory,
+        ScopeConfigInterface                $scopeConfig,
+        ClientFactory                       $clientFactory,
+        ResponseFactory                     $responseFactory,
         CountryInformationAcquirerInterface $countryInformationAcquirerInterface,
-        OrderRepositoryInterface $orderRepositoryInterface,
-        ProductApiService $productApiService
+        OrderRepositoryInterface            $orderRepositoryInterface,
+        ProductApiService                   $productApiService,
+        Logger                              $logger
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
         $this->responseFactory = $responseFactory;
         $this->countryInformationAcquirerInterface = $countryInformationAcquirerInterface;
         $this->orderRepositoryInterface = $orderRepositoryInterface;
-        $this->productApiService =  $productApiService;
+        $this->productApiService = $productApiService;
+        $this->logger = $logger;
     }
 
     /**
@@ -89,6 +94,7 @@ class BigCommerceApiService
     {
         if (!$order->getData('big_commerce_id')) {
             try {
+                $payload = [];
                 $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
                 $payload = $this->collectBillingData($order, $payload);
                 $payload['default_currency_code'] = $order->getOrderCurrencyCode();
@@ -110,29 +116,38 @@ class BigCommerceApiService
                 $this->orderRepositoryInterface->save($orderInterface);
                 return $response;
             } catch (Exception $exception) {
-                //ToDo Add loggger!!!!
+                $this->logger->error(
+                    __("BigCommerce order creation process was failed."),
+                    [
+                        "error_message" => $exception->getMessage(),
+                        "order_id" => $order->getId(),
+                        "request_payload" => $payload
+                    ]
+                );
             }
         }
     }
 
     /**
      * @param Order $order
-     * @return Response|ResponseInterface
      */
     public function updateOrder(Order $order)
     {
         $bigCommerceId = $order->getData('big_commerce_id');
 
         if ($bigCommerceId) {
-            $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
-            $payload = $this->collectBillingData($order, $payload);
-            $payload = $this->collectShippingData($order, $payload);
-            $payload = $this->collectProductsData($order, $payload);
+            try {
+                $payload['status_id'] = $this->getBigCommerceOrderStatusId($order->getStatus());
+                $payload = $this->collectBillingData($order, $payload);
+                $payload = $this->collectShippingData($order, $payload);
+                $payload = $this->collectProductsData($order, $payload);
 
-            $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT . '/' . $bigCommerceId, $payload, 'PUT');
-            return $response;
+                $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT . '/' . $bigCommerceId, $payload, 'PUT');
+            } catch (Exception $exception) {
+                $this->logger->error('Exception :: ' . $exception->getMessage());
+            }
         }
-    }
+   }
 
     /**
      * @param Order $order
@@ -196,18 +211,15 @@ class BigCommerceApiService
         $items = $order->getItems();
 
         foreach ($items as $key => $item) {
+            // ToDo check and replace by $item variable
             $payload['products'][$key]['name'] = $items[$key]->getName();
             $payload['products'][$key]['quantity'] = $items[$key]->getQtyOrdered();
             $payload['products'][$key]['sku'] = $items[$key]->getSku();
             $payload['products'][$key]['price_inc_tax'] = $items[$key]->getPriceInclTax();
             $payload['products'][$key]['price_ex_tax'] = $items[$key]->getPrice();
 
-            try {
-                if ($bcProduct = $this->getBcProduct($items[$key]->getSku())) {
-                    $payload['products'][$key]['product_id'] = $bcProduct->id;
-                }
-            } catch (Exception $exception) {
-                // ToDo add logger
+            if ($bcProduct = $this->getBcProduct($items[$key]->getSku()) && isset($bcProduct->id)) {
+                $payload['products'][$key]['product_id'] = $bcProduct->id;
             }
         }
         return $payload;
@@ -219,14 +231,15 @@ class BigCommerceApiService
      * @param string $type
      *
      * @return null|string
-     * */
-    protected function getCountryName(string $countryCode, string $type="local")
+     */
+    protected function getCountryName(string $countryCode, string $type = "local")
     {
         $countryName = null;
         try {
             $data = $this->countryInformationAcquirerInterface->getCountryInfo($countryCode);
             $countryName = $data->getFullNameLocale();
         } catch (NoSuchEntityException $e) {
+            $this->logger->error('Exception :: ' . $e->getMessage());
         }
         return $countryName;
     }
@@ -258,7 +271,7 @@ class BigCommerceApiService
      */
     public function doRequest(
         string $uriEndpoint,
-        array $payload = [],
+        array  $payload = [],
         string $requestMethod = Request::HTTP_METHOD_GET,
         $queryParams = []
     ) {
@@ -290,15 +303,16 @@ class BigCommerceApiService
                 $params
             );
         } catch (GuzzleException $exception) {
-            $response = $this->responseFactory->create([
-                'status' => $exception->getCode(),
-                'reason' => $exception->getMessage()
-            ]);
+            $this->logger->error('Exception :: ' . $exception->getMessage());
         }
 
         return $response;
     }
 
+    /**
+     * @param $sku
+     * @return mixed|null
+     */
     public function getBcProduct($sku)
     {
         //todo Get BC product as a batch (grab all the skus), not as one by one
@@ -307,11 +321,25 @@ class BigCommerceApiService
                 "sku" => $sku
             ]
         ];
-        $response = $this->productApiService->getAllProducts($params);
-        $products = json_decode($response->getBody()->getContents());
-        if (isset($products->data) && count($products->data)) {
+
+        try {
+            $response = $this->productApiService->getAllProducts($params);
+            $products = json_decode($response->getBody()->getContents());
+            if (!isset($products->data) || !count($products->data)) {
+                throw new Exception(__("Get All Product request data is empty"));
+            }
+
             $product = $products->data[0];
             return $product;
+        } catch (Exception | Throwable $e) {
+            // ToDo Handle an error
+            $this->logger->error(
+                "Product was not found in BigCommerce.",
+                [
+                    "sku" => $sku,
+                    "error_message" => $e->getMessage()
+                ]
+            );
         }
 
         return null;

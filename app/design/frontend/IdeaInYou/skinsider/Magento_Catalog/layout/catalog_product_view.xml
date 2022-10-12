@@ -10,6 +10,9 @@
         <css src="css/source/lib/carousel/owl.carousel.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <referenceContainer name="main">
+            <container name="main.product.info" htmlTag="div" htmlClass="main-product-info" before="-"/>
+        </referenceContainer>
         <referenceContainer name="content">
             <block name="main.review.popup" as="main.review.popup" before="-" template="Magento_Catalog::popup/review-popup.phtml"/>
             <referenceBlock name="product.info.details">
@@ -55,5 +58,7 @@
                 <argument name="view_model" xsi:type="object">IdeaInYou\GalleryImages\ViewModel\GalleryImageView</argument>
             </arguments>
         </referenceBlock>
+        <move element="product.info.media" destination="main.product.info" before="-"/>
+        <move element="product.info.main" destination="main.product.info" after="product.info.media"/>
     </body>
 </page>

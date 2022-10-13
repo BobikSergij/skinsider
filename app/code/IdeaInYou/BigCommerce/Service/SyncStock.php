@@ -88,13 +88,22 @@ class SyncStock
                             if ($miracleProduct['quantity'] != $bigCommerceProduct['inventory_level']) {
                                 $miracleProduct['quantity'] = $bigCommerceProduct['inventory_level'];
                                 unset($miracleProduct['logistic_class']);
-                                $this->doRequestInMiracle(
-                                    self::BASE_URL,
-                                    self::PRODUCT_GET_ENDPOINT,
-                                    'POST',
-                                    null,
-                                    $miracleProduct
-                                );
+                                try {
+                                    $this->doRequestInMiracle(
+                                        self::BASE_URL,
+                                        self::PRODUCT_GET_ENDPOINT,
+                                        'POST',
+                                        null,
+                                        $miracleProduct
+                                    );
+                                } catch (Exception $exception){
+                                    $this->logger->error(__('Зroduct sync failed'),
+                                    [
+                                        "message" => $exception->getMessage(),
+                                        'miracleProductSku' => $miracleProduct['shop_sku'],
+                                        'bigCommerceProductSku' => $bigCommerceProduct['sku']
+                                    ]);
+                                }
                             }
                         }
                     }

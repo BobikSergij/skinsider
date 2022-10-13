@@ -108,7 +108,11 @@ class BigCommerceApiService
                 $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT, $payload, 'POST');
                 $decoded_json = json_decode($response->getBody()->getContents(), true);
                 $bigCommerceId = $decoded_json['id'];
-
+                $this->logger->info( __("BigCommerce order created."),
+                [
+                    "bigCommerceId" => $bigCommerceId,
+                    "miracleOrderId" => $order->getMiraklOrderId()
+                ]);
                 $orderInterface = $this->orderRepositoryInterface->get($order->getId());
 
                 //ToDo Create big_commerce_id attribute

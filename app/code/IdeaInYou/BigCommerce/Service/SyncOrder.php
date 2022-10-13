@@ -83,6 +83,11 @@ class SyncOrder
                     $bcOrderShipment = $this->getBigCommerceFirstShipmentData($bcOrder->id);
                     $this->updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment);
                     $this->miraklOrderApiService->shipOrder($miraklOrder->getId());
+                    $this->logger->info( __("Miracle order status and tracking info changed."),
+                    [
+                        "bigCommerceOrderId" => $bcOrder->id,
+                        "miracleOrderId" => $miraklOrder->getId()
+                    ]);
                 } catch (Exception $e) {
                     $this->logger->error('Exception :: '. $e->getMessage());
                 }

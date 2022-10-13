@@ -1,7 +1,10 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
-        <job instance="IdeaInYou\BigCommerce\Service\SinсStock" method="resolve" name="sinс_stock_by_cron">
+        <job instance="IdeaInYou\BigCommerce\Service\SynсStock" method="resolve" name="sinс_stock_by_cron">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+        <job instance="IdeaInYou\BigCommerce\Service\SyncOrder" method="logic" name="sinс_order_status_by_cron">
             <schedule>*/15 * * * *</schedule>
         </job>
     </group>

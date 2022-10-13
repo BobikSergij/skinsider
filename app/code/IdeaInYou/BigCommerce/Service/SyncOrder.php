@@ -185,14 +185,17 @@ class SyncOrder
     {
         if (!$bcOrderShipment || !$bcOrderShipment->id)
             return null;
+        try {
+            $this->miraklOrderApiService->updateOrderTrackingInfo(
+                $miraklOrderId,
+                'YODEL',
+                BigCommerceApiService::YODEL_SHIPMENT_METHOD_BC,
+                $bcOrderShipment->tracking_number,
+                $bcOrderShipment->tracking_link
+            );
+        } catch (Exception $exception) {
 
-        $this->miraklOrderApiService->updateOrderTrackingInfo(
-            $miraklOrderId,
-            'yodel',
-            BigCommerceApiService::YODEL_SHIPMENT_METHOD_BC,
-            $bcOrderShipment->tracking_number,
-            $bcOrderShipment->tracking_link
-        );
+        }
 
         return true;
     }

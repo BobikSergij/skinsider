@@ -10,8 +10,9 @@
     textarea {
         .lib-font-size(16px);
     }
-    .price{
-        font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+
+    .price {
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
     .message.global.cookie {
@@ -276,7 +277,8 @@
                     .subtitle {
                         display: none;
                     }
-                    .items-total{
+
+                    .items-total {
                         display: none;
                     }
 
@@ -752,6 +754,12 @@
                                     position: relative;
                                     overflow: hidden;
                                     cursor: pointer;
+                                    .lib-font-size(13px);
+
+                                    a {
+                                        .lib-css(font-weight, @font-weight__semibold);
+                                        .lib-font-size(10px);
+                                    }
                                 }
 
                                 input[type="checkbox"] + label::before {
@@ -763,7 +771,7 @@
                                     .lib-css(background, @color-white);
                                     border: 1px solid @color-gray80;
                                     border-radius: 2px;
-                                    margin-right: 0.5em;
+                                    margin-right: 0.4em;
                                 }
                             }
                         }
@@ -1050,9 +1058,9 @@
             }
         }
     }
-    .page-header{
-        &.fixed{
-            .panel.wrapper{
+    .page-header {
+        &.fixed {
+            .panel.wrapper {
                 min-height: 100px;
             }
         }

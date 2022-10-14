@@ -15,6 +15,11 @@
         <referenceBlock name="header" remove="true"/>
         <referenceBlock name="skip_to_content" remove="true"/>
         <referenceContainer name="compare-link-wrapper" remove="true"/>
+        <referenceBlock name="consent_newsletter_block">
+            <arguments>
+                <argument name="view_model" xsi:type="object">IdeaInYou\StoreName\ViewModel\StoreNameView</argument>
+            </arguments>
+        </referenceBlock>
 
         <referenceContainer name="footer">
             <container name="social.wrap" as="socialWrap" label="Social Wrap" htmlTag="div" htmlClass="social-wrap">

@@ -1,3 +1,4 @@
+"Privacy and Cookie Policy","Polityka prywatności i plików cookie"
 "Add Coupon","Dodaj kupon",module,Magento_Checkout
 "Sort By","Sortuj",module,Smile_ElasticsuiteCatalog
 "Cancel","Anuluj",module,Magento_Checkout
@@ -8598,6 +8599,7 @@ information on installing the agent is available <a target=""_blank"" href=""%1"
 "Are you sure you want to delete this template?","Czy na pewno chcesz usunąć ten szablon?",module,Magento_Newsletter
 "Sign Up for Our Newsletter:","Subskrybuj nasz newsletter:",module,Magento_Newsletter
 "Enter your email address","Wprowadź swój adres e-mail",module,Magento_Newsletter
+"I read and agree","Czytam i zgadzam się",module,Magento_Newsletter
 "Subscribe","Subskrybuj",module,Magento_Newsletter
 "Newsletter subscription confirmation","Potwierdzenie subskrypcji newslettera",module,Magento_Newsletter
 "Thank you for subscribing to our newsletter.","Dziękujemy za dopisanie się do naszego newslettera.",module,Magento_Newsletter

@@ -6,7 +6,9 @@
 
 namespace IdeaInYou\StoreName\ViewModel;
 
-class StoreName extends \Magento\Framework\View\Element\Template
+use Magento\Framework\View\Element\Block\ArgumentInterface;
+
+class StoreNameView implements ArgumentInterface
 {
     protected $_storeManager;
 
@@ -17,7 +19,6 @@ class StoreName extends \Magento\Framework\View\Element\Template
     )
     {
         $this->_storeManager = $storeManager;
-        parent::__construct($context, $data);
     }
 
     /**

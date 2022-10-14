@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="extendware_module" resource="default" engine="innodb" comment="Extendware Core Module Table">
+        <column xsi:type="int" name="module_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Module id"/>
+        <column xsi:type="varchar" name="module_name"  nullable="false" comment="Module Name"/>
+        <column xsi:type="varchar" name="license_key"  nullable="true" comment="License Key"/>
+        <column xsi:type="boolean" name="module_active" nullable="false" comment="Module Active" default="0"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="module_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="LICENCE_KEY">
+            <column name="license_key"/>
+        </constraint>
+    </table>
+</schema>

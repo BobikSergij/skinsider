@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- plugins -->
+    <type name="Magento\SalesRule\Model\Rule\Metadata\ValueProvider">
+        <plugin name="gift_sales_rules_value_provider" type="Extendware\FreeGift\Plugin\Model\Rule\Metadata\ValueProviderPlugin" />
+    </type>
+    <type name="Magento\SalesRule\Api\RuleRepositoryInterface">
+        <plugin name="gift_sales_rules_repository" type="Extendware\FreeGift\Plugin\Model\RuleRepositoryPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product\Combine">
+        <plugin name="gift_sales_rules_condition_product_combine" type="Extendware\FreeGift\Plugin\Model\Rule\Condition\Product\CombinePlugin" />
+    </type>
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin name="gift_sales_rules_avoid_reorder" type="Extendware\FreeGift\Plugin\Checkout\Model\Cart" />
+    </type>
+
+    <!-- Proxy -->
+    <type name="Extendware\FreeGift\Model\GiftRuleService">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Extendware\FreeGift\Model\Rule\Action\Discount\OfferProduct">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Extendware\FreeGift\Model\Rule\Action\Discount\OfferProductPerPriceRange">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Extendware\FreeGift\Observer\CollectGiftRule">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Extendware\FreeGift\Observer\Test\SalesQuoteSaveAfterCustom">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Extendware\FreeGift\Helper\GiftRule">
+        <arguments>
+            <argument name="giftRule" xsi:type="array">
+                <item name="1" xsi:type="const">Extendware\FreeGift\Api\Data\GiftRuleInterface::OFFER_PRODUCT</item>
+                <item name="2" xsi:type="const">Extendware\FreeGift\Api\Data\GiftRuleInterface::OFFER_PRODUCT_PER_PRICE_RANGE</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Action\Discount\CalculatorFactory">
+        <arguments>
+            <argument name="discountRules" xsi:type="array">
+                <item name="offer_product" xsi:type="string">Extendware\FreeGift\Model\Rule\Action\Discount\OfferProduct</item>
+                <item name="offer_product_per_price_range" xsi:type="string">Extendware\FreeGift\Model\Rule\Action\Discount\OfferProductPerPriceRange</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- save cart price rule Handlers -->
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\SalesRule\Api\Data\RuleInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="create_gift_rule" xsi:type="string">Extendware\FreeGift\Model\SalesRule\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="update_gift_rule" xsi:type="string">Extendware\FreeGift\Model\SalesRule\SaveHandler</item>
+                    </item>
+                    <item name="read" xsi:type="array">
+                        <item name="read_gift_rule" xsi:type="string">Extendware\FreeGift\Model\SalesRule\ReadHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <preference for="Extendware\FreeGift\Api\Data\GiftRuleSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Extendware\FreeGift\Api\Data\GiftRuleInterface" type="Extendware\FreeGift\Model\GiftRule" />
+    <preference for="Extendware\FreeGift\Api\GiftRuleRepositoryInterface" type="Extendware\FreeGift\Model\GiftRuleRepository" />
+    <preference for="Extendware\FreeGift\Api\GiftRuleServiceInterface" type="Extendware\FreeGift\Model\GiftRuleService" />
+    <preference for="Extendware\FreeGift\Api\Data\GiftRuleDataInterface" type="Extendware\FreeGift\Model\GiftRuleData" />
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Extendware\FreeGift\Api\Data\GiftRuleRepository" xsi:type="string">Extendware\FreeGift\Api\GiftRuleRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Extendware\FreeGift\Api\Data\GiftRuleInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">extendware_gift_salesrule</item>
+                    <item name="identifierField" xsi:type="string">rule_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Extendware\FreeGift\Api\Data\GiftRuleInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

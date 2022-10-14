@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Extendware\Core\Api\Data\ExtendwareModuleInterface" type="Extendware\Core\Model\ExtendwareModule"/>
+    <preference for="Extendware\Core\Api\Data\ExtendwareModuleResultsInterface" type="Extendware\Core\Model\ExtendwareModuleResults"/>
+    <preference for="Extendware\Core\Api\ExtendwareModuleRepositoryInterface" type="Extendware\Core\Model\ExtendwareModuleRepository"/>
+
+    <virtualType name="Extendware\Core\Api\SearchCriteria\ConfigurationCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Extendware\Core\Model\ExtendwareModuleRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Extendware\Core\Api\SearchCriteria\ConfigurationCollectionProcessor</argument>
+        </arguments>
+    </type>
+</config>

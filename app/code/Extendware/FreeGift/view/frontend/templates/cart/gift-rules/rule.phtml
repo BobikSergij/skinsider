@@ -1,0 +1,58 @@
+<?php
+/**
+ * @category  Extendware
+ * @package   Extendware\FreeGift
+ * @copyright 2020 Extendware
+ */
+
+/** @var $block \Extendware\FreeGift\Block\Cart\GiftRules\Rule */
+$rule = $block->getGiftRule();
+?>
+
+<?php if ($rule) : ?>
+    <div class="rule-item">
+        <span class="name"><?= $rule->getLabel() ?></span>
+        <button class="choose action primary" onclick="jQuery('#rule-freegift-popin-<?= $rule->getCode() ?>').modal('openModal')"><?= $block->getButtonLabel() ?></button>
+        <div class="popin-block" id="rule-freegift-popin-<?= $rule->getCode() ?>" data-mage-init='{
+            "Magento_Ui/js/modal/modal": {
+                "type": "popup",
+                "responsive": true,
+                "modalClass": "free-gift-modal",
+                "innerScroll": true,
+                "title": "<?= $block->escapeJs(__($block->getGiftLabel(), $rule->getLabel(), $rule->getNumberOfferedProduct())) ?>",
+                "buttons": []
+            }
+        }'  style="display: none;">
+            <div id="choose-gifts" data-mage-init='{"extendwareChooseGifts":{
+                "nbProductToOffer": "<?= (int) $rule->getNumberOfferedProduct() ?>",
+                "formId": "#choose-gifts-form-<?= (int) $rule->getCode() ?>"
+            }}'>
+                <form id="choose-gifts-form-<?= (int) $rule->getCode() ?>" method="post" action="<?= $block->getAddToCartUrl($rule->getRuleId(), $rule->getCode()) ?>">
+                    <div class="messages">
+                        <div class="message-error error message" style="display: none;">
+                            <div class="message-text"></div>
+                        </div>
+                    </div>
+                    <div class="products-grid">
+                        <ul class="freegift products list items product-items">
+                            <?php
+                            /** @var \Extendware\FreeGift\Block\Cart\GiftRules\ProductItem $childBlock */
+                            $childBlock = $block->getChildBlock('checkout.cart.gift-rules.product-item');
+                            ?>
+                            <?php foreach ($block->getProductCollection($rule->getProductItems())->getItems() as $product) : ?>
+                                <?= $childBlock->setProduct($product)->setGiftRule($rule)->toHtml(); ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="actions">
+                        <div class="primary-block">
+                            <button class="action primary validate-choose-gifts" type="submit" title="<?= __('Validate my gift(s)') ?>">
+                                <?= __('Validate my gift(s)') ?>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

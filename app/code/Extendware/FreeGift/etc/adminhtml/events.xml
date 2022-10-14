@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Extendware
+ * @package   Extendware\FreeGift
+ * @copyright 2019 Extendware
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_block_salesrule_actions_prepareform">
+        <observer name="extendware_gift_salesrule_prepareform" instance="Extendware\FreeGift\Observer\PrepareFormActions" />
+    </event>
+</config>

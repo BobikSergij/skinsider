@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="extendware" sortOrder="999" translate="label">
+			<label>Extendware</label>
+		</tab>
+		<section id="freegift" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Free Gift</label>
+			<tab>extendware</tab>
+			<resource>Extendware_FreeGift::config_extendware_freegift</resource>
+			<group id="genral" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>General</label>
+				<field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label" type="select">
+					<label>Enable Auto Add On</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="label" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label</label>
+					<comment><![CDATA[label on free gift popup %1: choose your %2 gifts, rule label, free product]]></comment>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

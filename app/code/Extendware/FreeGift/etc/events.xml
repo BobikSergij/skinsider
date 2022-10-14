@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="salesrule_rule_save_before">
+        <observer name="extendware_gift_salesrule_save_rule" instance="Extendware\FreeGift\Observer\UpdateGiftRuleActions" />
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="extendware_gift_salesrule_product_add" instance="Extendware\FreeGift\Observer\SetGiftItemPrice" />
+    </event>
+    <event name="catalog_product_type_prepare_full_options">
+        <observer name="extendware_gift_salesrule_prepare_options" instance="Extendware\FreeGift\Observer\AddGiftRuleOption"/>
+    </event>
+    <event name="sales_quote_collect_totals_after">
+        <observer name="extendware_gift_salesrule_collect_totals_after" instance="Extendware\FreeGift\Observer\CollectGiftRule"/>
+    </event>
+
+    <event name="sales_quote_save_after">
+        <observer name="Ewall_CustomPrice_Custom" instance="Extendware\FreeGift\Observer\Test\SalesQuoteSaveAfterCustom" />
+    </event>
+</config>

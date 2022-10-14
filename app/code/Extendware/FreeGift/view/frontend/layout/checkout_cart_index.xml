@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Extendware
+ * @package   Extendware\FreeGift
+ * @copyright 2020 Extendware
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="cart.discount">
+            <block class="Extendware\FreeGift\Block\Cart\GiftRules"
+                   name="checkout.cart.gift-rules"
+                   template="Extendware_FreeGift::cart/gift-rules.phtml"
+                   after="-">
+                <block class="Extendware\FreeGift\Block\Cart\GiftRules\Rule"
+                       name="checkout.cart.gift-rules.rule"
+                       template="Extendware_FreeGift::cart/gift-rules/rule.phtml">
+                    <block class="Extendware\FreeGift\Block\Cart\GiftRules\ProductItem"
+                           name="checkout.cart.gift-rules.product-item"
+                           template="Extendware_FreeGift::cart/gift-rules/product-item.phtml">
+                        <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable"
+                               name="swatch-details" as="swatch-details"
+                               template="Extendware_FreeGift::cart/gift-rules/product/swatch-renderer.phtml"
+                               ifconfig="catalog/frontend/show_swatches_in_product_list" />
+                        <block class="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable"
+                               name="configurable-details" as="configurable-details"
+                               template="Extendware_FreeGift::cart/gift-rules/product/configurable-renderer.phtml"/>
+                        <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                            <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

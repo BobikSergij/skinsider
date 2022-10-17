@@ -28,13 +28,16 @@ foreach ($consentPage as $consentdata) {
 
                 <label for="<?= $block->escapeHtmlAttr('sparsh_consent_checkbox_' . $count) ?>" class="label">
                     <?php $viewModel = $block->getData('view_model');
-                    if ($viewModel->getStoreName() == "PL") { ?>
-                        <?= $escaper->escapeHtml(__('Czytam i zgadzam się'))?>
-                        <a class="policy" href="<?= $block->escapeUrl('pl/privacy-and-cookie-policy') ?>">
-                            <?= $escaper->escapeHtml(__('Privacy Policy'))?></a>
-                    <?php } else { ?>
-                        <?= $block->getConsentContent(); ?>
-                    <?php } ?>
+                    if (!empty($viewModel)) {
+                        if ($viewModel->getStoreName() == "PL") { ?>
+                            <?= $escaper->escapeHtml(__('Czytam i zgadzam się')) ?>
+                            <a class="policy" href="<?= $block->escapeUrl('pl/privacy-and-cookie-policy') ?>">
+                                <?= $escaper->escapeHtml(__('Privacy Policy')) ?></a>
+                        <?php } else { ?>
+                            <?= $block->getConsentContent(); ?>
+                        <?php }
+                    } ?>
+
                 </label>
                 <input type="hidden" name="gdpr_action" id="actiontype" value="<?= /* @noEscape */
                 $consentdataVal; ?>">

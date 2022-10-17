@@ -4,9 +4,9 @@ namespace IdeaInYou\BigCommerce\Service;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
+use IdeaInYou\BigCommerce\Helper\Logger;
 use IdeaInYou\BigCommerce\Service\Mirakl\Order as MiraklOrderApiService;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use IdeaInYou\BigCommerce\Helper\Logger;
 
 class SyncOrder
 {
@@ -77,19 +77,24 @@ class SyncOrder
             }
             $miraklOrder = $miraklOrders[$miraklOrderId];
 
-            // $bcOrder->id == 368708 ||
             if ($miraklOrder->getId() == $miraklOrderId && strtolower($miraklOrder->getStatus()->getState()) !== "shipped") {
                 try {
                     $bcOrderShipment = $this->getBigCommerceFirstShipmentData($bcOrder->id);
                     $this->updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment);
                     $this->miraklOrderApiService->shipOrder($miraklOrder->getId());
-                    $this->logger->info( __("Miracle order status and tracking info changed."),
-                    [
+                    $this->logger->info(
+                        __("Miracle order status and tracking info changed."),
+                        [
+                            "bigCommerceOrderId" => $bcOrder->id,
+                            "miracleOrderId" => $miraklOrder->getId()
+                        ]
+                    );
+                } catch (Exception $e) {
+                    $this->logger->error(__("ERROR update miracle order status and tracking info"), [
+                        'message' => $e->getMessage(),
                         "bigCommerceOrderId" => $bcOrder->id,
                         "miracleOrderId" => $miraklOrder->getId()
                     ]);
-                } catch (Exception $e) {
-                    $this->logger->error('Exception :: '. $e->getMessage());
                 }
             }
         }
@@ -149,7 +154,10 @@ class SyncOrder
             $response = $this->orderApiService->getAllOrder($qparams);
             $result = json_decode($response->getBody()->getContents());
         } catch (GuzzleException $e) {
-            $this->logger->error('Exception :: '. $e->getMessage());
+            $this->logger->error(__('Error for get all orders'),
+                [
+                    "message" => $e->getMessage()
+                ]);
         }
 
         return $result ?? [];
@@ -174,7 +182,7 @@ class SyncOrder
             $response = $this->orderApiService->getOrderShipment($bcOrderId);
             $result = json_decode($response->getBody()->getContents());
         } catch (GuzzleException $e) {
-            $this->logger->error('Exception :: '. $e->getMessage());
+            $this->logger->error('Exception :: ' . $e->getMessage());
         }
 
         return $result ?? [];
@@ -188,20 +196,36 @@ class SyncOrder
      */
     public function updateMiraklOrderTrackingInfo($miraklOrderId, $bcOrderShipment)
     {
-        if (!$bcOrderShipment || !$bcOrderShipment->id)
+        if (!$bcOrderShipment || !$bcOrderShipment->id) {
             return null;
-        try {
-            $this->miraklOrderApiService->updateOrderTrackingInfo(
-                $miraklOrderId,
-                'YODEL',
-                BigCommerceApiService::YODEL_SHIPMENT_METHOD_BC,
-                $bcOrderShipment->tracking_number,
-                $bcOrderShipment->tracking_link
-            );
-        } catch (Exception $exception) {
 
+            try {
+                $this->miraklOrderApiService->updateOrderTrackingInfo(
+                    $miraklOrderId,
+                    'YODEL',
+                    BigCommerceApiService::YODEL_SHIPMENT_METHOD_BC,
+                    $bcOrderShipment->tracking_number,
+                    $bcOrderShipment->tracking_link
+                );
+                $this->logger->info(
+                    __("Miracle order tracking updated"),
+                    [
+                    "bigCommerceOrderId" => $bcOrderShipment->id,
+                    "miraklOrderId" => $miraklOrderId
+                ]
+                );
+            } catch (Exception $exception) {
+                $this->logger->error(
+                    __("ERROR update miracle order tracking"),
+                    [
+                    "message" => $exception->getMessage(),
+                    "bigCommerceOrderId" => $bcOrderShipment->id,
+                    "miraklOrderId" => $miraklOrderId
+                ]
+                );
+            }
+
+            return true;
         }
-
-        return true;
     }
 }

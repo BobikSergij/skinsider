@@ -5,10 +5,6 @@
         <plugin name="ImportMiraklOrderPlugin"
                 type="IdeaInYou\BigCommerce\Plugin\ImportMiraklOrderPlugin"/>
     </type>
-    <type name="MiraklSeller\Sales\Model\Synchronize\Shipments">
-        <plugin name="UpdateMiraklOrderPlugin"
-                type="IdeaInYou\BigCommerce\Plugin\UpdateMiraklOrderPlugin"/>
-    </type>
     <type name="MiraklSeller\Sales\Model\Create\Quote">
         <plugin name="EmailMirakl"
                 type="IdeaInYou\BigCommerce\Plugin\UpdateMiraklEmailPlugin"/>

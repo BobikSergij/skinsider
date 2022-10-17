@@ -96,12 +96,19 @@ class SyncStock
                                         null,
                                         $miracleProduct
                                     );
-                                } catch (Exception $exception){
-                                    $this->logger->error(__('Зroduct sync failed'),
+                                    $this->logger->info(__("Product quantity updated"),
+                                    [
+                                        "productSku" => $miracleProduct['shop_sku'],
+                                        "miracleProductId" => $miracleProduct['offer_id'],
+                                        "bigCommerceProduct" => $bigCommerceProduct['id']
+                                    ]);
+                                } catch (Exception $exception) {
+                                    $this->logger->error(__("Error product quantity update"),
                                     [
                                         "message" => $exception->getMessage(),
-                                        'miracleProductSku' => $miracleProduct['shop_sku'],
-                                        'bigCommerceProductSku' => $bigCommerceProduct['sku']
+                                        "productSku" => $miracleProduct['shop_sku'],
+                                        "miracleProductId" => $miracleProduct['offer_id'],
+                                        "bigCommerceProduct" => $bigCommerceProduct['id']
                                     ]);
                                 }
                             }

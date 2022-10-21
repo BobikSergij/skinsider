@@ -12,6 +12,7 @@ use Magento\Directory\Api\CountryInformationAcquirerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Webapi\Rest\Request;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
 
 class SyncStock
 {
@@ -45,6 +46,7 @@ class SyncStock
      */
     private $serializer;
     private Logger $logger;
+    private StockRegistryInterface $stockRegistry;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -54,6 +56,7 @@ class SyncStock
      * @param BigCommerceApiService $bigCommerceApiService
      * @param SerializerInterface $serializer
      * @param Logger $logger
+     * @param StockRegistryInterface $stockRegistry
      */
     public function __construct(
         ScopeConfigInterface                $scopeConfig,
@@ -62,7 +65,8 @@ class SyncStock
         CountryInformationAcquirerInterface $countryInformationAcquirerInterface,
         BigCommerceApiService               $bigCommerceApiService,
         SerializerInterface                 $serializer,
-        Logger                              $logger
+        Logger                              $logger,
+        StockRegistryInterface              $stockRegistry
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
@@ -71,6 +75,7 @@ class SyncStock
         $this->bigCommerceApiService = $bigCommerceApiService;
         $this->serializer = $serializer;
         $this->logger = $logger;
+        $this->stockRegistry = $stockRegistry;
     }
 
     /**
@@ -85,6 +90,9 @@ class SyncStock
                 foreach ($bigCommerceProductsArray as $bigCommerceProducts) {
                     foreach ($bigCommerceProducts as $bigCommerceProduct) {
                         if ($miracleProduct['shop_sku'] == $bigCommerceProduct['sku']) {
+                            $stockItem = $this->stockRegistry->getStockItemBySku($bigCommerceProduct['sku']);
+                            $stockItem->setQty($bigCommerceProduct['inventory_level']);
+                            $this->stockRegistry->updateStockItemBySku($bigCommerceProduct['sku'], $stockItem);
                             if ($miracleProduct['quantity'] != $bigCommerceProduct['inventory_level']) {
                                 $miracleProduct['quantity'] = $bigCommerceProduct['inventory_level'];
                                 unset($miracleProduct['logistic_class']);

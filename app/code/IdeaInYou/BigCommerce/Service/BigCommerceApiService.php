@@ -120,9 +120,7 @@ class BigCommerceApiService
                         "miracleOrderId" => $order->getMiraklOrderId()
                     ]);
                 $orderInterface = $this->orderRepositoryInterface->get($order->getId());
-//                $big_commerce_id = $this->attributeRepository->get(\Magento\Sales\Model\Order::ENTITY,
-//                    'big_commerce_id');
-//                $big_commerce_id->setData('big_commerce_id', $big_commerce_id);
+
                 //ToDo Create big_commerce_id attribute
                 $orderInterface->setData('big_commerce_id', $bigCommerceId);
                 $this->orderRepositoryInterface->save($orderInterface);

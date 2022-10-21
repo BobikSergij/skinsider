@@ -18,6 +18,7 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
+use Magento\Eav\Api\AttributeRepositoryInterface;
 
 class BigCommerceApiService
 {
@@ -58,6 +59,7 @@ class BigCommerceApiService
      */
     private $productApiService;
     private Logger $logger;
+    private AttributeRepositoryInterface $attributeRepository;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -67,6 +69,7 @@ class BigCommerceApiService
      * @param OrderRepositoryInterface $orderRepositoryInterface
      * @param ProductApiService $productApiService
      * @param Logger $logger
+     * @param AttributeRepositoryInterface $attributeRepository
      */
     public function __construct(
         ScopeConfigInterface                $scopeConfig,
@@ -75,8 +78,10 @@ class BigCommerceApiService
         CountryInformationAcquirerInterface $countryInformationAcquirerInterface,
         OrderRepositoryInterface            $orderRepositoryInterface,
         ProductApiService                   $productApiService,
-        Logger                              $logger
-    ) {
+        Logger                              $logger,
+        AttributeRepositoryInterface        $attributeRepository
+    )
+    {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
         $this->responseFactory = $responseFactory;
@@ -84,6 +89,7 @@ class BigCommerceApiService
         $this->orderRepositoryInterface = $orderRepositoryInterface;
         $this->productApiService = $productApiService;
         $this->logger = $logger;
+        $this->attributeRepository = $attributeRepository;
     }
 
     /**
@@ -108,11 +114,11 @@ class BigCommerceApiService
                 $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT, $payload, 'POST');
                 $decoded_json = json_decode($response->getBody()->getContents(), true);
                 $bigCommerceId = $decoded_json['id'];
-                $this->logger->info( __("BigCommerce order created."),
-                [
-                    "bigCommerceId" => $bigCommerceId,
-                    "miracleOrderId" => $order->getMiraklOrderId()
-                ]);
+                $this->logger->info(__("BigCommerce order created."),
+                    [
+                        "bigCommerceId" => $bigCommerceId,
+                        "miracleOrderId" => $order->getMiraklOrderId()
+                    ]);
                 $orderInterface = $this->orderRepositoryInterface->get($order->getId());
 
                 //ToDo Create big_commerce_id attribute
@@ -151,7 +157,7 @@ class BigCommerceApiService
                 $this->logger->error('Exception :: ' . $exception->getMessage());
             }
         }
-   }
+    }
 
     /**
      * @param Order $order
@@ -277,8 +283,9 @@ class BigCommerceApiService
         string $uriEndpoint,
         array  $payload = [],
         string $requestMethod = Request::HTTP_METHOD_GET,
-        $queryParams = []
-    ) {
+               $queryParams = []
+    )
+    {
         $config = $this->scopeConfig;
         if (str_contains($uriEndpoint, 'orders')) {
             $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path') . 'v2';
@@ -335,7 +342,7 @@ class BigCommerceApiService
 
             $product = $products->data[0];
             return $product;
-        } catch (Exception | Throwable $e) {
+        } catch (Exception|Throwable $e) {
             // ToDo Handle an error
             $this->logger->error(
                 "Product was not found in BigCommerce.",

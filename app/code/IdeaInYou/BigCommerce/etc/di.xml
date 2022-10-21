@@ -4,6 +4,8 @@
     <type name="MiraklSeller\Sales\Helper\Order\Import">
         <plugin name="ImportMiraklOrderPlugin"
                 type="IdeaInYou\BigCommerce\Plugin\ImportMiraklOrderPlugin"/>
+        <plugin name="CheckProductAvailability"
+                type="IdeaInYou\BigCommerce\Plugin\CheckProductAvailability"/>
     </type>
     <type name="MiraklSeller\Sales\Model\Create\Quote">
         <plugin name="EmailMirakl"

@@ -1,0 +1,59 @@
+<?php
+/**
+ * Product list templates
+ *
+ * @var $block \Sparsh\Gdpr\Block\Consent
+ * * @var \Magento\Framework\Escaper $escaper
+ **/
+$count = 0;
+$consentPage = $block->getConsentCheckboxData();
+foreach ($consentPage as $consentdata) {
+    $count++;
+    if ($consentdata == $block->getLinkType()) {
+        $consentdataVal = "Register";
+        if ($consentdata == "contactpage") {
+            $consentdataVal = "Contact";
+        } elseif ($consentdata == "newsletterform") {
+            $consentdataVal = "Subscribe";
+        }
+        ?>
+        <div class="field sparsh_consent_checkbox required">
+            <?php if ($block->escapeHtml($block->getMsgContent())) { ?>
+                <label class="label" for="comment"><?= $block->escapeHtml($block->getMsgContent()); ?></label>
+            <?php } ?>
+            <div class="control start">
+                <input type="checkbox" id="<?= $block->escapeHtmlAttr('sparsh_consent_checkbox_' . $count) ?>"
+                       name="sparsh_consent_checkbox"
+                       data-validate="{required:true}" class="input-checkbox checkbox required" value="1">
+
+                <label for="<?= $block->escapeHtmlAttr('sparsh_consent_checkbox_' . $count) ?>" class="label">
+                    <?php $viewModel = $block->getData('view_model');
+                    if (!empty($viewModel)) {
+                        if ($viewModel->getStoreName() == "PL") { ?>
+                            <?= $escaper->escapeHtml(__('Czytam i zgadzam się')) ?>
+                            <a class="policy" href="<?= $block->escapeUrl('pl/privacy-and-cookie-policy') ?>">
+                                <?= $escaper->escapeHtml(__('Privacy Policy')) ?></a>
+                        <?php } else { ?>
+                            <?= $block->getConsentContent(); ?>
+                        <?php }
+                    } ?>
+
+                </label>
+                <input type="hidden" name="gdpr_action" id="actiontype" value="<?= /* @noEscape */
+                $consentdataVal; ?>">
+            </div>
+        </div>
+        <script type="text/x-magento-init">
+        {
+            ".sparsh_consent_checkbox ": {
+                "privacypolicyLink": {
+                    "privacyLink": ".sparsh_consent_checkbox a",
+                    "subscribeUrl": "#newsletter-validate-detail .subscribe"
+                }
+            }
+        }
+
+        </script>
+        <?php
+    }
+} ?>

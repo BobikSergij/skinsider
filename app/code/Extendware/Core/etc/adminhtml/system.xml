@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="extendware" translate="label" sortOrder="999999" class="extendware-tab extendware-tab-container">
+            <label>extendware</label>
+        </tab>
+        <section id="extendware_core" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>General Settings</label>
+            <tab>extendware</tab>
+            <resource>Extendware_Core::extendware_config</resource>
+            <group id="installed" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Extendware Extensions</label>
+                <frontend_model>Extendware\Core\Block\Adminhtml\System\Installed</frontend_model>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Extendware_FreeGift::parent" title="Extendware Free Gift" module="Extendware_FreeGift" sortOrder="100" resource="Extendware_FreeGift::parent" parent="Extendware_Core::extendware"/>		
+		<add id="Extendware_FreeGift::configuration" title="Configuration" module="Extendware_FreeGift" sortOrder="30" parent="Extendware_FreeGift::parent" action="adminhtml/system_config/edit/section/freegift" resource="Extendware_FreeGift::configuration"/> 
+    </menu>
+</config>

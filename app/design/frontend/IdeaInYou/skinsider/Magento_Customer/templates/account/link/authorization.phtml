@@ -33,6 +33,11 @@ if ($block->isLoggedIn()) {
     $signOutLink = $block->getBaseUrl() . 'customer/account/logout/';
 }
 ?>
+<li class="link wishlist">
+    <a href="<?= $block->getUrl()?>mwishlist/" id="my-wishlist">
+        <span><?= $escaper->escapeHtml(__('My WishList'))?></span>
+    </a>
+</li>
 <li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
     <?php if (!$block->isLoggedIn()): ?>
     <a <?= /* @noEscape */ $block->getLinkAttributes() ?>

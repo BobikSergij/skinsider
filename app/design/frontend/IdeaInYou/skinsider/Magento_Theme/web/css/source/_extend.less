@@ -144,16 +144,15 @@
         .header-right {
             .lib-vendor-prefix-display();
             margin-right: 20px;
-            max-width: 45px;
 
             .authorization-link {
                 a {
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
-                        @_icon-font-content: @_icon-user-o,
+                        @_icon-font-content: @_icon-user-main,
                         @_icon-font-color: @theme__color__primary,
                         @_icon-font-margin: 0 7px 0 0,
-                        @_icon-font-size: 16px
+                        @_icon-font-size: 20px
                     );
                     .lib-vendor-box-align();
                     line-height: 17px;
@@ -188,7 +187,18 @@
 
             .header.links {
                 .link.wishlist {
-                    display: none;
+                    a {
+                        .lib-icon-font(
+                            @_icon-font: @icomoon-font-family,
+                            @_icon-font-content: @_icon-wishlist,
+                            @_icon-font-color: @theme__color__primary,
+                            @_icon-font-margin: 0 7px 0 0,
+                            @_icon-font-size: 20px
+                        );
+                        .lib-vendor-box-align();
+                        line-height: 17px;
+                        cursor: pointer;
+                    }
                 }
             }
 
@@ -196,7 +206,6 @@
             .minicart-wrapper {
                 .lib-vendor-prefix-display();
                 .lib-vendor-box-align();
-                width: 55%;
             }
 
             .minicart-wrapper {
@@ -241,10 +250,9 @@
                 }
 
                 .action.showcart {
-                    margin-left: 5px;
                     .lib-icon-font(
                         @_icon-font: @icomoon-font-family,
-                        @_icon-font-content: @_icon-shopping-cart,
+                        @_icon-font-content: @_icon_bag,
                         @_icon-font-color: @color-shopping-cart,
                         @_icon-font-margin: 0 3px 0 0,
                         @_icon-font-size: 20px,
@@ -1002,31 +1010,6 @@
         .amsearch-wrapper-block {
             width: 45%;
         }
-
-        .header.content .header-right {
-            width: 28%;
-
-            .authorization-link a {
-                span {
-                    display: block;
-                    .lib-font-size(12px);
-                    .lib-css(font-weight, @font-weight__bold);
-                }
-            }
-
-            .cart-text {
-                display: block;
-                .lib-font-size(12px);
-                .lib-css(font-weight, @font-weight__bold);
-            }
-
-            .minicart-wrapper.active {
-                .block-minicart {
-                    right: 0;
-                    width: 400px;
-                }
-            }
-        }
     }
 }
 
@@ -1104,7 +1087,7 @@
             width: 10%;
             max-width: 300px;
             margin-right: 0;
-
+            .link.wishlist a,
             .authorization-link a {
                 span {
                     display: none;
@@ -1140,7 +1123,6 @@
 
             .minicart-wrapper {
                 .action.showcart {
-                    margin-left: 20px;
 
                     &:before {
                         margin: 0 7px 0 0;
@@ -1159,6 +1141,9 @@
 
                 .amsearch-input {
                     padding-left: 45px;
+                }
+                .amsearch-button.-loupe{
+                    background-size: 18px;
                 }
             }
         }
@@ -1338,6 +1323,33 @@
                 }
             }
         }
+        .header.content .header-right {
+            width: 100%;
+            max-width: 400px;
+
+            .link.wishlist a,
+            .authorization-link a {
+                margin-right: 20px;
+                span {
+                    display: block;
+                    .lib-font-size(12px);
+                    .lib-css(font-weight, @font-weight__bold);
+                }
+            }
+
+            .cart-text {
+                display: block;
+                .lib-font-size(12px);
+                .lib-css(font-weight, @font-weight__bold);
+            }
+
+            .minicart-wrapper.active {
+                .block-minicart {
+                    right: 0;
+                    width: 400px;
+                }
+            }
+        }
     }
 }
 
@@ -1389,6 +1401,7 @@
             margin-right: 15px;
             width: min-content;
 
+            .link.wishlist a,
             .authorization-link a {
                 span {
                     display: none;

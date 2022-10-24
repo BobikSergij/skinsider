@@ -12,6 +12,7 @@
         <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="my-account-link" remove="true" />
         <referenceBlock name="register-link" remove="true" />
+        <referenceBlock name="customer" remove="true" />
         <referenceBlock name="header" remove="true"/>
         <referenceBlock name="skip_to_content" remove="true"/>
         <referenceContainer name="compare-link-wrapper" remove="true"/>

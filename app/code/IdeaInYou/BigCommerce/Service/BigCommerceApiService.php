@@ -11,6 +11,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ResponseFactory;
 use IdeaInYou\BigCommerce\Helper\Logger;
 use Magento\Directory\Api\CountryInformationAcquirerInterface;
+use Magento\Eav\Api\AttributeRepositoryInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Webapi\Rest\Request;
@@ -18,7 +19,6 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
-use Magento\Eav\Api\AttributeRepositoryInterface;
 
 class BigCommerceApiService
 {
@@ -80,8 +80,7 @@ class BigCommerceApiService
         ProductApiService                   $productApiService,
         Logger                              $logger,
         AttributeRepositoryInterface        $attributeRepository
-    )
-    {
+    ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
         $this->responseFactory = $responseFactory;
@@ -114,11 +113,13 @@ class BigCommerceApiService
                 $response = $this->doRequest(self::ORDER_CREATION_ENDPOINT, $payload, 'POST');
                 $decoded_json = json_decode($response->getBody()->getContents(), true);
                 $bigCommerceId = $decoded_json['id'];
-                $this->logger->info(__("BigCommerce order created."),
+                $this->logger->info(
+                    __("BigCommerce order created."),
                     [
                         "bigCommerceId" => $bigCommerceId,
                         "miracleOrderId" => $order->getMiraklOrderId()
-                    ]);
+                    ]
+                );
                 $orderInterface = $this->orderRepositoryInterface->get($order->getId());
 
                 //ToDo Create big_commerce_id attribute
@@ -170,7 +171,11 @@ class BigCommerceApiService
         $payload['billing_address']['last_name'] = $order->getBillingAddress()->getLastname();
         $payload['billing_address']['street_1'] = implode(", ", $order->getBillingAddress()->getStreet());
         $payload['billing_address']['city'] = $order->getBillingAddress()->getCity();
-        $payload['billing_address']['state'] = $order->getBillingAddress()->getRegion();
+        if($order->getBillingAddress()->getRegion() !== null) {
+            $payload['billing_address']['state'] = $order->getBillingAddress()->getRegion();
+        }else {
+            $payload['billing_address']['state'] = $order->getBillingAddress()->getCity();
+        }
         $payload['billing_address']['zip'] = $order->getBillingAddress()->getPostcode();
         $payload['billing_address']['country'] = $this->getCountryName($order->getBillingAddress()->getCountryId());
         $payload['billing_address']['country_iso2'] = $order->getBillingAddress()->getCountryId();
@@ -194,7 +199,11 @@ class BigCommerceApiService
                 $payload['shipping_addresses'][$key]['last_name'] = $addressesItem->getLastname();
                 $payload['shipping_addresses'][$key]['street_1'] = implode(", ", $addressesItem->getStreet());
                 $payload['shipping_addresses'][$key]['city'] = $addressesItem->getCity();
-                $payload['shipping_addresses'][$key]['state'] = $addressesItem->getRegion() ?? '';
+                if($addressesItem->getRegion() !== null) {
+                    $payload['shipping_addresses'][$key]['state'] = $addressesItem->getRegion() ?? '';
+                }else {
+                    $payload['shipping_addresses'][$key]['state'] = $addressesItem->getCity();
+                }
                 $payload['shipping_addresses'][$key]['zip'] = $addressesItem->getPostcode();
                 $payload['shipping_addresses'][$key]['country'] = $this->getCountryName($addressesItem->getCountryId());
                 $payload['shipping_addresses'][$key]['country_iso2'] = $addressesItem->getCountryId();
@@ -284,8 +293,7 @@ class BigCommerceApiService
         array  $payload = [],
         string $requestMethod = Request::HTTP_METHOD_GET,
                $queryParams = []
-    )
-    {
+    ) {
         $config = $this->scopeConfig;
         if (str_contains($uriEndpoint, 'orders')) {
             $baseUrl = $config->getValue('bigCommerce/api_group/bigCommerce_api_path') . 'v2';

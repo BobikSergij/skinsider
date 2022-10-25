@@ -106,12 +106,6 @@ class SyncStock
                                         null,
                                         $miracleProduct
                                     );
-                                    $product = $this->productRepository->get($bigCommerceProduct['sku']);
-                                    $product->setStockData([
-                                        'qty' => $bigCommerceProduct['inventory_level'],
-                                        'is_in_stock' => ($bigCommerceProduct['inventory_level'] > 0 ? 1 : 0)
-                                    ]);
-                                    $this->productRepository->save($product);
                                     $this->logger->info(
                                         __("Product quantity updated"),
                                         [

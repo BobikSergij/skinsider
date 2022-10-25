@@ -8,11 +8,12 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ResponseFactory;
 use IdeaInYou\BigCommerce\Helper\Logger;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Directory\Api\CountryInformationAcquirerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Webapi\Rest\Request;
-use Magento\CatalogInventory\Api\StockRegistryInterface;
 
 class SyncStock
 {
@@ -47,6 +48,7 @@ class SyncStock
     private $serializer;
     private Logger $logger;
     private StockRegistryInterface $stockRegistry;
+    private ProductRepositoryInterface $productRepository;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -57,6 +59,7 @@ class SyncStock
      * @param SerializerInterface $serializer
      * @param Logger $logger
      * @param StockRegistryInterface $stockRegistry
+     * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         ScopeConfigInterface                $scopeConfig,
@@ -66,7 +69,8 @@ class SyncStock
         BigCommerceApiService               $bigCommerceApiService,
         SerializerInterface                 $serializer,
         Logger                              $logger,
-        StockRegistryInterface              $stockRegistry
+        StockRegistryInterface              $stockRegistry,
+        ProductRepositoryInterface          $productRepository
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
@@ -76,6 +80,7 @@ class SyncStock
         $this->serializer = $serializer;
         $this->logger = $logger;
         $this->stockRegistry = $stockRegistry;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -90,9 +95,6 @@ class SyncStock
                 foreach ($bigCommerceProductsArray as $bigCommerceProducts) {
                     foreach ($bigCommerceProducts as $bigCommerceProduct) {
                         if ($miracleProduct['shop_sku'] == $bigCommerceProduct['sku']) {
-                            $stockItem = $this->stockRegistry->getStockItemBySku($bigCommerceProduct['sku']);
-                            $stockItem->setQty($bigCommerceProduct['inventory_level']);
-                            $this->stockRegistry->updateStockItemBySku($bigCommerceProduct['sku'], $stockItem);
                             if ($miracleProduct['quantity'] != $bigCommerceProduct['inventory_level']) {
                                 $miracleProduct['quantity'] = $bigCommerceProduct['inventory_level'];
                                 unset($miracleProduct['logistic_class']);
@@ -104,20 +106,30 @@ class SyncStock
                                         null,
                                         $miracleProduct
                                     );
-                                    $this->logger->info(__("Product quantity updated"),
-                                    [
+                                    $product = $this->productRepository->get($bigCommerceProduct['sku']);
+                                    $product->setStockData([
+                                        'qty' => $bigCommerceProduct['inventory_level'],
+                                        'is_in_stock' => ($bigCommerceProduct['inventory_level'] > 0 ? 1 : 0)
+                                    ]);
+                                    $this->productRepository->save($product);
+                                    $this->logger->info(
+                                        __("Product quantity updated"),
+                                        [
                                         "productSku" => $miracleProduct['shop_sku'],
                                         "miracleProductId" => $miracleProduct['offer_id'],
                                         "bigCommerceProduct" => $bigCommerceProduct['id']
-                                    ]);
+                                    ]
+                                    );
                                 } catch (Exception $exception) {
-                                    $this->logger->error(__("Error product quantity update"),
-                                    [
+                                    $this->logger->error(
+                                        __("Error product quantity update"),
+                                        [
                                         "message" => $exception->getMessage(),
                                         "productSku" => $miracleProduct['shop_sku'],
                                         "miracleProductId" => $miracleProduct['offer_id'],
                                         "bigCommerceProduct" => $bigCommerceProduct['id']
-                                    ]);
+                                    ]
+                                    );
                                 }
                             }
                         }

@@ -8,8 +8,12 @@
     .page-wrapper {
         .sections.nav-sections {
             ul.level0 {
+                li.nav-2-5{
+                    width: 100%;
+                }
+                li.nav-2-5 > a,
                 li.parent > a {
-                    font-weight: 700;
+                    .lib-css(font-weight, @font-weight__bold);
                 }
 
                 li {
@@ -105,7 +109,7 @@
                         left: 0 !important;
                         position: absolute;
                         .lib-vendor-prefix-flex-wrap(wrap);
-                        justify-content: space-around;
+                        justify-content: space-between;
 
                         ul.level1 {
                             display: block;

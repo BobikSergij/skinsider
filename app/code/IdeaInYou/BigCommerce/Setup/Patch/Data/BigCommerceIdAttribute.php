@@ -8,6 +8,8 @@ use Magento\Sales\Setup\SalesSetupFactory;
 
 class BigCommerceIdAttribute implements DataPatchInterface
 {
+
+    const BIG_COMMERCE_ID = "big_commerce_id";
     /**
      * @var ModuleDataSetupInterface
      */

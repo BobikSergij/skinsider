@@ -121,8 +121,6 @@ class BigCommerceApiService
                     ]
                 );
                 $orderInterface = $this->orderRepositoryInterface->get($order->getId());
-
-                //ToDo Create big_commerce_id attribute
                 $orderInterface->setData('big_commerce_id', $bigCommerceId);
                 $this->orderRepositoryInterface->save($orderInterface);
                 return $response;
@@ -230,14 +228,13 @@ class BigCommerceApiService
         $items = $order->getItems();
 
         foreach ($items as $key => $item) {
-            // ToDo check and replace by $item variable
-            $payload['products'][$key]['name'] = $items[$key]->getName();
-            $payload['products'][$key]['quantity'] = $items[$key]->getQtyOrdered();
-            $payload['products'][$key]['sku'] = $items[$key]->getSku();
-            $payload['products'][$key]['price_inc_tax'] = $items[$key]->getPriceInclTax();
-            $payload['products'][$key]['price_ex_tax'] = $items[$key]->getPrice();
+            $payload['products'][$key]['name'] = $item->getName();
+            $payload['products'][$key]['quantity'] = $item->getQtyOrdered();
+            $payload['products'][$key]['sku'] = $item->getSku();
+            $payload['products'][$key]['price_inc_tax'] = $item->getPriceInclTax();
+            $payload['products'][$key]['price_ex_tax'] = $item->getPrice();
 
-            if ($bcProduct = $this->getBcProduct($items[$key]->getSku()) && isset($bcProduct->id)) {
+            if ($bcProduct = $this->getBcProduct($item->getSku(),$item->getName(), $order->getIncrementId()) && isset($bcProduct->id)) {
                 $payload['products'][$key]['product_id'] = $bcProduct->id;
             }
         }
@@ -332,18 +329,17 @@ class BigCommerceApiService
      * @param $sku
      * @return mixed|null
      */
-    public function getBcProduct($sku)
+    public function getBcProduct($sku, $name, $incrementId)
     {
-        //todo Get BC product as a batch (grab all the skus), not as one by one
         $params = [
             "query" => [
-                "sku" => $sku
+                "sku" => $sku,
+                "name" => $name
             ]
         ];
 
         try {
-            $response = $this->productApiService->getAllProducts($params);
-            $products = json_decode($response->getBody()->getContents());
+            $products = json_decode($this->productApiService->getAllProducts($params)->getBody()->getContents());
             if (!isset($products->data) || !count($products->data)) {
                 throw new Exception(__("Get All Product request data is empty"));
             }
@@ -351,11 +347,12 @@ class BigCommerceApiService
             $product = $products->data[0];
             return $product;
         } catch (Exception|Throwable $e) {
-            // ToDo Handle an error
             $this->logger->error(
-                "Product was not found in BigCommerce.",
+                "Product was not found in BigCommerce on create order.",
                 [
+                    "incrementId" => $incrementId,
                     "sku" => $sku,
+                    "name" => $name,
                     "error_message" => $e->getMessage()
                 ]
             );

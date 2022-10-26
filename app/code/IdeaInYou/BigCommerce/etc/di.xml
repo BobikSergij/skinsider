@@ -25,4 +25,11 @@
             </argument>
         </arguments>
     </type>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Orders\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="big_commerce_id" xsi:type="string">sales_order.big_commerce_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

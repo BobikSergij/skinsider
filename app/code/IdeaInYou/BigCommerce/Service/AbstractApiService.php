@@ -10,6 +10,7 @@ use GuzzleHttp\ClientFactory;
 use GuzzleHttp\Exception\GuzzleException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Webapi\Rest\Request;
+use IdeaInYou\BigCommerce\Helper\Logger;
 
 abstract class AbstractApiService
 {
@@ -25,17 +26,21 @@ abstract class AbstractApiService
      * @var ClientFactory
      */
     private $clientFactory;
+    private Logger $logger;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param ClientFactory $clientFactory
+     * @param Logger $logger
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        ClientFactory        $clientFactory
+        ClientFactory        $clientFactory,
+        Logger               $logger
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
+        $this->logger = $logger;
     }
 
     /**
@@ -100,6 +105,11 @@ abstract class AbstractApiService
         $options["headers"] = isset($options["headers"]) && count($options["header"])
                                 ? array_merge($options["header"], $this->getDefaultHeaders())
                                 : $this->getDefaultHeaders();
+        $this->logger->info(__("Request."),
+            [
+                "uri" => $uri,
+                "options" => $options
+            ]);
 
         return $this->getClient()->request(
             $method,
@@ -111,7 +121,7 @@ abstract class AbstractApiService
     /**
      * @throws GuzzleException
      */
-    protected function get($uri = 'orders', array $options = []): \Psr\Http\Message\ResponseInterface
+    protected function get($uri = '', array $options = []): \Psr\Http\Message\ResponseInterface
     {
         return $this->request(Request::HTTP_METHOD_GET, $uri, $options);
     }

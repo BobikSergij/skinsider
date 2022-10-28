@@ -242,8 +242,8 @@ class BigCommerceApiService
             $payload['products'][$key]['price_inc_tax'] = $item->getPriceInclTax();
             $payload['products'][$key]['price_ex_tax'] = $item->getPrice();
 
-            if ($bcProduct = $this->getBcProduct($item->getSku()) && isset($bcProduct->id)) {
-                $payload['products'][$key]['product_id'] = $bcProduct->id;
+            if ($this->getBcProduct($item->getSku()) && $this->getBcProduct($item->getSku())->id  ) {
+                $payload['products'][$key]['product_id'] = $this->getBcProduct($item->getSku())->id;
             }
         }
         return $payload;
@@ -309,7 +309,7 @@ class BigCommerceApiService
         $client = $this->clientFactory->create(['config' => [
             'base_uri' => $baseUrl
         ]]);
-
+        unset($payload['default_currency_code']);
         $jsonBody = json_encode($payload);
         $params = [];
         $params['body'] = $jsonBody;
@@ -347,10 +347,11 @@ class BigCommerceApiService
 
         try {
             $productsStr = $this->productApiService->getAllProducts($params)->getBody()->getContents();
+
+            $products = json_decode($productsStr);
             if (!isset($products->data) || !count($products->data)) {
                 throw new Exception(__("Get All Product request data is empty"));
             }
-            $products = json_decode($productsStr);
             $product = $products->data[0];
             $this->logger->info(
                 "Searching for BigCommerce product by SKU",

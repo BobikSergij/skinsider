@@ -309,7 +309,7 @@ class BigCommerceApiService
         $client = $this->clientFactory->create(['config' => [
             'base_uri' => $baseUrl
         ]]);
-        unset($payload['default_currency_code']);
+
         $jsonBody = json_encode($payload);
         $params = [];
         $params['body'] = $jsonBody;

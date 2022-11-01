@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ResponseFactory;
 use IdeaInYou\BigCommerce\Helper\Logger;
+use Magento\Catalog\Api\Data\ProductInterfaceFactory;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Directory\Api\CountryInformationAcquirerInterface;
@@ -49,6 +50,7 @@ class SyncStock
     private Logger $logger;
     private StockRegistryInterface $stockRegistry;
     private ProductRepositoryInterface $productRepository;
+    private ProductInterfaceFactory $productInterfaceFactory;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -60,6 +62,7 @@ class SyncStock
      * @param Logger $logger
      * @param StockRegistryInterface $stockRegistry
      * @param ProductRepositoryInterface $productRepository
+     * @param ProductInterfaceFactory $productInterfaceFactory
      */
     public function __construct(
         ScopeConfigInterface                $scopeConfig,
@@ -70,7 +73,8 @@ class SyncStock
         SerializerInterface                 $serializer,
         Logger                              $logger,
         StockRegistryInterface              $stockRegistry,
-        ProductRepositoryInterface          $productRepository
+        ProductRepositoryInterface          $productRepository,
+        ProductInterfaceFactory             $productInterfaceFactory
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->clientFactory = $clientFactory;
@@ -81,6 +85,7 @@ class SyncStock
         $this->logger = $logger;
         $this->stockRegistry = $stockRegistry;
         $this->productRepository = $productRepository;
+        $this->productInterfaceFactory = $productInterfaceFactory;
     }
 
     /**
@@ -106,6 +111,8 @@ class SyncStock
                                         null,
                                         $miracleProduct
                                     );
+                                    $isProduct = $this->isProductInMagento($bigCommerceProduct['sku']);
+                                    $this->syncProductInMagento($isProduct, $bigCommerceProduct);
                                     $this->logger->info(
                                         __("Product quantity updated"),
                                         [
@@ -130,6 +137,62 @@ class SyncStock
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * @param $isProduct
+     * @param $bcProduct
+     * @return void
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\StateException
+     */
+    public function syncProductInMagento($isProduct, $bcProduct)
+    {
+        if ($isProduct != false) {
+            $product = $this->productRepository->get($bcProduct['sku']);
+            $stockItem = $this->stockRegistry->getStockItem($product->getId());
+            if($bcProduct['inventory_level'] > 0) {
+                $stockItem->setIsInStock(true);
+            } else {
+                $stockItem->setIsInStock(false);
+            }
+            $stockItem->setQty($bcProduct['inventory_level']);
+            $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+        } else {
+            $product = $this->productInterfaceFactory->create();
+            $product->setName($bcProduct['name']);
+            $product->setSku($bcProduct['sku']);
+            $product->setPrice($bcProduct['price']);
+            $product->setVisibility(1);
+            $product->setAttributeSetId(4);
+            $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+            $product->setTypeId(\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE);
+            $this->productRepository->save($product);
+            $stockItem = $this->stockRegistry->getStockItemBySku($product->getSku());
+            if($bcProduct['inventory_level'] > 0) {
+                $stockItem->setIsInStock(true);
+            } else {
+                $stockItem->setIsInStock(false);
+            }
+            $stockItem->setQty($bcProduct['inventory_level']);
+            $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+        }
+    }
+
+    /**
+     * @param $sku
+     * @return bool
+     */
+    public function isProductInMagento($sku)
+    {
+        try {
+            $this->productRepository->get($sku);
+            return true;
+        } catch (Exception $exception) {
+            return false;
         }
     }
 

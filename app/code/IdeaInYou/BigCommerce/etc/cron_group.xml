@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/cron_groups.xsd">
     <group id="synс_stock_by_cron">
-        <schedule_generate_every>5</schedule_generate_every>
+        <schedule_generate_every>6</schedule_generate_every>
         <schedule_ahead_for>5</schedule_ahead_for>
         <schedule_lifetime>7</schedule_lifetime>
         <history_cleanup_every>5</history_cleanup_every>

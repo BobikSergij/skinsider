@@ -4,8 +4,6 @@
         <job instance="IdeaInYou\BigCommerce\Service\SyncOrder" method="logic" name="synс_order_status_by_cron">
             <schedule>*/15 * * * *</schedule>
         </job>
-    </group>
-    <group id="index">
         <job instance="IdeaInYou\BigCommerce\Service\SyncStock" method="resolve" name="synс_stock_by_cron">
             <schedule>*/5 * * * *</schedule>
         </job>

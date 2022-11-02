@@ -1,11 +1,11 @@
-<!--<?xml version="1.0" ?>-->
-<!--<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">-->
-<!--    <group id="default">-->
-<!--        <job instance="IdeaInYou\BigCommerce\Service\SyncOrder" method="logic" name="synс_order_status_by_cron">-->
-<!--            <schedule>*/15 * * * *</schedule>-->
-<!--        </job>-->
-<!--        <job instance="IdeaInYou\BigCommerce\Service\SyncStock" method="resolve" name="synс_stock_by_cron">-->
-<!--            <schedule>*/5 * * * *</schedule>-->
-<!--        </job>-->
-<!--    </group>-->
-<!--</config>-->
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="IdeaInYou\BigCommerce\Service\SyncOrder" method="logic" name="synс_order_status_by_cron">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+        <job instance="IdeaInYou\BigCommerce\Service\SyncStock" method="resolve" name="synс_stock_by_cron">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+    </group>
+</config>

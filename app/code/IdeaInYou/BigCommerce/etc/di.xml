@@ -11,6 +11,10 @@
         <plugin name="EmailMirakl"
                 type="IdeaInYou\BigCommerce\Plugin\UpdateMiraklEmailPlugin"/>
     </type>
+    <type name="MiraklSeller\Api\Helper\Order">
+        <plugin name="AcceptOrder"
+                type="IdeaInYou\BigCommerce\Plugin\AcceptAllOrder"/>
+    </type>
 
     <type name="IdeaInYou\BigCommerce\Helper\Handler">
         <arguments>

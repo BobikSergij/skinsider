@@ -153,6 +153,7 @@ class SyncStock
     {
         if ($isProduct != false) {
             $product = $this->productRepository->get($bcProduct['sku']);
+            $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
             $stockItem = $this->stockRegistry->getStockItem($product->getId());
             if($bcProduct['inventory_level'] > 0) {
                 $stockItem->setIsInStock(true);

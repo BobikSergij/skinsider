@@ -10,6 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 class ProductApiService extends AbstractApiService
 {
     const API_SCOPE = "/catalog/products";
+    const API_SCOPE_VARIANTS = "/catalog/variants";
     const API_VERSION = "3";
 
     /**
@@ -34,9 +35,9 @@ class ProductApiService extends AbstractApiService
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getAllProducts($params = [])
+    public function getAllProducts($params = [], $scope = '')
     {
-        $result = $this->get('', $params);
+        $result = $this->get('', $params, $scope);
         return $result;
     }
 }

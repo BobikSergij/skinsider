@@ -96,10 +96,13 @@ abstract class AbstractApiService
      * @return \Psr\Http\Message\ResponseInterface
      * @throws GuzzleException
      */
-    private function request(string $method, $uri = '', array $options = []): \Psr\Http\Message\ResponseInterface
+    private function request(string $method, $uri = '', array $options = [], $scope): \Psr\Http\Message\ResponseInterface
     {
         // https://api.bigcommerce.com/stores/{token}/{version}/{scope}
-        $baseUrl = $this->getBaseUrl($this->getApiVersion()) . $this->getScope();
+        if(empty($scope)){
+            $scope = $this->getScope();
+        }
+        $baseUrl = $this->getBaseUrl($this->getApiVersion()) . $scope;
         $uri = $baseUrl . $uri;
 
         $options["headers"] = isset($options["headers"]) && count($options["header"])
@@ -121,9 +124,9 @@ abstract class AbstractApiService
     /**
      * @throws GuzzleException
      */
-    protected function get($uri = '', array $options = []): \Psr\Http\Message\ResponseInterface
+    protected function get($uri = '', array $options = [], $scope): \Psr\Http\Message\ResponseInterface
     {
-        return $this->request(Request::HTTP_METHOD_GET, $uri, $options);
+        return $this->request(Request::HTTP_METHOD_GET, $uri, $options, $scope);
     }
 
     /**

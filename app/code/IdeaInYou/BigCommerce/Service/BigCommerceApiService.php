@@ -346,9 +346,11 @@ class BigCommerceApiService
         ];
 
         try {
-            $productsStr = $this->productApiService->getAllProducts($params)->getBody()->getContents();
-
-            $products = json_decode($productsStr);
+            $productsStr = $this->getBaseProduct($params);
+            if($productsStr == false){
+                $productsStr = $this->getVariantsProduct($params);
+            }
+            $products = $productsStr;
             if (!isset($products->data) || !count($products->data)) {
                 throw new Exception(__("Get All Product request data is empty"));
             }
@@ -373,5 +375,43 @@ class BigCommerceApiService
         }
 
         return null;
+    }
+
+    /**
+     * @param $params
+     * @return bool
+     * @throws GuzzleException
+     */
+    public function getBaseProduct($params){
+            $response = json_decode($this->productApiService->getAllProducts($params)->getBody()->getContents());
+            if(!empty($response->data)){
+                return $response;
+            }else{
+                return false;
+            }
+    }
+
+    /**
+     * @param $params
+     * @return false|string
+     * @throws GuzzleException
+     */
+    public function getVariantsProduct($params){
+        try{
+            $request = $this->productApiService->getAllProducts($params, "/catalog/variants")->getBody()->getContents();
+            $request = json_decode($request);
+            $params['query']['id'] = $request->data['product_id'];
+            unset($params['query']['sku']);
+            $this->logger->info(
+                "Searching for BigCommerce variants product by id",
+                [
+                    "product_id" => $request['product_id']
+                ]
+            );
+            $product = json_decode($this->productApiService->getAllProducts($params)->getBody()->getContents());
+            return $product;
+        } catch (Exception $exception){
+            return false;
+        }
     }
 }

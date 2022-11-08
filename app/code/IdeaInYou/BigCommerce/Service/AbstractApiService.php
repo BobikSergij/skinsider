@@ -124,7 +124,7 @@ abstract class AbstractApiService
     /**
      * @throws GuzzleException
      */
-    protected function get($uri = '', array $options = [], $scope): \Psr\Http\Message\ResponseInterface
+    protected function get($uri = '', array $options = [], $scope = ''): \Psr\Http\Message\ResponseInterface
     {
         return $this->request(Request::HTTP_METHOD_GET, $uri, $options, $scope);
     }

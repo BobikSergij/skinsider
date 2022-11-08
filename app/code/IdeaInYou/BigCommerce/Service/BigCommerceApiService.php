@@ -243,7 +243,13 @@ class BigCommerceApiService
             $payload['products'][$key]['price_ex_tax'] = $item->getPrice();
 
             if ($this->getBcProduct($item->getSku()) && $this->getBcProduct($item->getSku())->id  ) {
-                $payload['products'][$key]['product_id'] = $this->getBcProduct($item->getSku())->id;
+                $product = $this->getBcProduct($item->getSku());
+                $payload['products'][$key]['product_id'] = $product->id;
+                $payload['products'][$key]['name'] = $product->name;
+                $payload['products'][$key]['sku'] = $product->sku;
+                if($this->variantId($item->getSku()) !== false) {
+                    $payload['products'][$key]['variant_id'] = $this->variantId($item->getSku());
+                }
             }
         }
         return $payload;
@@ -351,6 +357,7 @@ class BigCommerceApiService
                 $productsStr = $this->getVariantsProduct($params);
             }
             $products = $productsStr;
+
             if (!isset($products->data) || !count($products->data)) {
                 throw new Exception(__("Get All Product request data is empty"));
             }
@@ -359,8 +366,7 @@ class BigCommerceApiService
                 "Searching for BigCommerce product by SKU",
                 [
                     "sku" => $sku,
-                    "big_commerce_product_id" => $bcProduct->id ?? 0,
-                    "big_commerce_products" => $productsStr,
+                    "big_commerce_product_id" => $bcProduct->id ?? 0
                 ]
             );
             return $product;
@@ -400,16 +406,36 @@ class BigCommerceApiService
         try{
             $request = $this->productApiService->getAllProducts($params, "/catalog/variants")->getBody()->getContents();
             $request = json_decode($request);
-            $params['query']['id'] = $request->data['product_id'];
+            $params['query']['id'] = $request->data[0]->product_id;
             unset($params['query']['sku']);
             $this->logger->info(
                 "Searching for BigCommerce variants product by id",
                 [
-                    "product_id" => $request['product_id']
+                    "product_id" => $request->data[0]->product_id
                 ]
             );
             $product = json_decode($this->productApiService->getAllProducts($params)->getBody()->getContents());
             return $product;
+        } catch (Exception $exception){
+            return false;
+        }
+    }
+
+    /**
+     * @param $sku
+     * @return false
+     * @throws GuzzleException
+     */
+    public function variantId($sku){
+        $params = [
+            "query" => [
+                "sku" => $sku
+            ]
+        ];
+        try {
+            $request = $this->productApiService->getAllProducts($params, "/catalog/variants")->getBody()->getContents();
+            $request = json_decode($request);
+            return $request->data[0]->id;
         } catch (Exception $exception){
             return false;
         }

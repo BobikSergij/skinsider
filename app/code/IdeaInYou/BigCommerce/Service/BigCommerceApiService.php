@@ -243,6 +243,7 @@ class BigCommerceApiService
             $payload['products'][$key]['price_ex_tax'] = $item->getPrice();
 
             if ($this->getBcProduct($item->getSku()) && $this->getBcProduct($item->getSku())->id  ) {
+                $payload['products'][$key]['product_id'] = $this->getBcProduct($item->getSku())->id;
                 if($this->variantId($item->getSku()) !== false) {
                     $payload['products'][$key]['variant_id'] = $this->variantId($item->getSku());
                 }

@@ -18,7 +18,7 @@ use Magento\Framework\Webapi\Rest\Request;
 
 class SyncStock
 {
-    const ENDPOINT = "catalog/products";
+    const ENDPOINT = "catalog/variants";
     const PRODUCT_GET_ENDPOINT = 'offers';
     const BASE_URL = 'https://feelunique-prod.mirakl.net/api/offers';
     const ACCESS_TOKEN = '72ab8764-b05c-49d4-9468-7e266c8e9d0d';
@@ -111,8 +111,6 @@ class SyncStock
                                         null,
                                         $miracleProduct
                                     );
-                                    $isProduct = $this->isProductInMagento($bigCommerceProduct['sku']);
-                                    $this->syncProductInMagento($isProduct, $bigCommerceProduct);
                                     $this->logger->info(
                                         __("Product quantity updated"),
                                         [
@@ -138,6 +136,27 @@ class SyncStock
                 }
             }
         }
+        $this->syncStockInMagento($bigCommerceProductsArray);
+    }
+
+    /**
+     * @param $bigCommerceProductsArray
+     * @return void
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\StateException
+     */
+    public function syncStockInMagento($bigCommerceProductsArray)
+    {
+        foreach ($bigCommerceProductsArray as $bigCommerceProducts) {
+            foreach ($bigCommerceProducts as $bigCommerceProduct) {
+                $isProduct = $this->isProductInMagento($bigCommerceProduct['sku']);
+                if ($isProduct !== false && $isProduct != $bigCommerceProduct['inventory_level']) {
+                    $this->syncProductInMagento($bigCommerceProduct);
+                }
+            }
+        }
     }
 
     /**
@@ -149,38 +168,18 @@ class SyncStock
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\StateException
      */
-    public function syncProductInMagento($isProduct, $bcProduct)
+    public function syncProductInMagento($bcProduct)
     {
-        if ($isProduct != false) {
-            $product = $this->productRepository->get($bcProduct['sku']);
-            $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
-            $stockItem = $this->stockRegistry->getStockItem($product->getId());
-            if($bcProduct['inventory_level'] > 0) {
-                $stockItem->setIsInStock(true);
-            } else {
-                $stockItem->setIsInStock(false);
-            }
-            $stockItem->setQty($bcProduct['inventory_level']);
-            $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+        $product = $this->productRepository->get($bcProduct['sku']);
+        $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+        $stockItem = $this->stockRegistry->getStockItem($product->getId());
+        if ($bcProduct['inventory_level'] > 0) {
+            $stockItem->setIsInStock(true);
         } else {
-            $product = $this->productInterfaceFactory->create();
-            $product->setName($bcProduct['name']);
-            $product->setSku($bcProduct['sku']);
-            $product->setPrice($bcProduct['price']);
-            $product->setVisibility(1);
-            $product->setAttributeSetId(4);
-            $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
-            $product->setTypeId(\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE);
-            $this->productRepository->save($product);
-            $stockItem = $this->stockRegistry->getStockItemBySku($product->getSku());
-            if($bcProduct['inventory_level'] > 0) {
-                $stockItem->setIsInStock(true);
-            } else {
-                $stockItem->setIsInStock(false);
-            }
-            $stockItem->setQty($bcProduct['inventory_level']);
-            $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+            $stockItem->setIsInStock(false);
         }
+        $stockItem->setQty($bcProduct['inventory_level']);
+        $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
     }
 
     /**
@@ -190,8 +189,8 @@ class SyncStock
     public function isProductInMagento($sku)
     {
         try {
-            $this->productRepository->get($sku);
-            return true;
+            $product = $this->productRepository->get($sku);
+            return $product['quantity_and_stock_status']['qty'];
         } catch (Exception $exception) {
             return false;
         }

@@ -170,16 +170,27 @@ class SyncStock
      */
     public function syncProductInMagento($bcProduct)
     {
-        $product = $this->productRepository->get($bcProduct['sku']);
-        $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
-        $stockItem = $this->stockRegistry->getStockItem($product->getId());
-        if ($bcProduct['inventory_level'] > 0) {
-            $stockItem->setIsInStock(true);
-        } else {
-            $stockItem->setIsInStock(false);
+            $product = $this->productRepository->get($bcProduct['sku']);
+        try {
+            $product->setStatus(\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+            $stockItem = $this->stockRegistry->getStockItem($product->getId());
+            if ($bcProduct['inventory_level'] > 0) {
+                $stockItem->setIsInStock(true);
+            } else {
+                $stockItem->setIsInStock(false);
+            }
+            $stockItem->setQty($bcProduct['inventory_level']);
+            $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+        } catch (Exception $exception) {
+            $this->logger->info(
+                __("Error product quantity update in Magento"),
+                [
+                    "message" => $exception->getMessage(),
+                    "productSku" => $product->getSku(),
+                    "productId" => $product->getId()
+                ]
+            );
         }
-        $stockItem->setQty($bcProduct['inventory_level']);
-        $this->stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
     }
 
     /**

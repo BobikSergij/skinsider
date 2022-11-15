@@ -147,9 +147,9 @@ class AcceptAllOrderMiracle extends AbstractHelper
         $params = ['order_states' => [\Mirakl\MMP\Common\Domain\Order\OrderState::WAITING_ACCEPTANCE]];
         $miraklOrders = $this->apiOrder->getAllOrders($connection, $params);
 
-//        if (!$miraklOrders->count()) {
-//            return $process->output(__('No Mirakl order to accept for this connection'));
-//        }
+        if (!$miraklOrders->count()) {
+            return $process->output(__('No Mirakl order to accept for this connection'));
+        }
 
         /** @var ShopOrder $miraklOrder */
         foreach ($miraklOrders as $miraklOrder) {

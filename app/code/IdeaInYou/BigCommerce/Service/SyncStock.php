@@ -102,6 +102,9 @@ class SyncStock
                         if ($miracleProduct['shop_sku'] == $bigCommerceProduct['sku']) {
                             if ($miracleProduct['quantity'] != $bigCommerceProduct['inventory_level']) {
                                 $miracleProduct['quantity'] = $bigCommerceProduct['inventory_level'];
+                                if($miracleProduct['all_prices'][0]['channel_code'] == null){
+                                    $miracleProduct['all_prices'][0]['channel_code'] = $miracleProduct['all_prices'][0]['price'];
+                                }
                                 unset($miracleProduct['logistic_class']);
                                 try {
                                     $this->doRequestInMiracle(

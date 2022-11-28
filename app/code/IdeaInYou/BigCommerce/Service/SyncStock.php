@@ -139,7 +139,6 @@ class SyncStock
                 }
             }
         }
-        $this->syncStockInMagento($bigCommerceProductsArray);
     }
 
     /**
